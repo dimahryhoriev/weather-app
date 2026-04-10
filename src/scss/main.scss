@@ -7,3 +7,71 @@ body {
     background-color: black;
     font-family: v.$font-primary;
 }
+
+.wrapper {
+    display: flex;
+    max-width: 1440px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 0 0 116px;
+    min-height: 100vh;
+    position: relative;
+}
+
+.header {
+    position: absolute;
+    margin-top: 36px;
+}
+
+.weather {
+    width: fit-content;
+    align-self: flex-end;
+    margin-bottom: 84px;
+
+    &__current {
+        display: flex;
+        align-items: center;
+        gap: 28px;
+    }
+
+    &__info {
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    &__main-icon {
+        display: flex;
+        align-items: center;
+        padding-top: 15px;
+
+        svg {
+            width: 70px;
+            height: 70px;
+        }
+    }
+
+    &__temperature {
+        @include m.text-h1;
+    }
+
+    &__city {
+        @include m.text-h2;
+    }
+
+    &__date {
+        @include m.text-primary;
+
+        &-week-day {
+            &::after {
+                content: ',';
+            }
+        }
+
+        &-year {
+            &::before {
+                content: '\‘';
+            }
+        }
+    }
+}

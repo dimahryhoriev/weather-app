@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /* Box sizing rules */
 *,
 *::before,
@@ -91,14 +92,14 @@ textarea:not([rows]) {
 
 @font-face {
   font-family: "Roboto";
-  src: url("./src/assets/fonts/Roboto-Regular.woff2");
+  src: url("/src/assets/fonts/Roboto-Regular.woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Roboto";
-  src: url("./src/assets/fonts/Roboto-Medium.woff2");
+  src: url("/src/assets/fonts/Roboto-Medium.woff2");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -106,4 +107,139 @@ textarea:not([rows]) {
 body {
   background-color: black;
   font-family: "Roboto", sans-serif;
+}
+
+.wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 0 0 116px;
+  min-height: 100vh;
+  position: relative;
+}
+
+.header {
+  position: absolute;
+  margin-top: 36px;
+}
+
+.weather {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+  margin-bottom: 84px;
+}
+.weather__current {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 28px;
+}
+.weather__info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+.weather__main-icon {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding-top: 15px;
+}
+.weather__main-icon svg {
+  width: 70px;
+  height: 70px;
+}
+.weather__temperature {
+  font-weight: 400;
+  letter-spacing: -0.08em;
+  line-height: normal;
+}
+@media (width < 768px) {
+  .weather__temperature {
+    font-size: 64px;
+    color: rgb(255, 255, 255);
+  }
+}
+@media (768px <= width < 1024px) {
+  .weather__temperature {
+    font-size: 120px;
+    color: rgb(255, 255, 255);
+  }
+}
+@media (width >= 1024px) {
+  .weather__temperature {
+    font-size: 143px;
+    color: rgb(255, 255, 255);
+  }
+}
+.weather__city {
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: normal;
+}
+@media (width < 768px) {
+  .weather__city {
+    font-size: 30px;
+    color: rgb(255, 255, 255);
+  }
+}
+@media (768px <= width < 1024px) {
+  .weather__city {
+    font-size: 48px;
+    color: rgb(255, 255, 255);
+  }
+}
+@media (width >= 1024px) {
+  .weather__city {
+    font-size: 60px;
+    color: rgb(255, 255, 255);
+  }
+}
+.weather__date {
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: normal;
+}
+@media (width < 768px) {
+  .weather__date {
+    font-size: 14px;
+    color: rgb(255, 255, 255);
+  }
+}
+@media (768px <= width < 1024px) {
+  .weather__date {
+    font-size: 18px;
+    color: rgb(255, 255, 255);
+  }
+}
+@media (width >= 1024px) {
+  .weather__date {
+    font-size: 18px;
+    color: rgb(255, 255, 255);
+  }
+}
+.weather__date-week-day::after {
+  content: ",";
+}
+.weather__date-year::before {
+  content: "‘";
 }/*# sourceMappingURL=main.css.map */
