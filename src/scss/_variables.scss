@@ -1,3 +1,5 @@
+@use 'fonts';
+
 // --- COLOR PALETTE --- //
 // --- ---- ---- --- //
 // White palette: solid & translucent
@@ -80,3 +82,8 @@ $lh-auto: normal;
 // --- ---- ---- --- //
 $ls-tight: -0.08em;
 $ls-normal: 0;
+
+
+// --- FONT FAMILY --- //
+// --- ---- ---- --- //
+$font-primary: 'Roboto', sans-serif;
