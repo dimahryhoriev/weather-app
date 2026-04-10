@@ -1,0 +1,111 @@
+@use 'variables' as v;
+
+// TEXT H1 TOKEN
+@mixin text-h1 {
+    font-weight: v.$regular-weight;
+    letter-spacing: v.$ls-tight;
+    line-height: v.$lh-auto;
+
+    @media (width < 768px) {
+        font-size: v.$h1-size-m;
+        color: v.$h1-color-m;
+    }
+
+    @media (768px <=width < 1024px) {
+        font-size: v.$h1-size-t;
+        color: v.$h1-color-t;
+    }
+
+    @media (width >=1024px) {
+        font-size: v.$h1-size-d;
+        color: v.$h1-color-d;
+    }
+}
+
+// TEXT H2 TOKEN
+@mixin text-h2 {
+    font-weight: v.$regular-weight;
+    letter-spacing: v.$ls-normal;
+    line-height: v.$lh-auto;
+
+    @media (width < 768px) {
+        font-size: v.$h2-size-m;
+        color: v.$h2-color-m;
+    }
+
+    @media (768px <=width < 1024px) {
+        font-size: v.$h2-size-t;
+        color: v.$h2-color-t;
+    }
+
+    @media (width >=1024px) {
+        font-size: v.$h2-size-d;
+        color: v.$h2-color-d;
+    }
+}
+
+// TEXT H3 TOKEN
+@mixin text-h3 {
+    font-weight: v.$regular-weight;
+    letter-spacing: v.$ls-normal;
+    line-height: v.$lh-auto;
+
+    @media (width < 768px) {
+        font-size: v.$h3-size-m;
+        color: v.$h3-color-m;
+    }
+
+    @media (768px <=width < 1024px) {
+        font-size: v.$h3-size-t;
+        color: v.$h3-color-t;
+    }
+
+    @media (width >=1024px) {
+        font-size: v.$h3-size-d;
+        color: v.$h3-color-d;
+    }
+}
+
+// TEXT H4 TOKEN
+@mixin text-h4 {
+    font-weight: v.$regular-weight;
+    letter-spacing: v.$ls-normal;
+    line-height: v.$lh-auto;
+
+    @media (width < 768px) {
+        font-size: v.$h4-size-m;
+        color: v.$h4-color-m;
+    }
+
+    @media (768px <=width < 1024px) {
+        font-size: v.$h4-size-t;
+        color: v.$h4-color-t;
+    }
+
+    @media (width >=1024px) {
+        font-size: v.$h4-size-d;
+        color: v.$h4-color-d;
+    }
+}
+
+// TEXT PRIMARY TOKEN
+@mixin text-primary {
+    font-weight: v.$regular-weight;
+    letter-spacing: v.$ls-normal;
+    line-height: v.$lh-auto;
+
+    @media (width < 768px) {
+        font-size: v.$primary-size-m;
+        color: v.$primary-color-m;
+    }
+
+    @media (768px <=width < 1024px) {
+        font-size: v.$primary-size-t;
+        color: v.$primary-color-t;
+    }
+
+    @media (width >=1024px) {
+        font-size: v.$primary-size-d;
+        color: v.$primary-color-d;
+    }
+}

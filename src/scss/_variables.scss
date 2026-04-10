@@ -1,5 +1,5 @@
 // --- COLOR PALETTE --- //
-
+// --- ---- ---- --- //
 // White palette: solid & translucent
 $white: rgb(255, 255, 255);
 $white-70: rgba(255, 255, 255, 0.70);
@@ -10,8 +10,73 @@ $white-4: rgba(255, 255, 255, 0.04);
 $pink: #DFA1A1;
 $blue: #6D97CA;
 
-// Design tokens
+// Color palette tokens
 $primary: $white;
 $secondary: $white-70;
 $surface: $white-4;
 $surface-stroke: $white-14;
+
+
+// --- FONT SIZES --- //
+// --- ---- ---- --- //
+// Font sizes (Desktop)
+$h1-size-d: 143px;
+$h2-size-d: 60px;
+$h3-size-d: 24px;
+$h4-size-d: 20px;
+$primary-size-d: 18px;
+
+// Font sizes (Tablet)
+$h1-size-t: 120px;
+$h2-size-t: 48px;
+$h3-size-t: 18px;
+$h4-size-t: 16px;
+$primary-size-t: 18px;
+
+// Font sizes (Mobile)
+$h1-size-m: 64px;
+$h2-size-m: 30px;
+$h3-size-m: 12px;
+$h4-size-m: 10px;
+$primary-size-m: 14px;
+
+
+// --- FONT COLORS --- //
+// --- ---- ---- --- //
+// Font colors (Desktop)
+$h1-color-d: $white;
+$h2-color-d: $white;
+$h3-color-d: $white-70;
+$h4-color-d: $white-70;
+$primary-color-d: $white;
+
+// Font colors (Tablet)
+$h1-color-t: $white;
+$h2-color-t: $white;
+$h3-color-t: $white-70;
+$h4-color-t: $white;
+$primary-color-t: $white;
+
+// Font colors (Mobile)
+$h1-color-m: $white;
+$h2-color-m: $white;
+$h3-color-m: $white-70;
+$h4-color-m: $white;
+$primary-color-m: $white;
+
+
+// --- FONT WEIGHTS --- //
+// --- ---- ---- --- //
+$regular-weight: 400;
+$medium-weight: 500;
+
+
+// --- FONT LINE HEIGHT --- //
+// --- ---- ---- --- //
+$lh-auto: normal;
+
+
+// --- FONT LETTER SPACING --- //
+// --- ---- ---- --- //
+$ls-tight: -0.08em;
+$ls-normal: 0;
