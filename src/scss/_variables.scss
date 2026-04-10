@@ -1,0 +1,17 @@
+// --- COLOR PALETTE --- //
+
+// White palette: solid & translucent
+$white: rgb(255, 255, 255);
+$white-70: rgba(255, 255, 255, 0.70);
+$white-14: rgba(255, 255, 255, 0.14);
+$white-4: rgba(255, 255, 255, 0.04);
+
+// Dynamic temperature shades
+$pink: #DFA1A1;
+$blue: #6D97CA;
+
+// Design tokens
+$primary: $white;
+$secondary: $white-70;
+$surface: $white-4;
+$surface-stroke: $white-14;
