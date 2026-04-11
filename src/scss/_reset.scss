@@ -85,3 +85,23 @@ select {
 textarea:not([rows]) {
     min-height: 10em;
 }
+
+/* Remove default browser focus ring for all interactive elements */
+:focus {
+    outline: none;
+}
+
+/* Specialized reset for search-type inputs */
+input[type="search"] {
+    appearance: none;
+    -webkit-appearance: none;
+
+    /* Hide default "clear" (X) button and decoration icons in WebKit browsers (Chrome, Safari, Edge) */
+    &::-webkit-search-decoration,
+    &::-webkit-search-cancel-button,
+    &::-webkit-search-results-button,
+    &::-webkit-search-results-decoration {
+        display: none;
+        -webkit-appearance: none;
+    }
+}
