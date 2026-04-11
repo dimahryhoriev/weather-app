@@ -26,13 +26,13 @@ body {
 .weather {
     width: fit-content;
     align-self: flex-end;
-    margin-bottom: 84px;
+}
 
-    &__current {
-        display: flex;
-        align-items: center;
-        gap: 28px;
-    }
+.current {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    margin-bottom: 84px;
 
     &__info {
         display: flex;
@@ -40,7 +40,7 @@ body {
         flex-direction: column;
     }
 
-    &__main-icon {
+    &__icon {
         display: flex;
         align-items: center;
         padding-top: 15px;

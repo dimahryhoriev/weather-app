@@ -132,9 +132,9 @@ body {
   width: fit-content;
   -ms-flex-item-align: end;
       align-self: flex-end;
-  margin-bottom: 84px;
 }
-.weather__current {
+
+.current {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -142,8 +142,9 @@ body {
       -ms-flex-align: center;
           align-items: center;
   gap: 28px;
+  margin-bottom: 84px;
 }
-.weather__info {
+.current__info {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -155,7 +156,7 @@ body {
       -ms-flex-direction: column;
           flex-direction: column;
 }
-.weather__main-icon {
+.current__icon {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -164,82 +165,82 @@ body {
           align-items: center;
   padding-top: 15px;
 }
-.weather__main-icon svg {
+.current__icon svg {
   width: 70px;
   height: 70px;
 }
-.weather__temperature {
+.current__temperature {
   font-weight: 400;
   letter-spacing: -0.08em;
   line-height: normal;
 }
 @media (width < 768px) {
-  .weather__temperature {
+  .current__temperature {
     font-size: 64px;
     color: rgb(255, 255, 255);
   }
 }
 @media (768px <= width < 1024px) {
-  .weather__temperature {
+  .current__temperature {
     font-size: 120px;
     color: rgb(255, 255, 255);
   }
 }
 @media (width >= 1024px) {
-  .weather__temperature {
+  .current__temperature {
     font-size: 143px;
     color: rgb(255, 255, 255);
   }
 }
-.weather__city {
+.current__city {
   font-weight: 400;
   letter-spacing: 0;
   line-height: normal;
 }
 @media (width < 768px) {
-  .weather__city {
+  .current__city {
     font-size: 30px;
     color: rgb(255, 255, 255);
   }
 }
 @media (768px <= width < 1024px) {
-  .weather__city {
+  .current__city {
     font-size: 48px;
     color: rgb(255, 255, 255);
   }
 }
 @media (width >= 1024px) {
-  .weather__city {
+  .current__city {
     font-size: 60px;
     color: rgb(255, 255, 255);
   }
 }
-.weather__date {
+.current__date {
   font-weight: 400;
   letter-spacing: 0;
   line-height: normal;
 }
 @media (width < 768px) {
-  .weather__date {
+  .current__date {
     font-size: 14px;
     color: rgb(255, 255, 255);
   }
 }
 @media (768px <= width < 1024px) {
-  .weather__date {
+  .current__date {
     font-size: 18px;
     color: rgb(255, 255, 255);
   }
 }
 @media (width >= 1024px) {
-  .weather__date {
+  .current__date {
     font-size: 18px;
     color: rgb(255, 255, 255);
   }
 }
-.weather__date-week-day::after {
+.current__date-week-day::after {
   content: ",";
 }
-.weather__date-year::before {
+.current__date-year::before {
   content: "‘";
 }/*# sourceMappingURL=main.css.map */
