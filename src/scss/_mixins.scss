@@ -1,111 +1,62 @@
 @use 'variables' as v;
 
-// TEXT H1 TOKEN
+// WIDTH ADAPTIVITY MIXiNS
+@mixin mobile {
+    @media (width < 768px) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media (768px <=width < 1280px) {
+        @content;
+    }
+}
+
+@mixin desktop {
+    @media (width >=1280px) {
+        @content;
+    }
+}
+
+// TEXT TOKENS
+@mixin text-style($size-m, $size-t, $size-d, $color-m, $color-t, $color-d, $ls: v.$ls-normal) {
+    font-weight: v.$regular-weight;
+    line-height: v.$lh-auto;
+    letter-spacing: $ls;
+
+    @include mobile {
+        font-size: $size-m;
+        color: $color-m;
+    }
+
+    @include tablet {
+        font-size: $size-t;
+        color: $color-t;
+    }
+
+    @include desktop {
+        font-size: $size-d;
+        color: $color-d;
+    }
+}
+
 @mixin text-h1 {
-    font-weight: v.$regular-weight;
-    letter-spacing: v.$ls-tight;
-    line-height: v.$lh-auto;
-
-    @media (width < 768px) {
-        font-size: v.$h1-size-m;
-        color: v.$h1-color-m;
-    }
-
-    @media (768px <=width < 1024px) {
-        font-size: v.$h1-size-t;
-        color: v.$h1-color-t;
-    }
-
-    @media (width >=1024px) {
-        font-size: v.$h1-size-d;
-        color: v.$h1-color-d;
-    }
+    @include text-style(v.$h1-size-m, v.$h1-size-t, v.$h1-size-d, v.$h1-color-m, v.$h1-color-t, v.$h1-color-d, $ls: v.$ls-tight)
 }
 
-// TEXT H2 TOKEN
 @mixin text-h2 {
-    font-weight: v.$regular-weight;
-    letter-spacing: v.$ls-normal;
-    line-height: v.$lh-auto;
-
-    @media (width < 768px) {
-        font-size: v.$h2-size-m;
-        color: v.$h2-color-m;
-    }
-
-    @media (768px <=width < 1024px) {
-        font-size: v.$h2-size-t;
-        color: v.$h2-color-t;
-    }
-
-    @media (width >=1024px) {
-        font-size: v.$h2-size-d;
-        color: v.$h2-color-d;
-    }
+    @include text-style(v.$h2-size-m, v.$h2-size-t, v.$h2-size-d, v.$h2-color-m, v.$h2-color-t, v.$h2-color-d)
 }
 
-// TEXT H3 TOKEN
 @mixin text-h3 {
-    font-weight: v.$regular-weight;
-    letter-spacing: v.$ls-normal;
-    line-height: v.$lh-auto;
-
-    @media (width < 768px) {
-        font-size: v.$h3-size-m;
-        color: v.$h3-color-m;
-    }
-
-    @media (768px <=width < 1024px) {
-        font-size: v.$h3-size-t;
-        color: v.$h3-color-t;
-    }
-
-    @media (width >=1024px) {
-        font-size: v.$h3-size-d;
-        color: v.$h3-color-d;
-    }
+    @include text-style(v.$h3-size-m, v.$h3-size-t, v.$h3-size-d, v.$h3-color-m, v.$h3-color-t, v.$h3-color-d)
 }
 
-// TEXT H4 TOKEN
 @mixin text-h4 {
-    font-weight: v.$regular-weight;
-    letter-spacing: v.$ls-normal;
-    line-height: v.$lh-auto;
-
-    @media (width < 768px) {
-        font-size: v.$h4-size-m;
-        color: v.$h4-color-m;
-    }
-
-    @media (768px <=width < 1024px) {
-        font-size: v.$h4-size-t;
-        color: v.$h4-color-t;
-    }
-
-    @media (width >=1024px) {
-        font-size: v.$h4-size-d;
-        color: v.$h4-color-d;
-    }
+    @include text-style(v.$h4-size-m, v.$h4-size-t, v.$h4-size-d, v.$h4-color-m, v.$h4-color-t, v.$h4-color-d)
 }
 
-// TEXT PRIMARY TOKEN
 @mixin text-primary {
-    font-weight: v.$regular-weight;
-    letter-spacing: v.$ls-normal;
-    line-height: v.$lh-auto;
-
-    @media (width < 768px) {
-        font-size: v.$primary-size-m;
-        color: v.$primary-color-m;
-    }
-
-    @media (768px <=width < 1024px) {
-        font-size: v.$primary-size-t;
-        color: v.$primary-color-t;
-    }
-
-    @media (width >=1024px) {
-        font-size: v.$primary-size-d;
-        color: v.$primary-color-d;
-    }
+    @include text-style(v.$primary-size-m, v.$primary-size-t, v.$primary-size-d, v.$primary-color-m, v.$primary-color-t, v.$primary-color-d)
 }

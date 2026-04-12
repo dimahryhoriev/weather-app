@@ -119,6 +119,7 @@ body {
 
             &::placeholder {
                 @include m.text-h4;
+                color: v.$secondary;
             }
         }
 

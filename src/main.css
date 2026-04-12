@@ -198,8 +198,8 @@ body {
 }
 .current__temperature {
   font-weight: 400;
-  letter-spacing: -0.08em;
   line-height: normal;
+  letter-spacing: -0.08em;
 }
 @media (width < 768px) {
   .current__temperature {
@@ -207,13 +207,13 @@ body {
     color: rgb(255, 255, 255);
   }
 }
-@media (768px <= width < 1024px) {
+@media (768px <= width < 1280px) {
   .current__temperature {
     font-size: 120px;
     color: rgb(255, 255, 255);
   }
 }
-@media (width >= 1024px) {
+@media (width >= 1280px) {
   .current__temperature {
     font-size: 143px;
     color: rgb(255, 255, 255);
@@ -221,8 +221,8 @@ body {
 }
 .current__city {
   font-weight: 400;
-  letter-spacing: 0;
   line-height: normal;
+  letter-spacing: 0;
 }
 @media (width < 768px) {
   .current__city {
@@ -230,13 +230,13 @@ body {
     color: rgb(255, 255, 255);
   }
 }
-@media (768px <= width < 1024px) {
+@media (768px <= width < 1280px) {
   .current__city {
     font-size: 48px;
     color: rgb(255, 255, 255);
   }
 }
-@media (width >= 1024px) {
+@media (width >= 1280px) {
   .current__city {
     font-size: 60px;
     color: rgb(255, 255, 255);
@@ -244,8 +244,8 @@ body {
 }
 .current__date {
   font-weight: 400;
-  letter-spacing: 0;
   line-height: normal;
+  letter-spacing: 0;
 }
 @media (width < 768px) {
   .current__date {
@@ -253,13 +253,13 @@ body {
     color: rgb(255, 255, 255);
   }
 }
-@media (768px <= width < 1024px) {
+@media (768px <= width < 1280px) {
   .current__date {
     font-size: 18px;
     color: rgb(255, 255, 255);
   }
 }
-@media (width >= 1024px) {
+@media (width >= 1280px) {
   .current__date {
     font-size: 18px;
     color: rgb(255, 255, 255);
@@ -314,8 +314,8 @@ body {
   -webkit-box-shadow: inset 0 -1px 0 0 rgb(255, 255, 255);
           box-shadow: inset 0 -1px 0 0 rgb(255, 255, 255);
   font-weight: 400;
-  letter-spacing: 0;
   line-height: normal;
+  letter-spacing: 0;
 }
 @media (width < 768px) {
   .dashboard__search-input {
@@ -323,13 +323,13 @@ body {
     color: rgb(255, 255, 255);
   }
 }
-@media (768px <= width < 1024px) {
+@media (768px <= width < 1280px) {
   .dashboard__search-input {
-    font-size: 16px;
+    font-size: 18px;
     color: rgb(255, 255, 255);
   }
 }
-@media (width >= 1024px) {
+@media (width >= 1280px) {
   .dashboard__search-input {
     font-size: 20px;
     color: rgba(255, 255, 255, 0.7);
@@ -340,28 +340,28 @@ body {
 }
 .dashboard__search-input::-webkit-input-placeholder {
   font-weight: 400;
-  letter-spacing: 0;
   line-height: normal;
+  letter-spacing: 0;
 }
 .dashboard__search-input::-moz-placeholder {
   font-weight: 400;
-  letter-spacing: 0;
   line-height: normal;
+  letter-spacing: 0;
 }
 .dashboard__search-input:-ms-input-placeholder {
   font-weight: 400;
-  letter-spacing: 0;
   line-height: normal;
+  letter-spacing: 0;
 }
 .dashboard__search-input::-ms-input-placeholder {
   font-weight: 400;
-  letter-spacing: 0;
   line-height: normal;
+  letter-spacing: 0;
 }
 .dashboard__search-input::placeholder {
   font-weight: 400;
-  letter-spacing: 0;
   line-height: normal;
+  letter-spacing: 0;
 }
 @media (width < 768px) {
   .dashboard__search-input::-webkit-input-placeholder {
@@ -385,29 +385,29 @@ body {
     color: rgb(255, 255, 255);
   }
 }
-@media (768px <= width < 1024px) {
+@media (768px <= width < 1280px) {
   .dashboard__search-input::-webkit-input-placeholder {
-    font-size: 16px;
+    font-size: 18px;
     color: rgb(255, 255, 255);
   }
   .dashboard__search-input::-moz-placeholder {
-    font-size: 16px;
+    font-size: 18px;
     color: rgb(255, 255, 255);
   }
   .dashboard__search-input:-ms-input-placeholder {
-    font-size: 16px;
+    font-size: 18px;
     color: rgb(255, 255, 255);
   }
   .dashboard__search-input::-ms-input-placeholder {
-    font-size: 16px;
+    font-size: 18px;
     color: rgb(255, 255, 255);
   }
   .dashboard__search-input::placeholder {
-    font-size: 16px;
+    font-size: 18px;
     color: rgb(255, 255, 255);
   }
 }
-@media (width >= 1024px) {
+@media (width >= 1280px) {
   .dashboard__search-input::-webkit-input-placeholder {
     font-size: 20px;
     color: rgba(255, 255, 255, 0.7);
@@ -428,6 +428,21 @@ body {
     font-size: 20px;
     color: rgba(255, 255, 255, 0.7);
   }
+}
+.dashboard__search-input::-webkit-input-placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+.dashboard__search-input::-moz-placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+.dashboard__search-input:-ms-input-placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+.dashboard__search-input::-ms-input-placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+.dashboard__search-input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
 }
 .dashboard__search-btn {
   position: absolute;
@@ -449,8 +464,8 @@ body {
 }
 .details__title {
   font-weight: 400;
-  letter-spacing: 0;
   line-height: normal;
+  letter-spacing: 0;
 }
 @media (width < 768px) {
   .details__title {
@@ -458,13 +473,13 @@ body {
     color: rgb(255, 255, 255);
   }
 }
-@media (768px <= width < 1024px) {
+@media (768px <= width < 1280px) {
   .details__title {
     font-size: 18px;
     color: rgb(255, 255, 255);
   }
 }
-@media (width >= 1024px) {
+@media (width >= 1280px) {
   .details__title {
     font-size: 18px;
     color: rgb(255, 255, 255);
@@ -475,8 +490,8 @@ body {
 }
 .details__subtitle {
   font-weight: 400;
-  letter-spacing: 0;
   line-height: normal;
+  letter-spacing: 0;
 }
 @media (width < 768px) {
   .details__subtitle {
@@ -484,13 +499,13 @@ body {
     color: rgb(255, 255, 255);
   }
 }
-@media (768px <= width < 1024px) {
+@media (768px <= width < 1280px) {
   .details__subtitle {
     font-size: 18px;
     color: rgb(255, 255, 255);
   }
 }
-@media (width >= 1024px) {
+@media (width >= 1280px) {
   .details__subtitle {
     font-size: 18px;
     color: rgb(255, 255, 255);
@@ -502,8 +517,8 @@ body {
 }
 .details__metrics {
   font-weight: 400;
-  letter-spacing: 0;
   line-height: normal;
+  letter-spacing: 0;
 }
 @media (width < 768px) {
   .details__metrics {
@@ -511,13 +526,13 @@ body {
     color: rgb(255, 255, 255);
   }
 }
-@media (768px <= width < 1024px) {
+@media (768px <= width < 1280px) {
   .details__metrics {
     font-size: 18px;
     color: rgb(255, 255, 255);
   }
 }
-@media (width >= 1024px) {
+@media (width >= 1280px) {
   .details__metrics {
     font-size: 18px;
     color: rgb(255, 255, 255);
@@ -570,8 +585,8 @@ body {
 }
 .forecast__title {
   font-weight: 400;
-  letter-spacing: 0;
   line-height: normal;
+  letter-spacing: 0;
 }
 @media (width < 768px) {
   .forecast__title {
@@ -579,13 +594,13 @@ body {
     color: rgb(255, 255, 255);
   }
 }
-@media (768px <= width < 1024px) {
+@media (768px <= width < 1280px) {
   .forecast__title {
     font-size: 18px;
     color: rgb(255, 255, 255);
   }
 }
-@media (width >= 1024px) {
+@media (width >= 1280px) {
   .forecast__title {
     font-size: 18px;
     color: rgb(255, 255, 255);
@@ -604,8 +619,8 @@ body {
 }
 .forecast__item {
   font-weight: 400;
-  letter-spacing: 0;
   line-height: normal;
+  letter-spacing: 0;
 }
 @media (width < 768px) {
   .forecast__item {
@@ -613,13 +628,13 @@ body {
     color: rgb(255, 255, 255);
   }
 }
-@media (768px <= width < 1024px) {
+@media (768px <= width < 1280px) {
   .forecast__item {
     font-size: 18px;
     color: rgb(255, 255, 255);
   }
 }
-@media (width >= 1024px) {
+@media (width >= 1280px) {
   .forecast__item {
     font-size: 18px;
     color: rgb(255, 255, 255);
@@ -666,8 +681,8 @@ body {
 }
 .forecast__item-value {
   font-weight: 400;
-  letter-spacing: 0;
   line-height: normal;
+  letter-spacing: 0;
 }
 @media (width < 768px) {
   .forecast__item-value {
@@ -675,13 +690,13 @@ body {
     color: rgba(255, 255, 255, 0.7);
   }
 }
-@media (768px <= width < 1024px) {
+@media (768px <= width < 1280px) {
   .forecast__item-value {
     font-size: 18px;
     color: rgba(255, 255, 255, 0.7);
   }
 }
-@media (width >= 1024px) {
+@media (width >= 1280px) {
   .forecast__item-value {
     font-size: 24px;
     color: rgba(255, 255, 255, 0.7);
