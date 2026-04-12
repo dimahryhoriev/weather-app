@@ -13,6 +13,7 @@ html {
   -webkit-text-size-adjust: none;
   -ms-text-size-adjust: none;
       text-size-adjust: none;
+  overflow-x: hidden;
 }
 
 /* Remove default margin in favour of better control in authored CSS */
@@ -122,8 +123,9 @@ input[type=search]::-webkit-search-decoration, input[type=search]::-webkit-searc
   font-display: swap;
 }
 body {
-  background-color: black;
+  background: transparent url(/src/assets/images/snow.png) no-repeat center/cover fixed;
   font-family: "Roboto", sans-serif;
+  overflow-x: hidden;
 }
 
 .wrapper {
@@ -134,12 +136,11 @@ body {
   width: 100%;
   margin: 0 auto;
   padding: 0 0 0 116px;
-  height: 100vh;
   position: relative;
 }
 
 .header {
-  position: absolute;
+  position: fixed;
   margin-top: 36px;
 }
 
@@ -147,26 +148,28 @@ body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
   width: 100%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
 }
 
 .current {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  position: fixed;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
-  -ms-flex-item-align: end;
-      align-self: flex-end;
+  top: 68.5vh;
   gap: 28px;
-  margin-bottom: 84px;
 }
 .current__info {
   display: -webkit-box;
@@ -273,16 +276,27 @@ body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  position: relative;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  justify-self: flex-end;
   width: 526px;
+  border-left: 5px solid rgba(255, 255, 255, 0.14);
+  padding: 40px 120px 40px 35px;
+  gap: 40px;
+}
+.dashboard::after {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 100vw;
+  left: 0;
+  top: 0;
   background-color: rgba(255, 255, 255, 0.04);
   backdrop-filter: blur(19px);
-  border-left: 5px solid rgba(255, 255, 255, 0.14);
-  padding: 40px 120px 0px 35px;
-  gap: 40px;
+  z-index: -1;
 }
 .dashboard__search {
   display: -webkit-box;
