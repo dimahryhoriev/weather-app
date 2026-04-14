@@ -19,7 +19,7 @@
     }
 }
 
-// TEXT TOKENS
+// TYPOGRAPHY TOKENS
 @mixin text-style($size-m, $size-t, $size-d, $color-m, $color-t, $color-d, $ls: v.$ls-normal) {
     font-weight: v.$regular-weight;
     line-height: v.$lh-auto;

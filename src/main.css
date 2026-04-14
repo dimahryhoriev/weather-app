@@ -14,6 +14,7 @@ html {
   -ms-text-size-adjust: none;
       text-size-adjust: none;
   overflow-x: hidden;
+  height: 100%;
 }
 
 /* Remove default margin in favour of better control in authored CSS */
@@ -40,7 +41,7 @@ ol {
 
 /* Set core body defaults */
 body {
-  min-height: 100vh;
+  min-height: 100%;
   line-height: 1.5;
 }
 
@@ -138,10 +139,26 @@ body {
   padding: 0 0 0 116px;
   position: relative;
 }
+@media (768px <= width < 1280px) {
+  .wrapper {
+    padding: 268px 0 0 0;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    gap: 45px;
+  }
+}
 
 .header {
   position: fixed;
-  margin-top: 36px;
+  top: 36px;
+}
+@media (768px <= width < 1280px) {
+  .header {
+    top: 25px;
+    left: 40px;
+  }
 }
 
 .weather {
@@ -265,11 +282,27 @@ body {
     color: rgb(255, 255, 255);
   }
 }
+@media (768px <= width < 1280px) {
+  .current__date {
+    font-size: 16px;
+  }
+}
 .current__date-week-day::after {
   content: ",";
 }
 .current__date-year::before {
   content: "‘";
+}
+@media (768px <= width < 1280px) {
+  .current {
+    position: relative;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    top: auto;
+    left: auto;
+    margin-left: 40px;
+  }
 }
 
 .dashboard {
@@ -283,6 +316,7 @@ body {
           flex-direction: column;
   justify-self: flex-end;
   width: 526px;
+  min-height: 100vh;
   border-left: 5px solid rgba(255, 255, 255, 0.14);
   padding: 40px 120px 40px 35px;
   gap: 40px;
@@ -451,6 +485,49 @@ body {
   right: 16px;
   top: 9px;
 }
+.dashboard__search-btn svg {
+  width: 100%;
+  height: 100%;
+}
+@media (768px <= width < 1280px) {
+  .dashboard__search {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    position: fixed;
+    width: 305px;
+    min-height: 45px;
+    height: 45px;
+    top: 13px;
+    right: 40px;
+  }
+  .dashboard__search-btn {
+    width: 22px;
+    height: 22px;
+    right: 0;
+  }
+}
+@media (768px <= width < 1280px) {
+  .dashboard {
+    width: 100%;
+    border-left: none;
+    border-top: 5px solid rgba(255, 255, 255, 0.14);
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    padding: 105px 0 40px 0;
+  }
+  .dashboard::after {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    margin: 0 auto;
+    background-color: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(19px);
+    z-index: -1;
+  }
+}
 
 .details {
   display: -webkit-box;
@@ -566,6 +643,22 @@ body {
   position: absolute;
   right: 0;
 }
+@media (768px <= width < 1280px) {
+  .details {
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    max-width: 380px;
+    width: 100%;
+    padding: 0 8px;
+  }
+  .details__subtitle {
+    text-align: center;
+  }
+  .details__metrics {
+    width: 100%;
+  }
+}
 
 .forecast {
   display: -webkit-box;
@@ -576,12 +669,12 @@ body {
       -ms-flex-direction: column;
           flex-direction: column;
   gap: 40px;
+  margin-top: 45px;
 }
 .forecast__divider {
   width: 100%;
   height: 1px;
   background-color: rgb(255, 255, 255);
-  margin-top: 45px;
 }
 .forecast__title {
   font-weight: 400;
@@ -706,4 +799,21 @@ body {
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
+}
+@media (768px <= width < 1280px) {
+  .forecast {
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    max-width: 380px;
+    width: 100%;
+    padding: 0 8px;
+    margin-top: 40px;
+  }
+  .forecast__metrics {
+    width: 100%;
+  }
+  .forecast__item-value {
+    font-size: 24px;
+  }
 }/*# sourceMappingURL=main.css.map */
