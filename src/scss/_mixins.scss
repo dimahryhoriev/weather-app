@@ -2,13 +2,13 @@
 
 // WIDTH ADAPTIVITY MIXiNS
 @mixin mobile {
-    @media (width < 768px) {
+    @media (width < 550px) {
         @content;
     }
 }
 
 @mixin tablet {
-    @media (768px <=width < 1280px) {
+    @media (550px <=width < 1280px) {
         @content;
     }
 }
