@@ -829,6 +829,12 @@ body {
   height: 1px;
   background-color: rgb(255, 255, 255);
 }
+@media (550px <= width < 1280px) {
+  .forecast__divider {
+    width: calc(100% + 16px);
+    margin: 0 -8px;
+  }
+}
 .forecast__title {
   font-weight: 400;
   line-height: normal;
