@@ -772,6 +772,15 @@ body {
 .details__item-label {
   color: rgba(255, 255, 255, 0.7);
 }
+.details__item-value--degrees::after {
+  content: "°";
+}
+.details__item-value--percents::after {
+  content: "%";
+}
+.details__item-value--speed::after {
+  content: "km/h";
+}
 .details__item-icon {
   position: absolute;
   right: 0;

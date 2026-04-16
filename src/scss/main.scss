@@ -332,6 +332,26 @@ body {
             color: v.$secondary;
         }
 
+        &-value {
+            &--degrees {
+                &::after {
+                    content: '°';
+                }
+            }
+
+            &--percents {
+                &::after {
+                    content: '%';
+                }
+            }
+
+            &--speed {
+                &::after {
+                    content: 'km/h';
+                }
+            }
+        }
+
         &-icon {
             position: absolute;
             right: 0;
