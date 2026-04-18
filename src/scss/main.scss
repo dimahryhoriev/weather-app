@@ -4,7 +4,7 @@
 @use 'mixins' as m;
 
 body {
-    background: transparent url(/src/assets/images/snow.png) no-repeat center / cover fixed;
+    background: transparent url(/assets/images/snow.png) no-repeat center / cover fixed;
     font-family: v.$font-primary;
     overflow-x: hidden;
 }
@@ -197,6 +197,10 @@ body {
             &::placeholder {
                 @include m.text-h4;
                 color: v.$secondary;
+
+                @include m.mobile {
+                    font-size: 12px;
+                }
             }
         }
 

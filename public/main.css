@@ -111,20 +111,20 @@ input[type=search]::-webkit-search-decoration, input[type=search]::-webkit-searc
 
 @font-face {
   font-family: "Roboto";
-  src: url("/src/assets/fonts/Roboto-Regular.woff2");
+  src: url("/assets/fonts/Roboto-Regular.woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Roboto";
-  src: url("/src/assets/fonts/Roboto-Medium.woff2");
+  src: url("/assets/fonts/Roboto-Medium.woff2");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 body {
-  background: transparent url(/src/assets/images/snow.png) no-repeat center/cover fixed;
+  background: transparent url(/assets/images/snow.png) no-repeat center/cover fixed;
   font-family: "Roboto", sans-serif;
   overflow-x: hidden;
 }
@@ -543,6 +543,23 @@ body {
 }
 .dashboard__search-input::placeholder {
   color: rgba(255, 255, 255, 0.7);
+}
+@media (width < 550px) {
+  .dashboard__search-input::-webkit-input-placeholder {
+    font-size: 12px;
+  }
+  .dashboard__search-input::-moz-placeholder {
+    font-size: 12px;
+  }
+  .dashboard__search-input:-ms-input-placeholder {
+    font-size: 12px;
+  }
+  .dashboard__search-input::-ms-input-placeholder {
+    font-size: 12px;
+  }
+  .dashboard__search-input::placeholder {
+    font-size: 12px;
+  }
 }
 .dashboard__search-btn {
   position: absolute;

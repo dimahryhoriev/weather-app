@@ -144,3 +144,7 @@ vite.config.ts.timestamp-*
 # Sass / CSS maps
 *.css.map
 src/scss/*.css
+
+# Hide server settings
+node_modules/
+.env
