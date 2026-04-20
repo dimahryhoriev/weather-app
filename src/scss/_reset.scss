@@ -50,6 +50,11 @@ h4,
 button,
 input,
 label {
+    background: transparent;
+    outline: none;
+    border: none;
+    margin: 0 auto;
+    padding: 0;
     line-height: 1.1;
 }
 
