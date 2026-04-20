@@ -9,21 +9,21 @@ let currentDay = document.querySelector('[data-js="c-day"]');
 let currentMonth = document.querySelector('[data-js="c-month"]');
 let currentYear = document.querySelector('[data-js="c-year"]');
 
-function citySearch(city) {
-    console.log(city);
-}
 
+// Get user's search result
 form.addEventListener('submit', () => {
     event.preventDefault();
 
-    console.log(formInput.value);
+    fetchWeather(formInput.value);
 })
 
 // Fetch weather data from API
 const fetchWeather = async (city) => {
-    const url = `/api?q=${city}`
+    const url = `/api?q=${city}`;
 
-    const res = await fetch(url)
-    const data = await res.json()
+    const res = await fetch(url);
+    const data = await res.json();
+
+    console.log(data);
 }
 
