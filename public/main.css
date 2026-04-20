@@ -687,6 +687,8 @@ body {
   gap: 30px;
 }
 .details__title {
+  width: 100%;
+  text-align: left;
   font-weight: 400;
   line-height: normal;
   letter-spacing: 0;
@@ -718,6 +720,8 @@ body {
   }
 }
 .details__subtitle {
+  width: 100%;
+  text-align: left;
   font-weight: 400;
   line-height: normal;
   letter-spacing: 0;
@@ -786,7 +790,7 @@ body {
       -ms-flex-pack: justify;
           justify-content: space-between;
   height: 20px;
-  padding-right: 32px;
+  padding-right: 40px;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -822,6 +826,9 @@ body {
     width: 100%;
     padding: 0 8px;
   }
+  .details__title {
+    text-align: center;
+  }
   .details__subtitle {
     text-align: center;
   }
@@ -835,6 +842,9 @@ body {
         -ms-flex-align: center;
             align-items: center;
     width: 100%;
+  }
+  .details__title {
+    text-align: center;
   }
   .details__subtitle {
     text-align: center;
@@ -867,6 +877,8 @@ body {
   }
 }
 .forecast__title {
+  width: 100%;
+  text-align: left;
   font-weight: 400;
   line-height: normal;
   letter-spacing: 0;
@@ -1022,6 +1034,9 @@ body {
     padding: 0 8px;
     margin-top: 40px;
   }
+  .forecast__title {
+    text-align: center;
+  }
   .forecast__metrics {
     width: 100%;
   }
@@ -1036,6 +1051,9 @@ body {
             align-items: center;
     width: 100%;
     margin-top: 40px;
+  }
+  .forecast__title {
+    text-align: center;
   }
   .forecast__metrics {
     width: 100%;

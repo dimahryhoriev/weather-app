@@ -303,6 +303,9 @@ body {
     gap: 30px;
 
     &__title {
+        width: 100%;
+        text-align: left;
+
         @include m.text-primary;
         margin-bottom: 22px;
 
@@ -312,6 +315,9 @@ body {
     }
 
     &__subtitle {
+        width: 100%;
+        text-align: left;
+
         @include m.text-primary;
         text-transform: uppercase;
         font-weight: v.$medium-weight;
@@ -329,7 +335,7 @@ body {
         position: relative;
         justify-content: space-between;
         height: 20px;
-        padding-right: 32px;
+        padding-right: 40px;
         align-items: center;
 
         &-label {
@@ -375,6 +381,10 @@ body {
         width: 100%;
         padding: 0 8px;
 
+        &__title {
+            text-align: center;
+        }
+
         &__subtitle {
             text-align: center;
         }
@@ -387,6 +397,10 @@ body {
     @include m.mobile {
         align-items: center;
         width: 100%;
+
+        &__title {
+            text-align: center;
+        }
 
         &__subtitle {
             text-align: center;
@@ -416,6 +430,9 @@ body {
     }
 
     &__title {
+        width: 100%;
+        text-align: left;
+
         @include m.text-primary;
     }
 
@@ -482,6 +499,10 @@ body {
         padding: 0 8px;
         margin-top: 40px;
 
+        &__title {
+            text-align: center;
+        }
+
         &__metrics {
             width: 100%;
         }
@@ -497,6 +518,10 @@ body {
         align-items: center;
         width: 100%;
         margin-top: 40px;
+
+        &__title {
+            text-align: center;
+        }
 
         &__metrics {
             width: 100%;
