@@ -111,20 +111,20 @@ input[type=search]::-webkit-search-decoration, input[type=search]::-webkit-searc
 
 @font-face {
   font-family: "Roboto";
-  src: url("/assets/fonts/Roboto-Regular.woff2");
+  src: url("./assets/fonts/Roboto-Regular.woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Roboto";
-  src: url("/assets/fonts/Roboto-Medium.woff2");
+  src: url("./assets/fonts/Roboto-Medium.woff2");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 body {
-  background: transparent url(/assets/images/snow.png) no-repeat center/cover fixed;
+  background: transparent url(./assets/images/snow.png) no-repeat center/cover fixed;
   font-family: "Roboto", sans-serif;
   overflow-x: hidden;
 }
