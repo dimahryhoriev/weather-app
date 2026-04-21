@@ -1,37 +1,44 @@
-let form = document.querySelector('.dashboard__search');
-let formInput = document.querySelector('.dashboard__search-input');
-let formBtn = document.querySelector('.dashboard__search-btn');
-let currentTemp = document.querySelector('[data-js="c-temp"]');
-let currentCity = document.querySelector('[data-js="c-city"]');
-let currentTime = document.querySelector('[data-js="c-time"]');
-let currentWeekDay = document.querySelector('[data-js="c-week-day"]');
-let currentDay = document.querySelector('[data-js="c-day"]');
-let currentMonth = document.querySelector('[data-js="c-month"]');
-let currentYear = document.querySelector('[data-js="c-year"]');
+const dom = {
+    form: document.querySelector('.dashboard__search'),
+    formInput: document.querySelector('.dashboard__search-input'),
+    formBtn: document.querySelector('.dashboard__search-btn'),
+
+    current: {
+        temp: document.querySelector('[data-js="c-temp"]'),
+        city: document.querySelector('[data-js="c-city"]'),
+        time: document.querySelector('[data-js="c-time"]'),
+        weekDay: document.querySelector('[data-js="c-week-day"]'),
+        day: document.querySelector('[data-js="c-day"]'),
+        month: document.querySelector('[data-js="c-month"]'),
+        year: document.querySelector('[data-js="c-year"]'),
+    }
+}
 
 
 // Get user's search result
-form.addEventListener('submit', async () => {
+dom.form.addEventListener('submit', async (event) => {
     event.preventDefault();
 
-    const weatherParams = await fetchWeather(formInput.value);
-    // const epoch = weatherParams.location.localtime_epoch;
-    const localString = weatherParams.location.localtime.replace(' ', 'T');
-    let date = new Date(localString);
-    console.log(date);
-    console.log(weatherParams);
+    try {
+        const weatherParams = await fetchWeather(dom.formInput.value);
+        const localString = weatherParams.location.localtime.replace(' ', 'T');
+        let date = new Date(localString);
+        console.log(weatherParams);
 
-    currentTemp.textContent = Math.round(weatherParams.current.temp_c);
-    currentCity.textContent = weatherParams.location.name;
-    currentTime.textContent = date.toLocaleString('en-US', {
-        hour: '2-digit',
-        minute: '2-digit',
-        hour12: false
-    });
-    currentWeekDay.textContent = date.toLocaleString('en-US', { weekday: 'long' });
-    currentDay.textContent = date.getDate();
-    currentMonth.textContent = date.toLocaleString('en-US', { month: 'short' });
-    currentYear.textContent = date.getFullYear().toString().slice(-2);
+        dom.current.temp.textContent = Math.round(weatherParams.current.temp_c);
+        dom.current.city.textContent = weatherParams.location.name;
+        dom.current.time.textContent = date.toLocaleString('en-US', {
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: false
+        });
+        dom.current.weekDay.textContent = date.toLocaleString('en-US', { weekday: 'long' });
+        dom.current.day.textContent = date.getDate();
+        dom.current.month.textContent = date.toLocaleString('en-US', { month: 'short' });
+        dom.current.year.textContent = date.getFullYear().toString().slice(-2);
+    } catch (error) {
+        console.error('Error fetching weather data: ', error);
+    }
 })
 
 // Fetch weather data from API
