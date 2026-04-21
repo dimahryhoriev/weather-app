@@ -108,16 +108,24 @@ body {
 
     &__temperature {
         @include m.text-h1;
+
+        &::after {
+            content: '°';
+        }
     }
 
     &__city {
         @include m.text-h2;
+
+        width: 100%;
     }
 
     &__date {
         @include m.text-primary;
 
         &-week-day {
+            text-transform: capitalize;
+
             &::after {
                 content: ',';
             }
