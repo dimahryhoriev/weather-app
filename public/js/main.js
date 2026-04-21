@@ -15,18 +15,23 @@ form.addEventListener('submit', async () => {
     event.preventDefault();
 
     const weatherParams = await fetchWeather(formInput.value);
-    const epoch = weatherParams.location.localtime_epoch;
-    let date = new Date(epoch * 1000);
+    // const epoch = weatherParams.location.localtime_epoch;
+    const localString = weatherParams.location.localtime.replace(' ', 'T');
+    let date = new Date(localString);
     console.log(date);
     console.log(weatherParams);
 
     currentTemp.textContent = Math.round(weatherParams.current.temp_c);
     currentCity.textContent = weatherParams.location.name;
-    currentTime.textContent = weatherParams.location.localtime.substring(11, 17);
+    currentTime.textContent = date.toLocaleString('en-US', {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false
+    });
     currentWeekDay.textContent = date.toLocaleString('en-US', { weekday: 'long' });
-    currentDay.textContent = weatherParams.location.localtime.substring(8, 11);
+    currentDay.textContent = date.getDate();
     currentMonth.textContent = date.toLocaleString('en-US', { month: 'short' });
-    currentYear.textContent = weatherParams.location.localtime.substring(2, 4);
+    currentYear.textContent = date.getFullYear().toString().slice(-2);
 })
 
 // Fetch weather data from API
