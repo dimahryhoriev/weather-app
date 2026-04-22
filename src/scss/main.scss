@@ -493,6 +493,10 @@ body {
         &-value {
             @include m.text-h3;
             height: fit-content;
+
+            &::after {
+                content: '°';
+            }
         }
 
         @include m.mobile {
@@ -518,10 +522,6 @@ body {
         &__item {
             &-value {
                 font-size: 24px;
-
-                &::after {
-                    content: '°';
-                }
             }
         }
     }

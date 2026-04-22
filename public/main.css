@@ -1028,6 +1028,9 @@ body {
   height: -moz-fit-content;
   height: fit-content;
 }
+.forecast__item-value::after {
+  content: "°";
+}
 @media (width < 550px) {
   .forecast__item {
     padding-left: 66px;
@@ -1051,9 +1054,6 @@ body {
   }
   .forecast__item-value {
     font-size: 24px;
-  }
-  .forecast__item-value::after {
-    content: "°";
   }
 }
 @media (width < 550px) {
