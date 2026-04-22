@@ -66,13 +66,18 @@ dom.form.addEventListener('submit', async (event) => {
         for (let forecastCounter = 1; forecastCounter <= 12; forecastCounter++) {
             // Declare next forecast hour
             const template = dom.forecast.item.content.cloneNode(true);
-            let nextHour = template.querySelector('[data-js="f-time"]');
+            const nextHour = template.querySelector('[data-js="f-time"]');
             const nextDesc = template.querySelector('[data-js="f-desc"]');
             const nextTemp = template.querySelector('[data-js="f-temp"]');
 
+            // Calculating the next hour
             currentHour = (currentHour + 1) % 24;
             const formattedHour = currentHour.toString().padStart(2, '0');
             currentMinute = '00';
+
+            // Extract the temperature value for a specific hour
+            const hourData = weatherParams.forecast.forecastday[0].hour[currentHour];
+            nextTemp.textContent = Math.round(hourData.temp_c);
 
             nextHour.textContent = `${formattedHour}:${currentMinute}`;
             dom.forecast.list.appendChild(template);
