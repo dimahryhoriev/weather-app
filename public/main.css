@@ -1052,6 +1052,9 @@ body {
   .forecast__item-value {
     font-size: 24px;
   }
+  .forecast__item-value::after {
+    content: "°";
+  }
 }
 @media (width < 550px) {
   .forecast {

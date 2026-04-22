@@ -518,6 +518,10 @@ body {
         &__item {
             &-value {
                 font-size: 24px;
+
+                &::after {
+                    content: '°';
+                }
             }
         }
     }
