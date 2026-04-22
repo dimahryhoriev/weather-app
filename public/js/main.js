@@ -22,9 +22,6 @@ const dom = {
     },
 
     forecast: {
-        nextHour: document.querySelector('[data-js="f-time"]'),
-        nextDesc: document.querySelector('[data-js="f-desc"]'),
-        nextTemp: document.querySelector('[data-js="f-temp"]'),
         list: document.querySelector('.forecast__metrics'),
         item: document.querySelector('[data-js="forecast-item"]')
     }
@@ -36,6 +33,8 @@ dom.form.addEventListener('submit', async (event) => {
     event.preventDefault();
 
     try {
+        dom.forecast.list.innerHTML = '';
+
         const weatherParams = await fetchWeather(dom.formInput.value);
         const localString = weatherParams.location.localtime.replace(' ', 'T');
         let date = new Date(localString);
@@ -66,7 +65,22 @@ dom.form.addEventListener('submit', async (event) => {
 
         for (currentHour; currentHour <= 12; currentHour++) {
             // Declare next forecast hour
-            const template = dom.forecast.item.cloneNode(true);
+            const template = dom.forecast.item.content.cloneNode(true);
+            let nextHour = template.querySelector('[data-js="f-time"]');
+            const nextDesc = template.querySelector('[data-js="f-desc"]');
+            const nextTemp = template.querySelector('[data-js="f-temp"]');
+
+            nextHour.textContent = dom.current.time.textContent;
+            let [hours, minutes] = nextHour.textContent.split(':').map(Number);
+            console.log(hours);
+            console.log(minutes);
+            hours++;
+            const formattedHours = hours.toString().padStart(2, '0');
+
+            minutes = '00';
+            nextHour.textContent = `${formattedHours}:${minutes}`;
+
+            console.log(nextHour);
 
             dom.forecast.list.appendChild(template);
         }
