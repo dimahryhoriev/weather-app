@@ -10,7 +10,23 @@ const dom = {
         weekDay: document.querySelector('[data-js="c-week-day"]'),
         day: document.querySelector('[data-js="c-day"]'),
         month: document.querySelector('[data-js="c-month"]'),
-        year: document.querySelector('[data-js="c-year"]'),
+        year: document.querySelector('[data-js="c-year"]')
+    },
+
+    details: {
+        maxTemp: document.querySelector('[data-js="temp-max"]'),
+        minTemp: document.querySelector('[data-js="temp-min"]'),
+        humidity: document.querySelector('[data-js="humidity"]'),
+        cloudy: document.querySelector('[data-js="cloudy"]'),
+        wind: document.querySelector('[data-js="wind"]')
+    },
+
+    forecast: {
+        nextHour: document.querySelector('[data-js="f-time"]'),
+        nextDesc: document.querySelector('[data-js="f-desc"]'),
+        nextTemp: document.querySelector('[data-js="f-temp"]'),
+        list: document.querySelector('.forecast__metrics'),
+        item: document.querySelector('[data-js="forecast-item"]')
     }
 }
 
@@ -25,6 +41,7 @@ dom.form.addEventListener('submit', async (event) => {
         let date = new Date(localString);
         console.log(weatherParams);
 
+        // Show current weather by search query
         dom.current.temp.textContent = Math.round(weatherParams.current.temp_c);
         dom.current.city.textContent = weatherParams.location.name;
         dom.current.time.textContent = date.toLocaleString('en-US', {
@@ -36,6 +53,23 @@ dom.form.addEventListener('submit', async (event) => {
         dom.current.day.textContent = date.getDate();
         dom.current.month.textContent = date.toLocaleString('en-US', { month: 'short' });
         dom.current.year.textContent = date.getFullYear().toString().slice(-2);
+
+        // Show weather details by search query
+        dom.details.maxTemp.textContent = Math.round(weatherParams.forecast.forecastday[0].day.maxtemp_c);
+        dom.details.minTemp.textContent = Math.round(weatherParams.forecast.forecastday[0].day.mintemp_c);
+        dom.details.humidity.textContent = weatherParams.current.humidity;
+        dom.details.cloudy.textContent = weatherParams.current.cloud;
+        dom.details.wind.textContent = Math.round(weatherParams.current.wind_kph);
+
+        // Show next 12 hours weather forecast
+        let currentHour = 1;
+
+        for (currentHour; currentHour <= 12; currentHour++) {
+            // Declare next forecast hour
+            const template = dom.forecast.item.cloneNode(true);
+
+            dom.forecast.list.appendChild(template);
+        }
     } catch (error) {
         console.error('Error fetching weather data: ', error);
     }
