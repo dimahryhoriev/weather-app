@@ -61,27 +61,20 @@ dom.form.addEventListener('submit', async (event) => {
         dom.details.wind.textContent = Math.round(weatherParams.current.wind_kph);
 
         // Show next 12 hours weather forecast
-        let currentHour = 1;
+        let [currentHour, currentMinute] = dom.current.time.textContent.split(':').map(Number);
 
-        for (currentHour; currentHour <= 12; currentHour++) {
+        for (let forecastCounter = 1; forecastCounter <= 12; forecastCounter++) {
             // Declare next forecast hour
             const template = dom.forecast.item.content.cloneNode(true);
             let nextHour = template.querySelector('[data-js="f-time"]');
             const nextDesc = template.querySelector('[data-js="f-desc"]');
             const nextTemp = template.querySelector('[data-js="f-temp"]');
 
-            nextHour.textContent = dom.current.time.textContent;
-            let [hours, minutes] = nextHour.textContent.split(':').map(Number);
-            console.log(hours);
-            console.log(minutes);
-            hours++;
-            const formattedHours = hours.toString().padStart(2, '0');
+            currentHour = (currentHour + 1) % 24;
+            const formattedHour = currentHour.toString().padStart(2, '0');
+            currentMinute = '00';
 
-            minutes = '00';
-            nextHour.textContent = `${formattedHours}:${minutes}`;
-
-            console.log(nextHour);
-
+            nextHour.textContent = `${formattedHour}:${currentMinute}`;
             dom.forecast.list.appendChild(template);
         }
     } catch (error) {
