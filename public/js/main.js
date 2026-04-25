@@ -54,17 +54,6 @@ dom.form.addEventListener('submit', async (event) => {
         dom.current.month.textContent = date.toLocaleString('en-US', { month: 'short' });
         dom.current.year.textContent = date.getFullYear().toString().slice(-2);
 
-        // Change icon relying on current weather
-        switch (true) {
-            case (weatherParams.current.cloud <= 50):
-                dom.current.icon.style.backgroundImage = "url('assets/icons/partly-cloudy.svg')";
-                break;
-
-            case (weatherParams.current.cloud >= 50):
-                dom.current.icon.style.backgroundImage = "url('assets/icons/cloudy.svg')";
-                break;
-        }
-
         // Show weather details by search query
         dom.details.maxTemp.textContent = Math.round(weatherParams.forecast.forecastday[0].day.maxtemp_c);
         dom.details.minTemp.textContent = Math.round(weatherParams.forecast.forecastday[0].day.mintemp_c);
@@ -74,6 +63,8 @@ dom.form.addEventListener('submit', async (event) => {
 
         // Show next 12 hours weather forecast
         let [currentHour, currentMinute] = dom.current.time.textContent.split(':').map(Number);
+        let forecastHour = currentHour;
+        let forecastMinute = currentMinute;
 
         for (let forecastCounter = 1; forecastCounter <= 12; forecastCounter++) {
             // Declare next forecast hour
@@ -83,16 +74,56 @@ dom.form.addEventListener('submit', async (event) => {
             const nextTemp = template.querySelector('[data-js="f-temp"]');
 
             // Calculating the next hour
-            currentHour = (currentHour + 1) % 24;
-            const formattedHour = currentHour.toString().padStart(2, '0');
-            currentMinute = '00';
-            nextHour.textContent = `${formattedHour}:${currentMinute}`;
+            forecastHour = (forecastHour + 1) % 24;
+            const formattedHour = forecastHour.toString().padStart(2, '0');
+            forecastMinute = '00';
+            nextHour.textContent = `${formattedHour}:${forecastMinute}`;
 
             // Extract the temperature value for a specific hour
-            const hourData = weatherParams.forecast.forecastday[0].hour[currentHour];
+            const hourData = weatherParams.forecast.forecastday[0].hour[forecastHour];
             nextTemp.textContent = Math.round(hourData.temp_c);
 
             dom.forecast.list.appendChild(template);
+        }
+
+        // Change icon relying on current weather & time
+        const isDay = currentHour <= 18;
+        const isNight = currentHour >= 18 || currentHour < 6;
+
+        switch (true) {
+            // Day icon variants
+            case (weatherParams.current.cloud <= 25 && isDay):
+                dom.current.icon.style.backgroundImage = "url('assets/icons/clear-day.svg')";
+                break;
+
+            case (weatherParams.current.cloud <= 45 && isDay):
+                dom.current.icon.style.backgroundImage = "url('assets/icons/partly-cloudy-day.svg')";
+                break;
+
+            case (weatherParams.current.cloud <= 70 && isDay):
+                dom.current.icon.style.backgroundImage = "url('assets/icons/mostly-cloudy-day.svg')";
+                break;
+
+
+            // Evening - Night icon variants
+            case (weatherParams.current.cloud <= 25 && isNight):
+                dom.current.icon.style.backgroundImage = "url('assets/icons/clear-night.svg')";
+                break;
+
+            case (weatherParams.current.cloud <= 45 && isNight):
+                dom.current.icon.style.backgroundImage = "url('assets/icons/partly-cloudy-night.svg')";
+                break;
+
+            case (weatherParams.current.cloud <= 70 && isNight):
+                dom.current.icon.style.backgroundImage = "url('assets/icons/mostly-cloudy-night.svg')";
+                break;
+
+
+            // Common icon variants
+            case (weatherParams.current.cloud >= 70):
+                dom.current.icon.style.backgroundImage = "url('assets/icons/cloudy.svg')";
+                break;
+
         }
     } catch (error) {
         console.error('Error fetching weather data: ', error);
