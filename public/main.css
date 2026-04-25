@@ -249,20 +249,19 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding-top: 15px;
-}
-.current__icon svg {
+  margin-top: 15px;
+  background: transparent url(assets/icons/cloudiness.svg) center/contain no-repeat;
   width: 70px;
   height: 70px;
 }
 @media (550px <= width < 1280px) {
-  .current__icon svg {
+  .current__icon {
     width: 55px;
     height: 55px;
   }
 }
 @media (width < 550px) {
-  .current__icon svg {
+  .current__icon {
     width: 40px;
     height: 40px;
   }
@@ -987,6 +986,7 @@ body {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  background: transparent url(assets/icons/snow.svg) center/contain no-repeat;
   width: 48px;
   height: 48px;
   left: 0;

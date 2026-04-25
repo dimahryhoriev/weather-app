@@ -10,7 +10,8 @@ const dom = {
         weekDay: document.querySelector('[data-js="c-week-day"]'),
         day: document.querySelector('[data-js="c-day"]'),
         month: document.querySelector('[data-js="c-month"]'),
-        year: document.querySelector('[data-js="c-year"]')
+        year: document.querySelector('[data-js="c-year"]'),
+        icon: document.querySelector('[data-js="c-icon"]')
     },
 
     details: {
@@ -53,6 +54,11 @@ dom.form.addEventListener('submit', async (event) => {
         dom.current.month.textContent = date.toLocaleString('en-US', { month: 'short' });
         dom.current.year.textContent = date.getFullYear().toString().slice(-2);
 
+        // Change icon relying on current weather
+        if (weatherParams.current.cloud > 50) {
+            dom.current.icon
+        }
+
         // Show weather details by search query
         dom.details.maxTemp.textContent = Math.round(weatherParams.forecast.forecastday[0].day.maxtemp_c);
         dom.details.minTemp.textContent = Math.round(weatherParams.forecast.forecastday[0].day.mintemp_c);
@@ -74,12 +80,12 @@ dom.form.addEventListener('submit', async (event) => {
             currentHour = (currentHour + 1) % 24;
             const formattedHour = currentHour.toString().padStart(2, '0');
             currentMinute = '00';
+            nextHour.textContent = `${formattedHour}:${currentMinute}`;
 
             // Extract the temperature value for a specific hour
             const hourData = weatherParams.forecast.forecastday[0].hour[currentHour];
             nextTemp.textContent = Math.round(hourData.temp_c);
 
-            nextHour.textContent = `${formattedHour}:${currentMinute}`;
             dom.forecast.list.appendChild(template);
         }
     } catch (error) {
