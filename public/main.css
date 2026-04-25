@@ -250,7 +250,7 @@ body {
       -ms-flex-align: center;
           align-items: center;
   margin-top: 15px;
-  background: transparent url(assets/icons/cloudiness.svg) center/contain no-repeat;
+  background: transparent url(assets/icons/cloudy.svg) center/contain no-repeat;
   width: 70px;
   height: 70px;
 }

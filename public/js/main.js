@@ -55,8 +55,14 @@ dom.form.addEventListener('submit', async (event) => {
         dom.current.year.textContent = date.getFullYear().toString().slice(-2);
 
         // Change icon relying on current weather
-        if (weatherParams.current.cloud > 50) {
-            dom.current.icon
+        switch (true) {
+            case (weatherParams.current.cloud <= 50):
+                dom.current.icon.style.backgroundImage = "url('assets/icons/partly-cloudy.svg')";
+                break;
+
+            case (weatherParams.current.cloud >= 50):
+                dom.current.icon.style.backgroundImage = "url('assets/icons/cloudy.svg')";
+                break;
         }
 
         // Show weather details by search query
