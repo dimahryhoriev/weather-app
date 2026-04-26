@@ -87,10 +87,75 @@ dom.form.addEventListener('submit', async (event) => {
         }
 
         // Change icon relying on current weather & time
-        const isDay = currentHour <= 18;
-        const isNight = currentHour >= 18 || currentHour < 6;
-        const currentIcon = dom.current.icon.style.backgroundImage;
         const cloudyData = weatherParams.current.cloud;
+        let isDay = currentHour <= 18;
+        let isNight = currentHour >= 18 || currentHour < 6;
+        let currentIcon = dom.current.icon.style.backgroundImage;
+        let currentMonth = dom.current.month.textContent;
+
+        function dayCycle(m) {
+            switch (true) {
+                case m == Jan:
+                    isDay = currentHour <= 17;
+                    isNight = currentHour >= 17 || currentHour < 8;
+                    break;
+
+                case m == Feb:
+                    isDay = currentHour <= 17;
+                    isNight = currentHour >= 17 || currentHour < 7;
+                    break;
+
+                case m == Mar:
+                    isDay = currentHour <= 18;
+                    isNight = currentHour >= 18 || currentHour < 6;
+                    break;
+
+                case m == Apr:
+                    isDay = currentHour <= 20;
+                    isNight = currentHour >= 20 || currentHour < 6;
+                    break;
+
+                case m == May:
+                    isDay = currentHour <= 21;
+                    isNight = currentHour >= 21 || currentHour < 5;
+                    break;
+
+                case m == Jun:
+                    isDay = currentHour <= 21;
+                    isNight = currentHour >= 21 || currentHour < 4;
+                    break;
+
+                case m == Jul:
+                    isDay = currentHour <= 21;
+                    isNight = currentHour >= 21 || currentHour < 5;
+                    break;
+
+                case m == Aug:
+                    isDay = currentHour <= 20;
+                    isNight = currentHour >= 20 || currentHour < 6;
+                    break;
+
+                case m == Sep:
+                    isDay = currentHour <= 19;
+                    isNight = currentHour >= 19 || currentHour < 7;
+                    break;
+
+                case m == Oct:
+                    isDay = currentHour <= 18;
+                    isNight = currentHour >= 18 || currentHour < 7;
+                    break;
+
+                case m == Nov:
+                    isDay = currentHour <= 16;
+                    isNight = currentHour >= 16 || currentHour < 7;
+                    break;
+
+                case m == Dec:
+                    isDay = currentHour <= 16;
+                    isNight = currentHour >= 16 || currentHour < 8;
+                    break;
+            }
+        }
 
         switch (true) {
             // Day icon variants
