@@ -89,41 +89,28 @@ dom.form.addEventListener('submit', async (event) => {
         // Change icon relying on current weather & time
         const isDay = currentHour <= 18;
         const isNight = currentHour >= 18 || currentHour < 6;
+        const currentIcon = dom.current.icon.style.backgroundImage;
+        const cloudyData = weatherParams.current.cloud;
 
         switch (true) {
             // Day icon variants
-            case (weatherParams.current.cloud <= 25 && isDay):
-                dom.current.icon.style.backgroundImage = "url('assets/icons/clear-day.svg')";
+            case (isDay):
+                if (cloudyData <= 25) currentIcon = "url('assets/icons/clear-day.svg')";
+                else if (cloudyData <= 45) currentIcon = "url('assets/icons/partly-cloudy-day.svg')";
+                else if (cloudyData <= 70) currentIcon = "url('assets/icons/mostly-cloudy-day.svg')";
                 break;
-
-            case (weatherParams.current.cloud <= 45 && isDay):
-                dom.current.icon.style.backgroundImage = "url('assets/icons/partly-cloudy-day.svg')";
-                break;
-
-            case (weatherParams.current.cloud <= 70 && isDay):
-                dom.current.icon.style.backgroundImage = "url('assets/icons/mostly-cloudy-day.svg')";
-                break;
-
 
             // Evening - Night icon variants
-            case (weatherParams.current.cloud <= 25 && isNight):
-                dom.current.icon.style.backgroundImage = "url('assets/icons/clear-night.svg')";
+            case (isNight):
+                if (cloudyData <= 25) currentIcon = "url('assets/icons/clear-night.svg')";
+                else if (cloudyData <= 45) currentIcon = "url('assets/icons/partly-cloudy-night.svg')";
+                else if (cloudyData <= 70) currentIcon = "url('assets/icons/mostly-cloudy-night.svg')";
                 break;
-
-            case (weatherParams.current.cloud <= 45 && isNight):
-                dom.current.icon.style.backgroundImage = "url('assets/icons/partly-cloudy-night.svg')";
-                break;
-
-            case (weatherParams.current.cloud <= 70 && isNight):
-                dom.current.icon.style.backgroundImage = "url('assets/icons/mostly-cloudy-night.svg')";
-                break;
-
 
             // Common icon variants
             case (weatherParams.current.cloud >= 70):
-                dom.current.icon.style.backgroundImage = "url('assets/icons/cloudy.svg')";
+                currentIcon = "url('assets/icons/cloudy.svg')";
                 break;
-
         }
     } catch (error) {
         console.error('Error fetching weather data: ', error);
