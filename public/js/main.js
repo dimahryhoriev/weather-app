@@ -88,95 +88,56 @@ dom.form.addEventListener('submit', async (event) => {
 
         // Change icon relying on current weather & time
         const cloudyData = weatherParams.current.cloud;
-        let isDay = currentHour <= 18;
-        let isNight = currentHour >= 18 || currentHour < 6;
-        let currentIcon = dom.current.icon.style.backgroundImage;
+        let isDay;
+        let isNight;
+        let iconPath = '';
         let currentMonth = dom.current.month.textContent;
+        console.log(currentMonth);
 
-        function dayCycle(m) {
-            switch (true) {
-                case m == Jan:
-                    isDay = currentHour <= 17;
-                    isNight = currentHour >= 17 || currentHour < 8;
-                    break;
+        const dayCycles = {
+            Jan: { startOfDay: 8, endOfDay: 17 },
+            Feb: { startOfDay: 7, endOfDay: 17 },
+            Mar: { startOfDay: 7, endOfDay: 19 },
+            Apr: { startOfDay: 6, endOfDay: 20 },
+            May: { startOfDay: 5, endOfDay: 21 },
+            Jun: { startOfDay: 5, endOfDay: 21 },
+            Jul: { startOfDay: 5, endOfDay: 21 },
+            Aug: { startOfDay: 6, endOfDay: 20 },
+            Sep: { startOfDay: 7, endOfDay: 19 },
+            Oct: { startOfDay: 7, endOfDay: 18 },
+            Nov: { startOfDay: 7, endOfDay: 16 },
+            Dec: { startOfDay: 8, endOfDay: 16 },
+        }
 
-                case m == Feb:
-                    isDay = currentHour <= 17;
-                    isNight = currentHour >= 17 || currentHour < 7;
-                    break;
-
-                case m == Mar:
-                    isDay = currentHour <= 18;
-                    isNight = currentHour >= 18 || currentHour < 6;
-                    break;
-
-                case m == Apr:
-                    isDay = currentHour <= 20;
-                    isNight = currentHour >= 20 || currentHour < 6;
-                    break;
-
-                case m == May:
-                    isDay = currentHour <= 21;
-                    isNight = currentHour >= 21 || currentHour < 5;
-                    break;
-
-                case m == Jun:
-                    isDay = currentHour <= 21;
-                    isNight = currentHour >= 21 || currentHour < 4;
-                    break;
-
-                case m == Jul:
-                    isDay = currentHour <= 21;
-                    isNight = currentHour >= 21 || currentHour < 5;
-                    break;
-
-                case m == Aug:
-                    isDay = currentHour <= 20;
-                    isNight = currentHour >= 20 || currentHour < 6;
-                    break;
-
-                case m == Sep:
-                    isDay = currentHour <= 19;
-                    isNight = currentHour >= 19 || currentHour < 7;
-                    break;
-
-                case m == Oct:
-                    isDay = currentHour <= 18;
-                    isNight = currentHour >= 18 || currentHour < 7;
-                    break;
-
-                case m == Nov:
-                    isDay = currentHour <= 16;
-                    isNight = currentHour >= 16 || currentHour < 7;
-                    break;
-
-                case m == Dec:
-                    isDay = currentHour <= 16;
-                    isNight = currentHour >= 16 || currentHour < 8;
-                    break;
-            }
+        if (currentMonth in dayCycles) {
+            isDay = currentHour >= dayCycles[currentMonth].startOfDay
+                && currentHour <= dayCycles[currentMonth].endOfDay;
+            isNight = !isDay;
         }
 
         switch (true) {
+            // Common icon variants
+            case (weatherParams.current.cloud >= 70):
+                iconPath = "url('assets/icons/cloudy.svg')";
+                break;
+
             // Day icon variants
             case (isDay):
-                if (cloudyData <= 25) currentIcon = "url('assets/icons/clear-day.svg')";
-                else if (cloudyData <= 45) currentIcon = "url('assets/icons/partly-cloudy-day.svg')";
-                else if (cloudyData <= 70) currentIcon = "url('assets/icons/mostly-cloudy-day.svg')";
+                if (cloudyData <= 25) iconPath = "url('assets/icons/clear-day.svg')";
+                else if (cloudyData <= 45) iconPath = "url('assets/icons/partly-cloudy-day.svg')";
+                else if (cloudyData <= 70) iconPath = "url('assets/icons/mostly-cloudy-day.svg')";
                 break;
 
             // Evening - Night icon variants
             case (isNight):
-                if (cloudyData <= 25) currentIcon = "url('assets/icons/clear-night.svg')";
-                else if (cloudyData <= 45) currentIcon = "url('assets/icons/partly-cloudy-night.svg')";
-                else if (cloudyData <= 70) currentIcon = "url('assets/icons/mostly-cloudy-night.svg')";
-                break;
-
-            // Common icon variants
-            case (weatherParams.current.cloud >= 70):
-                currentIcon = "url('assets/icons/cloudy.svg')";
+                if (cloudyData <= 25) iconPath = "url('assets/icons/clear-night.svg')";
+                else if (cloudyData <= 45) iconPath = "url('assets/icons/partly-cloudy-night.svg')";
+                else if (cloudyData <= 70) iconPath = "url('assets/icons/mostly-cloudy-night.svg')";
                 break;
         }
+
+        dom.current.icon.style.backgroundImage = iconPath;
+
     } catch (error) {
         console.error('Error fetching weather data: ', error);
     }
