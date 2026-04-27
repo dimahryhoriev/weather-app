@@ -120,7 +120,7 @@ function updateCurrentIcon(weatherParams, currentHour, type) {
 
     switch (true) {
         // Common icon variants
-        case (weatherParams.current.cloud >= 70):
+        case (cloudyData >= 70):
             iconPath = "url('assets/icons/cloudy.svg')";
             break;
 
