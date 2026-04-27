@@ -74,9 +74,9 @@ function updateWeatherForecast(weatherParams, currentHour, currentMinute) {
         // Extract the temperature value for a specific hour
         const hourData = weatherParams.forecast.forecastday[0].hour[forecastHour];
         nextTemp.textContent = Math.round(hourData.temp_c);
-        
+
         dom.forecast.list.appendChild(template);
-        
+
         // Extract the weather icon for a specific hour
         updateCurrentIcon(weatherParams, forecastHour, 'forecastIcon');
     }
@@ -160,10 +160,11 @@ dom.form.addEventListener('submit', async (event) => {
         const weatherParams = await fetchWeather(dom.formInput.value);
         const localString = weatherParams.location.localtime.replace(' ', 'T');
         let date = new Date(localString);
-        let [currentHour, currentMinute] = dom.current.time.textContent.split(':').map(Number);
         console.log(weatherParams);
-
+        
         updateWeatherCurrent(weatherParams, date);
+        let [currentHour, currentMinute] = dom.current.time.textContent.split(':').map(Number);
+        
         updateWeatherDetails(weatherParams);
         updateWeatherForecast(weatherParams, currentHour, currentMinute);
         updateCurrentIcon(weatherParams, currentHour, 'currentIcon');
