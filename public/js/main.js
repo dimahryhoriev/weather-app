@@ -74,19 +74,28 @@ function updateWeatherForecast(weatherParams, currentHour, currentMinute) {
         // Extract the temperature value for a specific hour
         const hourData = weatherParams.forecast.forecastday[0].hour[forecastHour];
         nextTemp.textContent = Math.round(hourData.temp_c);
-
+        
         dom.forecast.list.appendChild(template);
+        
+        // Extract the weather icon for a specific hour
+        updateCurrentIcon(weatherParams, forecastHour, 'forecastIcon');
     }
 }
 
 // Change icon relying on current weather & time
-function updateCurrentIcon(weatherParams, currentHour) {
-    const cloudyData = weatherParams.current.cloud;
+function updateCurrentIcon(weatherParams, currentHour, type) {
+    let cloudyData = weatherParams.current.cloud;
+
+    if (type === 'currentIcon') {
+        cloudyData = weatherParams.current.cloud;
+    } else {
+        cloudyData = weatherParams.forecast.forecastday[0].hour[currentHour].cloud;
+    }
+
     let isDay;
     let isNight;
     let iconPath = '';
     let currentMonth = dom.current.month.textContent;
-    console.log(currentMonth);
 
     const dayCycles = {
         Jan: { startOfDay: 8, endOfDay: 17 },
@@ -130,7 +139,13 @@ function updateCurrentIcon(weatherParams, currentHour) {
             break;
     }
 
-    dom.current.icon.style.backgroundImage = iconPath;
+    if (type === 'currentIcon') {
+        dom.current.icon.style.backgroundImage = iconPath;
+    } else {
+        const allForecastIcons = document.querySelectorAll('[data-js="f-icon"]');
+        const newestForecastIcon = allForecastIcons[allForecastIcons.length - 1];
+        newestForecastIcon.style.backgroundImage = iconPath;
+    }
 }
 // ⇗⇗⇗ GET ALL WEATHER DATA FROM API ⇖⇖⇖ //
 
@@ -151,7 +166,7 @@ dom.form.addEventListener('submit', async (event) => {
         updateWeatherCurrent(weatherParams, date);
         updateWeatherDetails(weatherParams);
         updateWeatherForecast(weatherParams, currentHour, currentMinute);
-        updateCurrentIcon(weatherParams, currentHour);
+        updateCurrentIcon(weatherParams, currentHour, 'currentIcon');
 
     } catch (error) {
         console.error('Error fetching weather data: ', error);
