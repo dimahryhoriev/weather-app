@@ -1,7 +1,10 @@
 const dom = {
-    form: document.querySelector('.dashboard__search'),
-    formInput: document.querySelector('.dashboard__search-input'),
-    formBtn: document.querySelector('.dashboard__search-btn'),
+    search: {
+        form: document.querySelector('.dashboard__search'),
+        input: document.querySelector('.dashboard__search-input'),
+        submitBtn: document.querySelector('.dashboard__search-btn'),
+        resetBtn: document.querySelector('.dashboard__search-btn--reset')
+    },
 
     current: {
         temp: document.querySelector('[data-js="c-temp"]'),
@@ -151,20 +154,20 @@ function updateCurrentIcon(weatherParams, currentHour, type) {
 
 
 // Get user's search result
-dom.form.addEventListener('submit', async (event) => {
+dom.search.form.addEventListener('submit', async (event) => {
     event.preventDefault();
 
     try {
         dom.forecast.list.innerHTML = '';
 
-        const weatherParams = await fetchWeather(dom.formInput.value);
+        const weatherParams = await fetchWeather(dom.search.input.value);
         const localString = weatherParams.location.localtime.replace(' ', 'T');
         let date = new Date(localString);
         console.log(weatherParams);
-        
+
         updateWeatherCurrent(weatherParams, date);
         let [currentHour, currentMinute] = dom.current.time.textContent.split(':').map(Number);
-        
+
         updateWeatherDetails(weatherParams);
         updateWeatherForecast(weatherParams, currentHour, currentMinute);
         updateCurrentIcon(weatherParams, currentHour, 'currentIcon');
@@ -173,6 +176,15 @@ dom.form.addEventListener('submit', async (event) => {
         console.error('Error fetching weather data: ', error);
     }
 })
+
+dom.search.form.addEventListener('input', () => {
+    if (dom.search.input.length >= 1) {
+
+    } else {
+
+    }
+})
+
 
 // Fetch weather data from API
 const fetchWeather = async (city) => {
