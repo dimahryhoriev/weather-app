@@ -177,12 +177,24 @@ dom.search.form.addEventListener('submit', async (event) => {
     }
 })
 
-dom.search.form.addEventListener('input', () => {
-    if (dom.search.input.length >= 1) {
+dom.search.form.addEventListener('input', (event) => {
+    event.preventDefault();
 
+    if (dom.search.input.value.length >= 1) {
+        dom.search.submitBtn.style.display = 'none';
+        dom.search.resetBtn.style.display = 'flex';
     } else {
-
+        dom.search.submitBtn.style.display = 'flex';
+        dom.search.resetBtn.style.display = 'none';
     }
+})
+
+dom.search.form.addEventListener('reset', (event) => {
+    event.preventDefault();
+
+    dom.search.submitBtn.style.display = 'flex';
+    dom.search.resetBtn.style.display = 'none';
+    dom.search.input.value = '';
 })
 
 
