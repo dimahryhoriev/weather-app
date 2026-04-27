@@ -28,6 +28,8 @@ const dom = {
     }
 }
 
+// ⇘⇘⇘ GET ALL WEATHER DATA FROM API ⇙⇙⇙ //
+// Show current weather by search query
 function updateWeatherCurrent(weatherParams, date) {
     dom.current.temp.textContent = Math.round(weatherParams.current.temp_c);
     dom.current.city.textContent = weatherParams.location.name;
@@ -42,6 +44,7 @@ function updateWeatherCurrent(weatherParams, date) {
     dom.current.year.textContent = date.getFullYear().toString().slice(-2);
 }
 
+// Show weather details by search query
 function updateWeatherDetails(weatherParams) {
     dom.details.maxTemp.textContent = Math.round(weatherParams.forecast.forecastday[0].day.maxtemp_c);
     dom.details.minTemp.textContent = Math.round(weatherParams.forecast.forecastday[0].day.mintemp_c);
@@ -50,6 +53,7 @@ function updateWeatherDetails(weatherParams) {
     dom.details.wind.textContent = Math.round(weatherParams.current.wind_kph);
 }
 
+// Show next 12 hours weather forecast
 function updateWeatherForecast(weatherParams, currentHour, currentMinute) {
     let forecastHour = currentHour;
     let forecastMinute = currentMinute;
@@ -75,6 +79,7 @@ function updateWeatherForecast(weatherParams, currentHour, currentMinute) {
     }
 }
 
+// Change icon relying on current weather & time
 function updateCurrentIcon(weatherParams, currentHour) {
     const cloudyData = weatherParams.current.cloud;
     let isDay;
@@ -127,6 +132,8 @@ function updateCurrentIcon(weatherParams, currentHour) {
 
     dom.current.icon.style.backgroundImage = iconPath;
 }
+// ⇗⇗⇗ GET ALL WEATHER DATA FROM API ⇖⇖⇖ //
+
 
 // Get user's search result
 dom.form.addEventListener('submit', async (event) => {
@@ -153,7 +160,7 @@ dom.form.addEventListener('submit', async (event) => {
 
 // Fetch weather data from API
 const fetchWeather = async (city) => {
-    const url = `/api?q=${city}`;
+    const url = `/api?q=${city}&t=${new Date().getTime()}`;
 
     const res = await fetch(url);
     const data = await res.json();
