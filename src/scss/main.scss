@@ -4,7 +4,7 @@
 @use 'mixins' as m;
 
 body {
-    background: transparent url(./assets/images/snow.png) no-repeat center / cover fixed;
+    background: transparent url(./assets/images/snow-bg.png) no-repeat center / cover fixed;
     font-family: v.$font-primary;
     overflow-x: hidden;
 }

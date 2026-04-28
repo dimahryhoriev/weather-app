@@ -129,7 +129,7 @@ input[type=search]::-webkit-search-decoration, input[type=search]::-webkit-searc
   font-display: swap;
 }
 body {
-  background: transparent url(./assets/images/snow.png) no-repeat center/cover fixed;
+  background: transparent url(./assets/images/snow-bg.png) no-repeat center/cover fixed;
   font-family: "Roboto", sans-serif;
   overflow-x: hidden;
 }

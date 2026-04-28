@@ -14,7 +14,8 @@ const dom = {
         day: document.querySelector('[data-js="c-day"]'),
         month: document.querySelector('[data-js="c-month"]'),
         year: document.querySelector('[data-js="c-year"]'),
-        icon: document.querySelector('[data-js="c-icon"]')
+        icon: document.querySelector('[data-js="c-icon"]'),
+        background: document.body
     },
 
     details: {
@@ -98,6 +99,7 @@ function updateCurrentIcon(weatherParams, currentHour, type) {
     let isDay;
     let isNight;
     let iconPath = '';
+    let backgroundPath = '';
     let currentMonth = dom.current.month.textContent;
 
     const dayCycles = {
@@ -122,28 +124,42 @@ function updateCurrentIcon(weatherParams, currentHour, type) {
     }
 
     switch (true) {
-        // Common icon variants
-        case (cloudyData >= 70):
-            iconPath = "url('assets/icons/cloudy.svg')";
-            break;
-
         // Day icon variants
         case (isDay):
-            if (cloudyData <= 25) iconPath = "url('assets/icons/clear-day.svg')";
-            else if (cloudyData <= 45) iconPath = "url('assets/icons/partly-cloudy-day.svg')";
-            else if (cloudyData <= 70) iconPath = "url('assets/icons/mostly-cloudy-day.svg')";
-            break;
+            if (cloudyData <= 25) {
+                iconPath = "url('assets/icons/clear-day.svg')";
+                backgroundPath = "url('assets/images/day/clear.jpg')";
+            } else if (cloudyData <= 45) {
+                iconPath = "url('assets/icons/partly-cloudy-day.svg')";
+                backgroundPath = "url('assets/images/day/partly-cloudy.jpg')";
+            } else if (cloudyData <= 70) {
+                iconPath = "url('assets/icons/mostly-cloudy-day.svg')";
+                backgroundPath = "url('assets/images/day/mostly-cloudy.jpg')";
+            } else {
+                iconPath = "url('assets/icons/cloudy.svg')";
+                backgroundPath = "url('assets/images/day/cloudy.jpg')";
+            } break;
 
         // Evening - Night icon variants
         case (isNight):
-            if (cloudyData <= 25) iconPath = "url('assets/icons/clear-night.svg')";
-            else if (cloudyData <= 45) iconPath = "url('assets/icons/partly-cloudy-night.svg')";
-            else if (cloudyData <= 70) iconPath = "url('assets/icons/mostly-cloudy-night.svg')";
-            break;
+            if (cloudyData <= 25) {
+                iconPath = "url('assets/icons/clear-night.svg')";
+                backgroundPath = "url('assets/images/night/clear.jpg')";
+            } else if (cloudyData <= 45) {
+                iconPath = "url('assets/icons/partly-cloudy-night.svg')";
+                backgroundPath = "url('assets/images/night/partly-cloudy.jpg')";
+            } else if (cloudyData <= 70) {
+                iconPath = "url('assets/icons/mostly-cloudy-night.svg')";
+                backgroundPath = "url('assets/images/night/mostly-cloudy.jpg')";
+            } else {
+                iconPath = "url('assets/icons/cloudy.svg')";
+                backgroundPath = "url('assets/images/night/cloudy.jpg')";
+            } break;
     }
 
     if (type === 'currentIcon') {
         dom.current.icon.style.backgroundImage = iconPath;
+        dom.current.background.style.backgroundImage = backgroundPath;
     } else {
         const allForecastIcons = document.querySelectorAll('[data-js="f-icon"]');
         const newestForecastIcon = allForecastIcons[allForecastIcons.length - 1];
