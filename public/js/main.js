@@ -129,25 +129,25 @@ function updateCurrentIcon(weatherParams, currentHour, type, desc) {
             if (cloudyData <= 25) {
                 iconPath = "url('assets/icons/clear-day.svg')";
                 backgroundPath = "url('assets/images/day/clear.jpg')";
-                if (type != 'currentIcon') {
+                if (desc) {
                     desc.textContent = 'Sunny';
                 }
             } else if (cloudyData <= 45) {
                 iconPath = "url('assets/icons/partly-cloudy-day.svg')";
                 backgroundPath = "url('assets/images/day/partly-cloudy.jpg')";
-                if (type != 'currentIcon') {
+                if (desc) {
                     desc.textContent = 'Partly Cloudy';
                 }
             } else if (cloudyData <= 70) {
                 iconPath = "url('assets/icons/mostly-cloudy-day.svg')";
                 backgroundPath = "url('assets/images/day/mostly-cloudy.jpg')";
-                if (type != 'currentIcon') {
+                if (desc) {
                     desc.textContent = 'Mostly Cloudy';
                 }
             } else {
                 iconPath = "url('assets/icons/cloudy.svg')";
                 backgroundPath = "url('assets/images/day/cloudy.jpg')";
-                if (type != 'currentIcon') {
+                if (desc) {
                     desc.textContent = 'Overcast';
                 }
             } break;
@@ -157,25 +157,25 @@ function updateCurrentIcon(weatherParams, currentHour, type, desc) {
             if (cloudyData <= 25) {
                 iconPath = "url('assets/icons/clear-night.svg')";
                 backgroundPath = "url('assets/images/night/clear.jpg')";
-                if (type != 'currentIcon') {
+                if (desc) {
                     desc.textContent = 'Clear';
                 }
             } else if (cloudyData <= 45) {
                 iconPath = "url('assets/icons/partly-cloudy-night.svg')";
                 backgroundPath = "url('assets/images/night/partly-cloudy.jpg')";
-                if (type != 'currentIcon') {
+                if (desc) {
                     desc.textContent = 'Partly Cloudy';
                 }
             } else if (cloudyData <= 70) {
                 iconPath = "url('assets/icons/mostly-cloudy-night.svg')";
                 backgroundPath = "url('assets/images/night/mostly-cloudy.jpg')";
-                if (type != 'currentIcon') {
+                if (desc) {
                     desc.textContent = 'Mostly Cloudy';
                 }
             } else {
                 iconPath = "url('assets/icons/cloudy.svg')";
                 backgroundPath = "url('assets/images/night/cloudy.jpg')";
-                if (type != 'currentIcon') {
+                if (desc) {
                     desc.textContent = 'Overcast';
                 }
             } break;
