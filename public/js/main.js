@@ -102,6 +102,17 @@ function updateCurrentIcon(weatherParams, currentHour, type, desc) {
     let backgroundPath = '';
     let currentMonth = dom.current.month.textContent;
 
+    let weatherConfig = {
+        cloudy: {
+            clear: ['clear', 'Sunny', 'Clear'],
+            partly: ['partly-cloudy', 'Partly Cloudy'],
+            mostly: ['mostly-cloudy', 'Mostly Cloudy'],
+            overcast: ['overcast', 'Overcast'],
+        },
+
+        time: 'day'
+    }
+
     const dayCycles = {
         Jan: { startOfDay: 8, endOfDay: 17 },
         Feb: { startOfDay: 7, endOfDay: 17 },
@@ -121,84 +132,41 @@ function updateCurrentIcon(weatherParams, currentHour, type, desc) {
         isDay = currentHour >= dayCycles[currentMonth].startOfDay
             && currentHour <= dayCycles[currentMonth].endOfDay;
         isNight = !isDay;
-    }
 
-    const weatherConfig = {
-        cloudy: {
-            clear: 'clear',
-            partly: 'partly-cloudy',
-            mostly: 'mostly-cloudy',
-            overcast: 'overcast',
-            values: [25, 45, 70, 100]
-        },
-
-        time: {
-            day: 'day',
-            night: 'night'
+        if (isNight) {
+            weatherConfig.time = 'night';
         }
     }
 
-    function setIconPath (weather, time) {
-        iconPath = `url('assets/icons/${weather}-${time}.svg)`;
+    const cloudyValues = weatherConfig.cloudy;
+
+    function setIconPath(weather, time = weatherConfig.time) {
+        iconPath = `url('assets/icons/${time}/${weather[0]}.svg')`;
+        backgroundPath = `url('assets/images/${time}/${weather[0]}.jpg')`;
+        if (desc) {
+            if (weatherConfig.time === 'day') {
+                desc.textContent = weather[1];
+            } else if (weatherConfig.time === 'night' && weather[0] === 'clear') {
+                desc.textContent = weather[2];
+            } else {
+                desc.textContent = weather[1];
+            }
+        }
     }
 
-    // switch (true) {
-    //     // Day icon variants
-    //     case (isDay):
-    //         if (cloudyData <= 25) {
-    //             iconPath = "url('assets/icons/clear-day.svg')";
-    //             backgroundPath = "url('assets/images/day/clear.jpg')";
-    //             if (desc) {
-    //                 desc.textContent = 'Sunny';
-    //             }
-    //         } else if (cloudyData <= 45) {
-    //             iconPath = "url('assets/icons/partly-cloudy-day.svg')";
-    //             backgroundPath = "url('assets/images/day/partly-cloudy.jpg')";
-    //             if (desc) {
-    //                 desc.textContent = 'Partly Cloudy';
-    //             }
-    //         } else if (cloudyData <= 70) {
-    //             iconPath = "url('assets/icons/mostly-cloudy-day.svg')";
-    //             backgroundPath = "url('assets/images/day/mostly-cloudy.jpg')";
-    //             if (desc) {
-    //                 desc.textContent = 'Mostly Cloudy';
-    //             }
-    //         } else {
-    //             iconPath = "url('assets/icons/cloudy.svg')";
-    //             backgroundPath = "url('assets/images/day/cloudy.jpg')";
-    //             if (desc) {
-    //                 desc.textContent = 'Overcast';
-    //             }
-    //         } break;
+    switch (true) {
+        case cloudyData <= 25: setIconPath(cloudyValues.clear);
+            break;
 
-    //     // Evening - Night icon variants
-    //     case (isNight):
-    //         if (cloudyData <= 25) {
-    //             iconPath = "url('assets/icons/clear-night.svg')";
-    //             backgroundPath = "url('assets/images/night/clear.jpg')";
-    //             if (desc) {
-    //                 desc.textContent = 'Clear';
-    //             }
-    //         } else if (cloudyData <= 45) {
-    //             iconPath = "url('assets/icons/partly-cloudy-night.svg')";
-    //             backgroundPath = "url('assets/images/night/partly-cloudy.jpg')";
-    //             if (desc) {
-    //                 desc.textContent = 'Partly Cloudy';
-    //             }
-    //         } else if (cloudyData <= 70) {
-    //             iconPath = "url('assets/icons/mostly-cloudy-night.svg')";
-    //             backgroundPath = "url('assets/images/night/mostly-cloudy.jpg')";
-    //             if (desc) {
-    //                 desc.textContent = 'Mostly Cloudy';
-    //             }
-    //         } else {
-    //             iconPath = "url('assets/icons/cloudy.svg')";
-    //             backgroundPath = "url('assets/images/night/cloudy.jpg')";
-    //             if (desc) {
-    //                 desc.textContent = 'Overcast';
-    //             }
-    //         } break;
-    // }
+        case cloudyData <= 45: setIconPath(cloudyValues.partly);
+            break;
+
+        case cloudyData <= 70: setIconPath(cloudyValues.mostly);
+            break;
+
+        case cloudyData <= 100: setIconPath(cloudyValues.overcast);
+            break;
+    }
 
     if (type === 'currentIcon') {
         dom.current.icon.style.backgroundImage = iconPath;
