@@ -66,8 +66,8 @@ function updateWeatherForecast(weatherParams, currentHour, currentMinute) {
         // Declare next forecast hour
         const template = dom.forecast.item.content.cloneNode(true);
         const nextHour = template.querySelector('[data-js="f-time"]');
-        const nextDesc = template.querySelector('[data-js="f-desc"]');
         const nextTemp = template.querySelector('[data-js="f-temp"]');
+        const nextDesc = template.querySelector('[data-js="f-desc"]');
 
         // Calculating the next hour
         forecastHour = (forecastHour + 1) % 24;
@@ -82,12 +82,12 @@ function updateWeatherForecast(weatherParams, currentHour, currentMinute) {
         dom.forecast.list.appendChild(template);
 
         // Extract the weather icon for a specific hour
-        updateCurrentIcon(weatherParams, forecastHour, 'forecastIcon');
+        updateCurrentIcon(weatherParams, forecastHour, 'forecastIcon', nextDesc);
     }
 }
 
 // Change icon relying on current weather & time
-function updateCurrentIcon(weatherParams, currentHour, type) {
+function updateCurrentIcon(weatherParams, currentHour, type, desc) {
     let cloudyData = weatherParams.current.cloud;
 
     if (type === 'currentIcon') {
@@ -129,15 +129,27 @@ function updateCurrentIcon(weatherParams, currentHour, type) {
             if (cloudyData <= 25) {
                 iconPath = "url('assets/icons/clear-day.svg')";
                 backgroundPath = "url('assets/images/day/clear.jpg')";
+                if (type != 'currentIcon') {
+                    desc.textContent = 'Sunny';
+                }
             } else if (cloudyData <= 45) {
                 iconPath = "url('assets/icons/partly-cloudy-day.svg')";
                 backgroundPath = "url('assets/images/day/partly-cloudy.jpg')";
+                if (type != 'currentIcon') {
+                    desc.textContent = 'Partly Cloudy';
+                }
             } else if (cloudyData <= 70) {
                 iconPath = "url('assets/icons/mostly-cloudy-day.svg')";
                 backgroundPath = "url('assets/images/day/mostly-cloudy.jpg')";
+                if (type != 'currentIcon') {
+                    desc.textContent = 'Mostly Cloudy';
+                }
             } else {
                 iconPath = "url('assets/icons/cloudy.svg')";
                 backgroundPath = "url('assets/images/day/cloudy.jpg')";
+                if (type != 'currentIcon') {
+                    desc.textContent = 'Overcast';
+                }
             } break;
 
         // Evening - Night icon variants
@@ -145,15 +157,27 @@ function updateCurrentIcon(weatherParams, currentHour, type) {
             if (cloudyData <= 25) {
                 iconPath = "url('assets/icons/clear-night.svg')";
                 backgroundPath = "url('assets/images/night/clear.jpg')";
+                if (type != 'currentIcon') {
+                    desc.textContent = 'Clear';
+                }
             } else if (cloudyData <= 45) {
                 iconPath = "url('assets/icons/partly-cloudy-night.svg')";
                 backgroundPath = "url('assets/images/night/partly-cloudy.jpg')";
+                if (type != 'currentIcon') {
+                    desc.textContent = 'Partly Cloudy';
+                }
             } else if (cloudyData <= 70) {
                 iconPath = "url('assets/icons/mostly-cloudy-night.svg')";
                 backgroundPath = "url('assets/images/night/mostly-cloudy.jpg')";
+                if (type != 'currentIcon') {
+                    desc.textContent = 'Mostly Cloudy';
+                }
             } else {
                 iconPath = "url('assets/icons/cloudy.svg')";
                 backgroundPath = "url('assets/images/night/cloudy.jpg')";
+                if (type != 'currentIcon') {
+                    desc.textContent = 'Overcast';
+                }
             } break;
     }
 
