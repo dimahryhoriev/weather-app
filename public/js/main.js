@@ -1,36 +1,5 @@
-const dom = {
-    search: {
-        form: document.querySelector('.dashboard__search'),
-        input: document.querySelector('.dashboard__search-input'),
-        submitBtn: document.querySelector('.dashboard__search-btn'),
-        resetBtn: document.querySelector('.dashboard__search-btn--reset')
-    },
-
-    current: {
-        temp: document.querySelector('[data-js="c-temp"]'),
-        city: document.querySelector('[data-js="c-city"]'),
-        time: document.querySelector('[data-js="c-time"]'),
-        weekDay: document.querySelector('[data-js="c-week-day"]'),
-        day: document.querySelector('[data-js="c-day"]'),
-        month: document.querySelector('[data-js="c-month"]'),
-        year: document.querySelector('[data-js="c-year"]'),
-        icon: document.querySelector('[data-js="c-icon"]'),
-        background: document.body
-    },
-
-    details: {
-        maxTemp: document.querySelector('[data-js="temp-max"]'),
-        minTemp: document.querySelector('[data-js="temp-min"]'),
-        humidity: document.querySelector('[data-js="humidity"]'),
-        cloudy: document.querySelector('[data-js="cloudy"]'),
-        wind: document.querySelector('[data-js="wind"]')
-    },
-
-    forecast: {
-        list: document.querySelector('.forecast__metrics'),
-        item: document.querySelector('[data-js="forecast-item"]')
-    }
-}
+import { dom, dayCycles } from './constants.js';
+import { fetchWeather } from './weather-api.js';
 
 // ⇘⇘⇘ GET ALL WEATHER DATA FROM API ⇙⇙⇙ //
 // Show current weather by search query
@@ -111,21 +80,6 @@ function updateCurrentIcon(weatherParams, currentHour, type, desc) {
         },
 
         time: 'day'
-    }
-
-    const dayCycles = {
-        Jan: { startOfDay: 8, endOfDay: 17 },
-        Feb: { startOfDay: 7, endOfDay: 17 },
-        Mar: { startOfDay: 7, endOfDay: 19 },
-        Apr: { startOfDay: 6, endOfDay: 20 },
-        May: { startOfDay: 5, endOfDay: 21 },
-        Jun: { startOfDay: 5, endOfDay: 21 },
-        Jul: { startOfDay: 5, endOfDay: 21 },
-        Aug: { startOfDay: 6, endOfDay: 20 },
-        Sep: { startOfDay: 7, endOfDay: 19 },
-        Oct: { startOfDay: 7, endOfDay: 18 },
-        Nov: { startOfDay: 7, endOfDay: 16 },
-        Dec: { startOfDay: 8, endOfDay: 16 },
     }
 
     if (currentMonth in dayCycles) {
@@ -223,14 +177,3 @@ dom.search.form.addEventListener('reset', (event) => {
     dom.search.resetBtn.style.display = 'none';
     dom.search.input.value = '';
 })
-
-
-// Fetch weather data from API
-const fetchWeather = async (city) => {
-    const url = `/api?q=${city}&t=${new Date().getTime()}`;
-
-    const res = await fetch(url);
-    const data = await res.json();
-
-    return data;
-}
