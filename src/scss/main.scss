@@ -76,20 +76,20 @@ body {
     position: fixed;
     align-items: center;
     height: fit-content;
-    top: 68.5vh;
+    width: fit-content;
+    bottom: 85px;
     gap: 28px;
 
     &__info {
         display: flex;
         align-items: flex-start;
         flex-direction: column;
+        width: fit-content;
     }
 
     &__icon {
-        display: flex;
-        align-items: center;
         margin-top: 15px;
-        background: transparent url(assets/icons/cloudy.svg) center / contain no-repeat;
+        background: transparent url(assets/icons/cloudy.svg) center / cover no-repeat;
         width: 70px;
         height: 70px;
 
@@ -150,6 +150,7 @@ body {
         top: auto;
         left: auto;
         margin-left: 40px;
+        bottom: 0;
     }
 
     @include m.mobile {
@@ -159,6 +160,7 @@ body {
         left: auto;
         margin-left: 22px;
         gap: 16px;
+        bottom: 0;
     }
 }
 
