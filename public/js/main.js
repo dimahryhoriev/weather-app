@@ -1,7 +1,6 @@
 import { dom, dayCycles } from './constants.js';
 import { fetchWeather } from './weather-api.js';
 
-// ⇘⇘⇘ GET ALL WEATHER DATA FROM API ⇙⇙⇙ //
 // Show current weather by search query
 function updateWeatherCurrent(currentWeather) {
     const { city, date, temp, cloudy } = currentWeather;
@@ -31,10 +30,10 @@ function updateWeatherDetails(weatherDetails) {
 }
 
 // Show next 12 hours weather forecast
-function updateWeatherForecast(currentTime) {
-    const { currentHour, currentMinute } = currentTime.split(':').map(Number);
-    let forecastHour = currentHour;
-    let forecastMinute = currentMinute;
+function updateWeatherForecast(currentWeather) {
+    const time = dom.current.time.textContent;
+    const { day } = currentWeather;
+    let [currentHour, currentMinute] = time.split(':').map(Number);
 
     for (let forecastCounter = 1; forecastCounter <= 12; forecastCounter++) {
         // Declare next forecast hour
@@ -44,19 +43,19 @@ function updateWeatherForecast(currentTime) {
         const nextDesc = template.querySelector('[data-js="f-desc"]');
 
         // Calculating the next hour
-        forecastHour = (forecastHour + 1) % 24;
-        const formattedHour = forecastHour.toString().padStart(2, '0');
-        forecastMinute = '00';
-        nextHour.textContent = `${formattedHour}:${forecastMinute}`;
+        currentHour = (currentHour + 1) % 24;
+        const formattedHour = currentHour.toString().padStart(2, '0');
+        const formattedMinute = currentMinute = '00';
+        nextHour.textContent = `${formattedHour}:${formattedMinute}`;
 
         // Extract the temperature value for a specific hour
-        const hourData = weatherParams.forecast.forecastday[0].hour[forecastHour];
+        const hourData = day.hour[currentHour];
         nextTemp.textContent = Math.round(hourData.temp_c);
 
         dom.forecast.list.appendChild(template);
 
         // Extract the weather icon for a specific hour
-        updateCurrentIcon(weatherParams, forecastHour, 'forecastIcon', nextDesc);
+        // updateCurrentIcon(weatherParams, forecastHour, 'forecastIcon', nextDesc);
     }
 }
 
@@ -134,7 +133,6 @@ function updateCurrentIcon(cloudyData, currentHour, type, desc) {
         newestForecastIcon.style.backgroundImage = iconPath;
     }
 }
-// ⇗⇗⇗ GET ALL WEATHER DATA FROM API ⇖⇖⇖ //
 
 
 // Get user's search result
@@ -154,8 +152,8 @@ dom.search.form.addEventListener('submit', async (event) => {
                     city: weatherData.location.name,
                     date: new Date(localTime),
                     temp: Math.round(weatherData.current.temp_c),
-                    cloudy: weatherData.current.cloud,
-                    time: dom.current.time.textContent,
+                    cloud: weatherData.current.cloud,
+                    day: weatherData.forecast.forecastday[0],
                 },
 
                 details: {
@@ -165,10 +163,6 @@ dom.search.form.addEventListener('submit', async (event) => {
                     cloud: weatherData.current.cloud,
                     wind: weatherData.current.wind_kph,
                 },
-
-                forecast: {
-                    day: weatherData.forecast.forecastday[0],
-                }
             }
         }
 
