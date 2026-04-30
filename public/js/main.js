@@ -3,9 +3,11 @@ import { fetchWeather } from './weather-api.js';
 
 // ⇘⇘⇘ GET ALL WEATHER DATA FROM API ⇙⇙⇙ //
 // Show current weather by search query
-function updateWeatherCurrent(weatherParams, date) {
-    dom.current.temp.textContent = Math.round(weatherParams.current.temp_c);
-    dom.current.city.textContent = weatherParams.location.name;
+function updateWeatherCurrent(currentWeather) {
+    const { city, date, temp, cloudy } = currentWeather;
+
+    dom.current.temp.textContent = temp;
+    dom.current.city.textContent = city;
     dom.current.time.textContent = date.toLocaleString('en-US', {
         hour: '2-digit',
         minute: '2-digit',
@@ -18,16 +20,19 @@ function updateWeatherCurrent(weatherParams, date) {
 }
 
 // Show weather details by search query
-function updateWeatherDetails(weatherParams) {
-    dom.details.maxTemp.textContent = Math.round(weatherParams.forecast.forecastday[0].day.maxtemp_c);
-    dom.details.minTemp.textContent = Math.round(weatherParams.forecast.forecastday[0].day.mintemp_c);
-    dom.details.humidity.textContent = weatherParams.current.humidity;
-    dom.details.cloudy.textContent = weatherParams.current.cloud;
-    dom.details.wind.textContent = Math.round(weatherParams.current.wind_kph);
+function updateWeatherDetails(weatherDetails) {
+    const { maxTemp, minTemp, humidity, cloud, wind } = weatherDetails;
+
+    dom.details.maxTemp.textContent = Math.round(maxTemp);
+    dom.details.minTemp.textContent = Math.round(minTemp);
+    dom.details.humidity.textContent = humidity;
+    dom.details.cloudy.textContent = cloud;
+    dom.details.wind.textContent = Math.round(wind);
 }
 
 // Show next 12 hours weather forecast
-function updateWeatherForecast(weatherParams, currentHour, currentMinute) {
+function updateWeatherForecast(currentTime) {
+    const { currentHour, currentMinute } = currentTime.split(':').map(Number);
     let forecastHour = currentHour;
     let forecastMinute = currentMinute;
 
@@ -141,26 +146,39 @@ dom.search.form.addEventListener('submit', async (event) => {
 
         const getWeatherParams = async () => {
             const weatherData = await fetchWeather(dom.search.input.value);
+            const localTime = weatherData.location.localtime.replace(' ', 'T');
             console.log(weatherData);
 
             return {
-                cloudyData: weatherData.current.cloud,
+                current: {
+                    city: weatherData.location.name,
+                    date: new Date(localTime),
+                    temp: Math.round(weatherData.current.temp_c),
+                    cloudy: weatherData.current.cloud,
+                    time: dom.current.time.textContent,
+                },
+
+                details: {
+                    maxTemp: weatherData.forecast.forecastday[0].day.maxtemp_c,
+                    minTemp: weatherData.forecast.forecastday[0].day.mintemp_c,
+                    humidity: weatherData.current.humidity,
+                    cloud: weatherData.current.cloud,
+                    wind: weatherData.current.wind_kph,
+                },
+
+                forecast: {
+                    day: weatherData.forecast.forecastday[0],
+                }
             }
         }
 
         const weatherParams = await getWeatherParams();
         console.log(weatherParams);
 
-        // const localString = weatherParams.location.localtime.replace(' ', 'T');
-        // let date = new Date(localString);
-        // console.log(weatherParams);
-
-        // updateWeatherCurrent(weatherParams, date);
-        // let [currentHour, currentMinute] = dom.current.time.textContent.split(':').map(Number);
-
-        // updateWeatherDetails(weatherParams);
-        // updateWeatherForecast(weatherParams, currentHour, currentMinute);
-        // updateCurrentIcon(cloudyData, currentHour, 'currentIcon');
+        updateWeatherCurrent(weatherParams.current);
+        updateWeatherDetails(weatherParams.details);
+        updateWeatherForecast(weatherParams.current);
+        updateCurrentIcon(cloudyData, currentHour, 'currentIcon');
 
     } catch (error) {
         console.error('Error fetching weather data: ', error);
