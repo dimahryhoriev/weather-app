@@ -111,7 +111,7 @@ function setDayCycle() {
 
 function getWeatherStatus(weatherFactor, percentage) {
     console.log(weatherFactor);
-    const factorData = weatherConfig[weatherFactor];
+    const factorData = `${weatherConfig}.${weatherFactor}`;
     if (!factorData) {
         console.error(`Invalid factor data: ${weatherFactor}`);
         return null;
