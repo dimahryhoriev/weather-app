@@ -48,7 +48,7 @@ const dayCycles = {
 }
 
 const weatherConfig = {
-    cloudy: {
+    cloud: {
         clear: ['clear', 'Sunny', 'Clear'],
         partly: ['partly-cloudy', 'Partly Cloudy'],
         mostly: ['mostly-cloudy', 'Mostly Cloudy'],

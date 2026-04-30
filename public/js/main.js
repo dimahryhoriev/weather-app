@@ -62,22 +62,21 @@ function updateWeatherForecast(currentWeather) {
 
 // Update icon in current weather UI
 function updateCurrentVisuals(weatherFactor, percentage) {
-    let { currentHour } = getCurrentTime();
-
     const dayPeriod = setDayCycle();
     const weatherStatus = getWeatherStatus(weatherFactor, percentage);
-    const { iconPath, backgroundPath } = generateAssetPath(weatherStatus, currentHour);
+
+    const { iconPath, backgroundPath } = generateAssetPath(weatherStatus, dayPeriod);
 
     dom.current.icon.style.backgroundImage = iconPath;
     dom.current.background.style.backgroundImage = backgroundPath;
 }
 
-function generateAssetPath(weatherStatus, time) {
+function generateAssetPath(weatherStatus, dayPeriod) {
     let iconPath = '';
     let backgroundPath = '';
 
-    iconPath = `url('assets/icons/${time}/${weather[0]}.svg')`;
-    backgroundPath = `url('assets/images/${time}/${weather[0]}.jpg')`;
+    iconPath = `url('assets/icons/${dayPeriod}/${weatherStatus[0]}.svg')`;
+    backgroundPath = `url('assets/images/${dayPeriod}/${weatherStatus[0]}.jpg')`;
 
     return { iconPath, backgroundPath };
 }
@@ -110,8 +109,7 @@ function setDayCycle() {
 }
 
 function getWeatherStatus(weatherFactor, percentage) {
-    console.log(weatherFactor);
-    const factorData = `${weatherConfig}.${weatherFactor}`;
+    const factorData = weatherConfig[weatherFactor];
     if (!factorData) {
         console.error(`Invalid factor data: ${weatherFactor}`);
         return null;
