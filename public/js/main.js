@@ -56,9 +56,7 @@ function updateWeatherForecast(weatherParams, currentHour, currentMinute) {
 }
 
 // Change icon relying on current weather & time
-function updateCurrentIcon(weatherParams, currentHour, type, desc) {
-    let cloudyData = weatherParams.current.cloud;
-
+function updateCurrentIcon(cloudyData, currentHour, type, desc) {
     if (type === 'currentIcon') {
         cloudyData = weatherParams.current.cloud;
     } else {
@@ -141,17 +139,28 @@ dom.search.form.addEventListener('submit', async (event) => {
     try {
         dom.forecast.list.innerHTML = '';
 
-        const weatherParams = await fetchWeather(dom.search.input.value);
-        const localString = weatherParams.location.localtime.replace(' ', 'T');
-        let date = new Date(localString);
+        const getWeatherParams = async () => {
+            const weatherData = await fetchWeather(dom.search.input.value);
+            console.log(weatherData);
+
+            return {
+                cloudyData: weatherData.current.cloud,
+            }
+        }
+
+        const weatherParams = await getWeatherParams();
         console.log(weatherParams);
 
-        updateWeatherCurrent(weatherParams, date);
-        let [currentHour, currentMinute] = dom.current.time.textContent.split(':').map(Number);
+        // const localString = weatherParams.location.localtime.replace(' ', 'T');
+        // let date = new Date(localString);
+        // console.log(weatherParams);
 
-        updateWeatherDetails(weatherParams);
-        updateWeatherForecast(weatherParams, currentHour, currentMinute);
-        updateCurrentIcon(weatherParams, currentHour, 'currentIcon');
+        // updateWeatherCurrent(weatherParams, date);
+        // let [currentHour, currentMinute] = dom.current.time.textContent.split(':').map(Number);
+
+        // updateWeatherDetails(weatherParams);
+        // updateWeatherForecast(weatherParams, currentHour, currentMinute);
+        // updateCurrentIcon(cloudyData, currentHour, 'currentIcon');
 
     } catch (error) {
         console.error('Error fetching weather data: ', error);
