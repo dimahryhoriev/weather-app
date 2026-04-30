@@ -1,9 +1,9 @@
-import { dom, dayCycles } from './constants.js';
+import { dom, dayCycles, weatherConfig } from './constants.js';
 import { fetchWeather } from './weather-api.js';
 
 // Show current weather by search query
 function updateWeatherCurrent(currentWeather) {
-    const { city, date, temp, cloudy } = currentWeather;
+    const { city, date, temp, cloud } = currentWeather;
 
     dom.current.temp.textContent = temp;
     dom.current.city.textContent = city;
@@ -16,6 +16,8 @@ function updateWeatherCurrent(currentWeather) {
     dom.current.day.textContent = date.getDate();
     dom.current.month.textContent = date.toLocaleString('en-US', { month: 'short' });
     dom.current.year.textContent = date.getFullYear().toString().slice(-2);
+
+    updateCurrentVisuals(cloud[0], cloud[1]);
 }
 
 // Show weather details by search query
@@ -31,9 +33,8 @@ function updateWeatherDetails(weatherDetails) {
 
 // Show next 12 hours weather forecast
 function updateWeatherForecast(currentWeather) {
-    const time = dom.current.time.textContent;
+    let [currentHour, currentMinute] = getCurrentTime();
     const { day } = currentWeather;
-    let [currentHour, currentMinute] = time.split(':').map(Number);
 
     for (let forecastCounter = 1; forecastCounter <= 12; forecastCounter++) {
         // Declare next forecast hour
@@ -55,12 +56,78 @@ function updateWeatherForecast(currentWeather) {
         dom.forecast.list.appendChild(template);
 
         // Extract the weather icon for a specific hour
-        // updateCurrentIcon(weatherParams, forecastHour, 'forecastIcon', nextDesc);
+        updateUI(weatherParams, forecastHour, 'forecastIcon', nextDesc);
     }
 }
 
+// Update icon in current weather UI
+function updateCurrentVisuals(weatherFactor, percentage) {
+    let { currentHour } = getCurrentTime();
+
+    const dayPeriod = setDayCycle();
+    const weatherStatus = getWeatherStatus(weatherFactor, percentage);
+    const { iconPath, backgroundPath } = generateAssetPath(weatherStatus, currentHour);
+
+    dom.current.icon.style.backgroundImage = iconPath;
+    dom.current.background.style.backgroundImage = backgroundPath;
+}
+
+function generateAssetPath(weatherStatus, time) {
+    let iconPath = '';
+    let backgroundPath = '';
+
+    iconPath = `url('assets/icons/${time}/${weather[0]}.svg')`;
+    backgroundPath = `url('assets/images/${time}/${weather[0]}.jpg')`;
+
+    return { iconPath, backgroundPath };
+}
+
+function getCurrentTime() {
+    const time = dom.current.time.textContent;
+    let [currentHour, currentMinute] = time.split(':').map(Number);
+
+    return { currentHour, currentMinute };
+}
+
+function setDayCycle() {
+    let { currentHour } = getCurrentTime();
+    const currentMonth = dom.current.month.textContent;
+    let isDay;
+    let isNight;
+    let dayPeriod = 'day';
+
+    if (currentMonth in dayCycles) {
+        isDay = currentHour >= dayCycles[currentMonth].startOfDay
+            && currentHour <= dayCycles[currentMonth].endOfDay;
+        isNight = !isDay;
+
+        if (isNight) {
+            dayPeriod = 'night';
+        }
+    }
+
+    return dayPeriod;
+}
+
+function getWeatherStatus(weatherFactor, percentage) {
+    console.log(weatherFactor);
+    const factorData = weatherConfig[weatherFactor];
+    if (!factorData) {
+        console.error(`Invalid factor data: ${weatherFactor}`);
+        return null;
+    }
+
+    if (percentage <= 25) return factorData.clear;
+    if (percentage <= 45) return factorData.partly;
+    if (percentage <= 70) return factorData.mostly;
+    if (percentage <= 100) return factorData.overcast;
+
+    console.error(`Invalid factor percentage: ${percentage}`);
+    return null;
+}
+
 // Change icon relying on current weather & time
-function updateCurrentIcon(cloudyData, currentHour, type, desc) {
+function updateUI(cloudyData, currentHour, type, desc) {
     if (type === 'currentIcon') {
         cloudyData = weatherParams.current.cloud;
     } else {
@@ -152,7 +219,7 @@ dom.search.form.addEventListener('submit', async (event) => {
                     city: weatherData.location.name,
                     date: new Date(localTime),
                     temp: Math.round(weatherData.current.temp_c),
-                    cloud: weatherData.current.cloud,
+                    cloud: ['cloud', weatherData.current.cloud],
                     day: weatherData.forecast.forecastday[0],
                 },
 
@@ -172,7 +239,9 @@ dom.search.form.addEventListener('submit', async (event) => {
         updateWeatherCurrent(weatherParams.current);
         updateWeatherDetails(weatherParams.details);
         updateWeatherForecast(weatherParams.current);
-        updateCurrentIcon(cloudyData, currentHour, 'currentIcon');
+
+
+        updateUI(cloudyData, currentHour, 'currentIcon');
 
     } catch (error) {
         console.error('Error fetching weather data: ', error);

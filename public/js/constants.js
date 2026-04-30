@@ -47,4 +47,13 @@ const dayCycles = {
     Dec: { startOfDay: 8, endOfDay: 16 },
 }
 
-export { dom, dayCycles };
+const weatherConfig = {
+    cloudy: {
+        clear: ['clear', 'Sunny', 'Clear'],
+        partly: ['partly-cloudy', 'Partly Cloudy'],
+        mostly: ['mostly-cloudy', 'Mostly Cloudy'],
+        overcast: ['overcast', 'Overcast'],
+    }
+}
+
+export { dom, dayCycles, weatherConfig };
