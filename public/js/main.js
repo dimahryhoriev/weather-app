@@ -33,8 +33,8 @@ function updateWeatherDetails(weatherDetails) {
 
 // Show next 12 hours weather forecast
 function updateWeatherForecast(currentWeather) {
-    let [currentHour, currentMinute] = getCurrentTime();
-    const { day } = currentWeather;
+    let { currentHour, currentMinute } = getCurrentTime();
+    let { dayIndex } = currentWeather;
 
     for (let forecastCounter = 1; forecastCounter <= 12; forecastCounter++) {
         // Declare next forecast hour
@@ -50,19 +50,26 @@ function updateWeatherForecast(currentWeather) {
         nextHour.textContent = `${formattedHour}:${formattedMinute}`;
 
         // Extract the temperature value for a specific hour
-        const hourData = day.hour[currentHour];
-        nextTemp.textContent = Math.round(hourData.temp_c);
+        const nextHourData = dayIndex.hour[currentHour];
+        const cloud = dayIndex.hour[currentHour].cloud;
+        nextTemp.textContent = Math.round(nextHourData.temp_c);
 
         dom.forecast.list.appendChild(template);
 
-        // Extract the weather icon for a specific hour
-        updateUI(weatherParams, forecastHour, 'forecastIcon', nextDesc);
+        // Extract the weather icon & description for a specific hour
+        setDayCycle()
+        updateForecastVisuals();
     }
+}
+
+function updateForecastVisuals() {
+    
 }
 
 // Update icon in current weather UI
 function updateCurrentVisuals(weatherFactor, percentage) {
-    const dayPeriod = setDayCycle();
+    let { currentHour } = getCurrentTime();
+    const dayPeriod = setDayCycle(currentHour);
     const weatherStatus = getWeatherStatus(weatherFactor, percentage);
 
     const { iconPath, backgroundPath } = generateAssetPath(weatherStatus, dayPeriod);
@@ -88,8 +95,7 @@ function getCurrentTime() {
     return { currentHour, currentMinute };
 }
 
-function setDayCycle() {
-    let { currentHour } = getCurrentTime();
+function setDayCycle(currentHour) {
     const currentMonth = dom.current.month.textContent;
     let isDay;
     let isNight;
@@ -124,80 +130,6 @@ function getWeatherStatus(weatherFactor, percentage) {
     return null;
 }
 
-// Change icon relying on current weather & time
-function updateUI(cloudyData, currentHour, type, desc) {
-    if (type === 'currentIcon') {
-        cloudyData = weatherParams.current.cloud;
-    } else {
-        cloudyData = weatherParams.forecast.forecastday[0].hour[currentHour].cloud;
-    }
-
-    let isDay;
-    let isNight;
-    let iconPath = '';
-    let backgroundPath = '';
-    let currentMonth = dom.current.month.textContent;
-
-    let weatherConfig = {
-        cloudy: {
-            clear: ['clear', 'Sunny', 'Clear'],
-            partly: ['partly-cloudy', 'Partly Cloudy'],
-            mostly: ['mostly-cloudy', 'Mostly Cloudy'],
-            overcast: ['overcast', 'Overcast'],
-        },
-
-        time: 'day'
-    }
-
-    if (currentMonth in dayCycles) {
-        isDay = currentHour >= dayCycles[currentMonth].startOfDay
-            && currentHour <= dayCycles[currentMonth].endOfDay;
-        isNight = !isDay;
-
-        if (isNight) {
-            weatherConfig.time = 'night';
-        }
-    }
-
-    const cloudyValues = weatherConfig.cloudy;
-
-    function setIconPath(weather, time = weatherConfig.time) {
-        iconPath = `url('assets/icons/${time}/${weather[0]}.svg')`;
-        backgroundPath = `url('assets/images/${time}/${weather[0]}.jpg')`;
-        if (desc) {
-            if (weatherConfig.time === 'day') {
-                desc.textContent = weather[1];
-            } else if (weatherConfig.time === 'night' && weather[0] === 'clear') {
-                desc.textContent = weather[2];
-            } else {
-                desc.textContent = weather[1];
-            }
-        }
-    }
-
-    switch (true) {
-        case cloudyData <= 25: setIconPath(cloudyValues.clear);
-            break;
-
-        case cloudyData <= 45: setIconPath(cloudyValues.partly);
-            break;
-
-        case cloudyData <= 70: setIconPath(cloudyValues.mostly);
-            break;
-
-        case cloudyData <= 100: setIconPath(cloudyValues.overcast);
-            break;
-    }
-
-    if (type === 'currentIcon') {
-        dom.current.icon.style.backgroundImage = iconPath;
-        dom.current.background.style.backgroundImage = backgroundPath;
-    } else {
-        const allForecastIcons = document.querySelectorAll('[data-js="f-icon"]');
-        const newestForecastIcon = allForecastIcons[allForecastIcons.length - 1];
-        newestForecastIcon.style.backgroundImage = iconPath;
-    }
-}
 
 
 // Get user's search result
@@ -218,7 +150,7 @@ dom.search.form.addEventListener('submit', async (event) => {
                     date: new Date(localTime),
                     temp: Math.round(weatherData.current.temp_c),
                     cloud: ['cloud', weatherData.current.cloud],
-                    day: weatherData.forecast.forecastday[0],
+                    dayIndex: weatherData.forecast.forecastday[0],
                 },
 
                 details: {
@@ -237,9 +169,6 @@ dom.search.form.addEventListener('submit', async (event) => {
         updateWeatherCurrent(weatherParams.current);
         updateWeatherDetails(weatherParams.details);
         updateWeatherForecast(weatherParams.current);
-
-
-        updateUI(cloudyData, currentHour, 'currentIcon');
 
     } catch (error) {
         console.error('Error fetching weather data: ', error);
