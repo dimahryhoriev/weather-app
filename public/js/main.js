@@ -59,8 +59,12 @@ function updateWeatherForecast(currentWeather) {
 
         // Extract the weather icon & description for a specific hour
         const dayPeriod = setDayCycle(currentHour);
-        const iconPath = updateForecastVisuals(dayPeriod, 'cloud', nextCloud);
+        const visualsData = updateForecastVisuals(dayPeriod, 'cloud', nextCloud);
+        const iconPath = visualsData[0];
+        const weatherStatus = visualsData[1];
+
         nextIcon.style.backgroundImage = iconPath;
+        nextDesc.textContent = weatherStatus;
     }
 }
 
@@ -68,7 +72,11 @@ function updateForecastVisuals(dayPeriod, weatherFactor, percentage) {
     const weatherStatus = getWeatherStatus(weatherFactor, percentage);
     const { iconPath } = generateAssetPath(weatherStatus, dayPeriod);
 
-    return iconPath;
+    if (dayPeriod === 'night' && weatherStatus[0] === 'clear') {
+        return [iconPath, weatherStatus[2]];
+    } else {
+        return [iconPath, weatherStatus[1]];
+    }
 }
 
 // Update icon in current weather UI
