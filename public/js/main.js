@@ -42,6 +42,7 @@ function updateWeatherForecast(currentWeather) {
         const nextHour = template.querySelector('[data-js="f-time"]');
         const nextTemp = template.querySelector('[data-js="f-temp"]');
         const nextDesc = template.querySelector('[data-js="f-desc"]');
+        const nextIcon = template.querySelector('[data-js="f-icon"]');
 
         // Calculating the next hour
         currentHour = (currentHour + 1) % 24;
@@ -51,19 +52,25 @@ function updateWeatherForecast(currentWeather) {
 
         // Extract the temperature value for a specific hour
         const nextHourData = dayIndex.hour[currentHour];
-        const cloud = dayIndex.hour[currentHour].cloud;
+        const nextCloud = dayIndex.hour[currentHour].cloud;
         nextTemp.textContent = Math.round(nextHourData.temp_c);
 
         dom.forecast.list.appendChild(template);
 
         // Extract the weather icon & description for a specific hour
-        setDayCycle()
-        updateForecastVisuals();
+        const dayPeriod = setDayCycle(currentHour);
+        let { cloud } = currentWeather;
+        cloud[1] = nextCloud;
+        const iconPath = updateForecastVisuals(dayPeriod, cloud[0], cloud[1]);
+        nextIcon.style.backgroundImage = iconPath;
     }
 }
 
-function updateForecastVisuals() {
-    
+function updateForecastVisuals(dayPeriod, weatherFactor, percentage) {
+    const weatherStatus = getWeatherStatus(weatherFactor, percentage);
+    const { iconPath } = generateAssetPath(weatherStatus, dayPeriod);
+
+    return iconPath;
 }
 
 // Update icon in current weather UI
