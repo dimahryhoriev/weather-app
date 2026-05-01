@@ -59,9 +59,7 @@ function updateWeatherForecast(currentWeather) {
 
         // Extract the weather icon & description for a specific hour
         const dayPeriod = setDayCycle(currentHour);
-        let { cloud } = currentWeather;
-        cloud[1] = nextCloud;
-        const iconPath = updateForecastVisuals(dayPeriod, cloud[0], cloud[1]);
+        const iconPath = updateForecastVisuals(dayPeriod, 'cloud', nextCloud);
         nextIcon.style.backgroundImage = iconPath;
     }
 }
