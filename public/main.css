@@ -136,6 +136,10 @@ body {
   overflow-x: hidden;
 }
 
+.is-hidden {
+  display: none !important;
+}
+
 .wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -245,7 +249,9 @@ body {
   gap: 28px;
 }
 .current__content--active {
-  display: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 .current__content--default {
   display: -webkit-box;
@@ -852,7 +858,9 @@ body {
 }
 
 .details {
-  display: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
@@ -1040,7 +1048,9 @@ body {
 }
 
 .forecast {
-  display: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;

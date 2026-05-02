@@ -7,6 +7,10 @@ const dom = {
     },
 
     current: {
+        section: {
+            active: document.querySelector('.current__content--active'),
+            default: document.querySelector('.current__content--default')
+        },
         temp: document.querySelector('[data-js="c-temp"]'),
         city: document.querySelector('[data-js="c-city"]'),
         time: document.querySelector('[data-js="c-time"]'),
@@ -19,6 +23,7 @@ const dom = {
     },
 
     details: {
+        section: document.querySelector('.dashboard__details'),
         maxTemp: document.querySelector('[data-js="temp-max"]'),
         minTemp: document.querySelector('[data-js="temp-min"]'),
         humidity: document.querySelector('[data-js="humidity"]'),
@@ -27,8 +32,13 @@ const dom = {
     },
 
     forecast: {
+        section: document.querySelector('.dashboard__forecast'),
         list: document.querySelector('.forecast__metrics'),
         item: document.querySelector('[data-js="forecast-item"]')
+    },
+
+    placeholder: {
+        section: document.querySelector('.dashboard__placeholder')
     }
 }
 

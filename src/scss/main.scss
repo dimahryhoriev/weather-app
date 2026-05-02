@@ -9,6 +9,10 @@ body {
     overflow-x: hidden;
 }
 
+.is-hidden {
+    display: none !important;
+}
+
 .wrapper {
     display: flex;
     max-width: 1440px;
@@ -86,7 +90,7 @@ body {
         gap: 28px;
 
         &--active {
-            display: none;
+            display: flex;
         }
 
         &--default {
@@ -402,7 +406,7 @@ body {
 }
 
 .details {
-    display: none;
+    display: flex;
     flex-direction: column;
     gap: 30px;
 
@@ -528,7 +532,7 @@ body {
 }
 
 .forecast {
-    display: none;
+    display: flex;
     flex-direction: column;
     gap: 40px;
     margin-top: 45px;

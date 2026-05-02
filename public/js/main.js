@@ -143,6 +143,17 @@ function getWeatherStatus(weatherFactor, percentage) {
     return null;
 }
 
+function showContent() {
+    // Hide default sections
+    dom.current.section.default.classList.add('is-hidden');
+    dom.placeholder.section.classList.add('is-hidden');
+
+    // Show sections with UI elements
+    dom.current.section.active.classList.remove('is-hidden');
+    dom.details.section.classList.remove('is-hidden');
+    dom.forecast.section.classList.remove('is-hidden');
+}
+
 
 
 // Get user's search result
@@ -182,6 +193,7 @@ dom.search.form.addEventListener('submit', async (event) => {
         updateWeatherCurrent(weatherParams.current);
         updateWeatherDetails(weatherParams.details);
         updateWeatherForecast(weatherParams.current);
+        showContent();
 
     } catch (error) {
         console.error('Error fetching weather data: ', error);
