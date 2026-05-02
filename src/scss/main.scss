@@ -7,6 +7,8 @@ body {
     background: transparent url(./assets/images/background/bg-default.jpg) no-repeat center / cover fixed;
     font-family: v.$font-primary;
     overflow-x: hidden;
+
+    transition: all 1s ease;
 }
 
 .is-hidden {
@@ -140,6 +142,7 @@ body {
         background: transparent url(assets/icons/cloudy.svg) center / cover no-repeat;
         width: 70px;
         height: 70px;
+        transition: all 1s ease;
 
         @include m.tablet {
             width: 55px;

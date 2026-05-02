@@ -36,7 +36,7 @@ function updateWeatherForecast(currentWeather) {
     let { currentHour, currentMinute } = getCurrentTime();
     let { dayIndex } = currentWeather;
 
-    for (let forecastCounter = 1; forecastCounter <= 12; forecastCounter++) {
+    for (let forecastCounter = 1; forecastCounter <= 24; forecastCounter++) {
         // Declare next forecast hour
         const template = dom.forecast.item.content.cloneNode(true);
         const nextHour = template.querySelector('[data-js="f-time"]');

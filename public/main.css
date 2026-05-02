@@ -134,6 +134,8 @@ body {
   background: transparent url(./assets/images/background/bg-default.jpg) no-repeat center/cover fixed;
   font-family: "Roboto", sans-serif;
   overflow-x: hidden;
+  -webkit-transition: all 1s ease;
+  transition: all 1s ease;
 }
 
 .is-hidden {
@@ -347,6 +349,8 @@ body {
   background: transparent url(assets/icons/cloudy.svg) center/cover no-repeat;
   width: 70px;
   height: 70px;
+  -webkit-transition: all 1s ease;
+  transition: all 1s ease;
 }
 @media (550px <= width < 1280px) {
   .current__icon {
