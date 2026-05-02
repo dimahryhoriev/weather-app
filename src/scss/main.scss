@@ -8,7 +8,7 @@ body {
     font-family: v.$font-primary;
     overflow-x: hidden;
 
-    transition: all 1s ease;
+    transition: all 0.8s ease;
 }
 
 .is-hidden {
@@ -142,7 +142,7 @@ body {
         background: transparent url(assets/icons/cloudy.svg) center / cover no-repeat;
         width: 70px;
         height: 70px;
-        transition: all 1s ease;
+        transition: all 0.8s ease;
 
         @include m.tablet {
             width: 55px;
@@ -365,6 +365,7 @@ body {
 
     &__title {
         @include m.text-primary;
+        color: v.$secondary;
 
         width: 100%;
         text-align: left;
