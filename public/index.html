@@ -66,7 +66,7 @@
                 </div>
                 <div class="current__placeholder">
                     <h2 class="current__title">Select location</h2>
-                    <div class="current__subtitle">Search for a city to see the weather</div>
+                    <h3 class="current__subtitle">Search for a city to see the weather</h3>
                 </div>
             </div>
         </section>
@@ -96,6 +96,51 @@
                         </svg>
                     </button>
                 </form>
+                <div class="dashboard__placeholder">
+                    <div class="dashboard__title">There is nothing here yet...</div>
+                    <div class="dashboard__skeleton skeleton">
+                        <div class="skeleton__block skeleton__block--details">
+                            <div class="skeleton__line skeleton__line--long"></div>
+                            <ul class="skeleton__list skeleton__list--details">
+                                <li class="skeleton__item skeleton__item--details">
+                                    <div class="skeleton__line skeleton__line--short"></div>
+                                    <div class="skeleton__line skeleton__line--short"></div>
+                                    <div class="skeleton__circle skeleton__circle--small"></div>
+                                </li>
+                                <li class="skeleton__item skeleton__item--details">
+                                    <div class="skeleton__line skeleton__line--short"></div>
+                                    <div class="skeleton__line skeleton__line--short"></div>
+                                    <div class="skeleton__circle skeleton__circle--small"></div>
+                                </li>
+                                <li class="skeleton__item skeleton__item--details">
+                                    <div class="skeleton__line skeleton__line--short"></div>
+                                    <div class="skeleton__line skeleton__line--short"></div>
+                                    <div class="skeleton__circle skeleton__circle--small"></div>
+                                </li>
+                                <li class="skeleton__item skeleton__item--details">
+                                    <div class="skeleton__line skeleton__line--short"></div>
+                                    <div class="skeleton__line skeleton__line--short"></div>
+                                    <div class="skeleton__circle skeleton__circle--small"></div>
+                                </li>
+                                <li class="skeleton__item skeleton__item--details">
+                                    <div class="skeleton__line skeleton__line--short"></div>
+                                    <div class="skeleton__line skeleton__line--short"></div>
+                                    <div class="skeleton__circle skeleton__circle--small"></div>
+                                </li>
+                            </ul>
+                            <ul class="skeleton__list skeleton__list--forecast">
+                                <li class="skeleton__item skeleton__item--forecast">
+                                    <div class="skeleton__circle skeleton__circle--big"></div>
+                                    <div class="skeleton__line-group">
+                                        <div class="skeleton__line skeleton__line--short"></div>
+                                        <div class="skeleton__line skeleton__line--short"></div>
+                                    </div>
+                                    <div class="skeleton__line skeleton__line--short"></div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
                 <div class="dashboard__details details">
                     <h3 class="details__title">Weather Details...</h3>
                     <h3 class="details__subtitle">thunderstorm with light drizzle</h3>
@@ -163,7 +208,7 @@
                     </ul>
                 </div>
                 <div class="dashboard__forecast forecast" data-js="forecast-list">
-                    <span class="forecast__divider"></span>
+                    <span class="forecast__divider divider"></span>
                     <h3 class="forecast__title">Today’s Weather Forecast...</h3>
                     <ul class="forecast__metrics">
                         <template data-js="forecast-item">

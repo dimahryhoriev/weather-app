@@ -4,7 +4,7 @@
 @use 'mixins' as m;
 
 body {
-    background: transparent url(./assets/images/snow-bg.png) no-repeat center / cover fixed;
+    background: transparent url(./assets/images/background/bg-default.jpg) no-repeat center / cover fixed;
     font-family: v.$font-primary;
     overflow-x: hidden;
 }
@@ -339,6 +339,23 @@ body {
         }
     }
 
+    &__placeholder {
+        display: flex;
+        flex-direction: column;
+        align-items: left;
+
+        @include m.tablet {
+            width: 100%;
+            padding: 0 40px 0 40px;
+        }
+    }
+
+    &__title {
+        @include m.text-primary;
+
+        width: 100%;
+    }
+
     @include m.tablet {
         width: 100%;
         border-left: none;
@@ -379,7 +396,7 @@ body {
 }
 
 .details {
-    display: flex;
+    display: none;
     flex-direction: column;
     gap: 30px;
 
@@ -493,22 +510,22 @@ body {
     }
 }
 
+.divider {
+    width: 100%;
+    height: 1px;
+    background-color: v.$primary;
+
+    @include m.tablet {
+        width: calc(100% + 16px);
+        margin: 0 -8px;
+    }
+}
+
 .forecast {
-    display: flex;
+    display: none;
     flex-direction: column;
     gap: 40px;
     margin-top: 45px;
-
-    &__divider {
-        width: 100%;
-        height: 1px;
-        background-color: v.$primary;
-
-        @include m.tablet {
-            width: calc(100% + 16px);
-            margin: 0 -8px;
-        }
-    }
 
     &__title {
         width: 100%;

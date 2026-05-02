@@ -96,7 +96,7 @@ function generateAssetPath(weatherStatus, dayPeriod) {
     let backgroundPath = '';
 
     iconPath = `url('assets/icons/${dayPeriod}/${weatherStatus[0]}.svg')`;
-    backgroundPath = `url('assets/images/${dayPeriod}/${weatherStatus[0]}.jpg')`;
+    backgroundPath = `url('assets/images/background/${dayPeriod}/${weatherStatus[0]}.jpg')`;
 
     return { iconPath, backgroundPath };
 }
