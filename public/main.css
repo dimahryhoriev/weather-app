@@ -205,7 +205,7 @@ body {
   }
 }
 
-.weather {
+.sidebar {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -232,8 +232,94 @@ body {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
+  margin: 0 116px 0 0;
   bottom: 85px;
+}
+.current__content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   gap: 28px;
+}
+.current__content--active {
+  display: none;
+}
+.current__content--default {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+@media (550px <= width < 1280px) {
+  .current__content {
+    gap: 22px;
+  }
+}
+@media (width < 550px) {
+  .current__content {
+    gap: 16px;
+  }
+}
+.current__illustration svg {
+  height: 130px;
+}
+@media (550px <= width < 1280px) {
+  .current__illustration svg {
+    height: 100px;
+  }
+}
+@media (width < 550px) {
+  .current__illustration svg {
+    height: 60px;
+  }
+}
+.current__title {
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0;
+}
+@media (width < 550px) {
+  .current__title {
+    font-size: 30px;
+    color: rgb(255, 255, 255);
+  }
+}
+@media (550px <= width < 1280px) {
+  .current__title {
+    font-size: 48px;
+    color: rgb(255, 255, 255);
+  }
+}
+@media (width >= 1280px) {
+  .current__title {
+    font-size: 60px;
+    color: rgb(255, 255, 255);
+  }
+}
+.current__subtitle {
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0;
+}
+@media (width < 550px) {
+  .current__subtitle {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.7);
+  }
+}
+@media (550px <= width < 1280px) {
+  .current__subtitle {
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.7);
+  }
+}
+@media (width >= 1280px) {
+  .current__subtitle {
+    font-size: 24px;
+    color: rgba(255, 255, 255, 0.7);
+  }
 }
 .current__info {
   display: -webkit-box;
@@ -370,7 +456,7 @@ body {
     width: fit-content;
     top: auto;
     left: auto;
-    margin-left: 40px;
+    margin: 0 40px 0 40px;
     bottom: 0;
   }
 }
@@ -382,8 +468,7 @@ body {
     width: fit-content;
     top: auto;
     left: auto;
-    margin-left: 22px;
-    gap: 16px;
+    margin: 0 22px 0 22px;
     bottom: 0;
   }
 }

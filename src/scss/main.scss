@@ -64,7 +64,7 @@ body {
     }
 }
 
-.weather {
+.sidebar {
     display: flex;
     justify-content: flex-end;
     width: 100%;
@@ -77,8 +77,52 @@ body {
     align-items: center;
     height: fit-content;
     width: fit-content;
+    margin: 0 116px 0 0;
     bottom: 85px;
-    gap: 28px;
+
+    &__content {
+        display: flex;
+        align-items: center;
+        gap: 28px;
+
+        &--active {
+            display: none;
+        }
+
+        &--default {
+            display: flex;
+        }
+
+        @include m.tablet {
+            gap: 22px;
+        }
+
+        @include m.mobile {
+            gap: 16px;
+        }
+    }
+
+    &__illustration {
+        svg {
+            height: 130px;
+
+            @include m.tablet {
+                height: 100px;
+            }
+
+            @include m.mobile {
+                height: 60px;
+            }
+        }
+    }
+
+    &__title {
+        @include m.text-h2;
+    }
+
+    &__subtitle {
+        @include m.text-h3;
+    }
 
     &__info {
         display: flex;
@@ -149,7 +193,7 @@ body {
         width: fit-content;
         top: auto;
         left: auto;
-        margin-left: 40px;
+        margin: 0 40px 0 40px;
         bottom: 0;
     }
 
@@ -158,8 +202,7 @@ body {
         width: fit-content;
         top: auto;
         left: auto;
-        margin-left: 22px;
-        gap: 16px;
+        margin: 0 22px 0 22px;
         bottom: 0;
     }
 }
