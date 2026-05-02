@@ -354,6 +354,11 @@ body {
         @include m.text-primary;
 
         width: 100%;
+        text-align: left;
+
+        @include m.tablet {
+            text-align: center;
+        }
     }
 
     @include m.tablet {

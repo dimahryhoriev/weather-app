@@ -800,6 +800,12 @@ body {
 }
 .dashboard__title {
   width: 100%;
+  text-align: left;
+}
+@media (550px <= width < 1280px) {
+  .dashboard__title {
+    text-align: center;
+  }
 }
 @media (550px <= width < 1280px) {
   .dashboard {
