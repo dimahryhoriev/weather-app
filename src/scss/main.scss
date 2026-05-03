@@ -15,6 +15,11 @@ body {
     display: none !important;
 }
 
+.is-faded {
+    opacity: 0;
+    pointer-events: none;
+}
+
 .wrapper {
     display: flex;
     max-width: 1440px;
@@ -90,6 +95,7 @@ body {
         display: flex;
         align-items: center;
         gap: 28px;
+        transition: opacity 0.5s;
 
         &--active {
             display: flex;
@@ -351,6 +357,7 @@ body {
         align-items: left;
         width: 100%;
         gap: 52px;
+        transition: opacity 0.5s;
 
         @include m.tablet {
             max-width: 380px;
@@ -422,6 +429,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 30px;
+    transition: opacity 0.5s;
 
     &__title {
         width: 100%;
@@ -549,6 +557,7 @@ body {
     flex-direction: column;
     gap: 40px;
     margin-top: 45px;
+    transition: opacity 0.5s;
 
     &__title {
         width: 100%;

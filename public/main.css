@@ -142,6 +142,11 @@ body {
   display: none !important;
 }
 
+.is-faded {
+  opacity: 0;
+  pointer-events: none;
+}
+
 .wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -249,6 +254,8 @@ body {
       -ms-flex-align: center;
           align-items: center;
   gap: 28px;
+  -webkit-transition: opacity 0.5s;
+  transition: opacity 0.5s;
 }
 .current__content--active {
   display: -webkit-box;
@@ -779,6 +786,8 @@ body {
           align-items: left;
   width: 100%;
   gap: 52px;
+  -webkit-transition: opacity 0.5s;
+  transition: opacity 0.5s;
 }
 @media (550px <= width < 1280px) {
   .dashboard__placeholder {
@@ -886,6 +895,8 @@ body {
       -ms-flex-direction: column;
           flex-direction: column;
   gap: 30px;
+  -webkit-transition: opacity 0.5s;
+  transition: opacity 0.5s;
 }
 .details__title {
   width: 100%;
@@ -1077,6 +1088,8 @@ body {
           flex-direction: column;
   gap: 40px;
   margin-top: 45px;
+  -webkit-transition: opacity 0.5s;
+  transition: opacity 0.5s;
 }
 .forecast__title {
   width: 100%;

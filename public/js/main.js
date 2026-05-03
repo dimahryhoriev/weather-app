@@ -1,5 +1,6 @@
 import { dom, dayCycles, weatherConfig } from './constants.js';
 import { fetchWeather } from './weather-api.js';
+import { useFade } from './animations.js';
 
 // Show current weather by search query
 function updateWeatherCurrent(currentWeather) {
@@ -155,7 +156,6 @@ function showContent() {
 }
 
 
-
 // Get user's search result
 dom.search.form.addEventListener('submit', async (event) => {
     event.preventDefault();
@@ -193,7 +193,14 @@ dom.search.form.addEventListener('submit', async (event) => {
         updateWeatherCurrent(weatherParams.current);
         updateWeatherDetails(weatherParams.details);
         updateWeatherForecast(weatherParams.current);
-        showContent();
+
+        useFade([
+            dom.placeholder.section,
+            dom.current.section.active,
+            dom.current.section.default,
+            dom.details.section,
+            dom.forecast.section
+        ]);
 
     } catch (error) {
         console.error('Error fetching weather data: ', error);
@@ -219,3 +226,6 @@ dom.search.form.addEventListener('reset', (event) => {
     dom.search.resetBtn.style.display = 'none';
     dom.search.input.value = '';
 })
+
+
+export { showContent };
