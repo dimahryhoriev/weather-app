@@ -225,6 +225,7 @@ body {
     position: relative;
     flex-direction: column;
     justify-self: flex-end;
+    min-height: 100vh;
     width: 526px;
     border-left: 5px solid v.$surface-stroke;
     padding: 40px 120px 40px 35px;
@@ -357,7 +358,7 @@ body {
         align-items: left;
         width: 100%;
         gap: 52px;
-        transition: opacity 0.5s;
+        transition: opacity 0.250s;
 
         @include m.tablet {
             max-width: 380px;
@@ -429,7 +430,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 30px;
-    transition: opacity 0.5s;
+    transition: opacity 0.250s;
 
     &__title {
         width: 100%;
@@ -557,7 +558,7 @@ body {
     flex-direction: column;
     gap: 40px;
     margin-top: 45px;
-    transition: opacity 0.5s;
+    transition: opacity 0.250s;
 
     &__title {
         width: 100%;

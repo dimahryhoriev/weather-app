@@ -1,7 +1,7 @@
 import { dom } from './constants.js';
 import { showContent } from './main.js';
 
-const animTime = 250;
+const animTime = 125;
 const toggleFadeClass = elemIndex => elemIndex.classList.toggle('is-faded');
 
 const useFade = elemsArray => {
@@ -10,7 +10,9 @@ const useFade = elemsArray => {
 
         setTimeout(() => {
             showContent();
-            toggleFadeClass(elemsArray[index]);
+            setTimeout(() => {
+                toggleFadeClass(elemsArray[index]);
+            }, animTime);
         }, animTime);
     }
 }
