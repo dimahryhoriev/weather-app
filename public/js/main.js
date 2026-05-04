@@ -22,14 +22,26 @@ function updateWeatherCurrent(currentWeather) {
 }
 
 // Show weather details by search query
-function updateWeatherDetails(weatherDetails) {
+function updateWeatherDetails(currentWeather, weatherDetails) {
     const { maxTemp, minTemp, humidity, cloud, wind } = weatherDetails;
 
-    dom.details.maxTemp.textContent = Math.round(maxTemp);
-    dom.details.minTemp.textContent = Math.round(minTemp);
+    dom.details.maxTemp.textContent = maxTemp;
+    dom.details.minTemp.textContent = minTemp;
     dom.details.humidity.textContent = humidity;
     dom.details.cloudy.textContent = cloud;
-    dom.details.wind.textContent = Math.round(wind);
+    dom.details.wind.textContent = wind;
+
+    setWindStatus(currentWeather, weatherDetails);
+}
+
+const setWindStatus = (currentWeather, weatherDetails) => {
+    const { wind } = weatherDetails;
+    const { temp } = currentWeather;
+    const windSpeed = weatherConfig.wind.setWindSpeed(wind);
+    const windTemperature = weatherConfig.wind.setWindTemperature(temp);
+    const windDescription = `${windTemperature} ${windSpeed} wind`;
+
+    dom.details.description.textContent = windDescription;
 }
 
 // Show next 12 hours weather forecast
@@ -178,11 +190,11 @@ dom.search.form.addEventListener('submit', async (event) => {
                 },
 
                 details: {
-                    maxTemp: weatherData.forecast.forecastday[0].day.maxtemp_c,
-                    minTemp: weatherData.forecast.forecastday[0].day.mintemp_c,
+                    maxTemp: Math.round(weatherData.forecast.forecastday[0].day.maxtemp_c),
+                    minTemp: Math.round(weatherData.forecast.forecastday[0].day.mintemp_c,),
                     humidity: weatherData.current.humidity,
                     cloud: weatherData.current.cloud,
-                    wind: weatherData.current.wind_kph,
+                    wind: Math.round(weatherData.current.wind_kph),
                 },
             }
         }
@@ -191,7 +203,7 @@ dom.search.form.addEventListener('submit', async (event) => {
         console.log(weatherParams);
 
         updateWeatherCurrent(weatherParams.current);
-        updateWeatherDetails(weatherParams.details);
+        updateWeatherDetails(weatherParams.current, weatherParams.details);
         updateWeatherForecast(weatherParams.current);
 
         useFade([

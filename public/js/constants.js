@@ -24,6 +24,7 @@ const dom = {
 
     details: {
         section: document.querySelector('.dashboard__details'),
+        description: document.querySelector('.details__subtitle'),
         maxTemp: document.querySelector('[data-js="temp-max"]'),
         minTemp: document.querySelector('[data-js="temp-min"]'),
         humidity: document.querySelector('[data-js="humidity"]'),
@@ -63,7 +64,22 @@ const weatherConfig = {
         partly: ['partly-cloudy', 'Partly Cloudy'],
         mostly: ['mostly-cloudy', 'Mostly Cloudy'],
         overcast: ['overcast', 'Overcast'],
-    }
+    },
+
+    wind: {
+        setWindSpeed: (speed) => {
+            if (speed <= 5) return 'light';
+            if (speed <= 11) return 'moderate';
+            if (speed <= 19) return 'strong';
+            if (speed >= 20) return 'storm';
+        },
+
+        setWindTemperature: (temperature) => {
+            if (temperature < 10) return 'Cold';
+            if (temperature < 15) return 'Cool';
+            if (temperature >= 15) return 'Warm';
+        },
+    },
 }
 
 export { dom, dayCycles, weatherConfig };

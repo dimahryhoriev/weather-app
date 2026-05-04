@@ -10,6 +10,7 @@ const useFade = elemsArray => {
 
         setTimeout(() => {
             showContent();
+
             setTimeout(() => {
                 toggleFadeClass(element);
             }, animTime);
