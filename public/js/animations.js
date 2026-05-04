@@ -5,16 +5,16 @@ const animTime = 125;
 const toggleFadeClass = elemIndex => elemIndex.classList.toggle('is-faded');
 
 const useFade = elemsArray => {
-    for (let index = 0; index < elemsArray.length; index++) {
-        toggleFadeClass(elemsArray[index]);
+    elemsArray.forEach(element => {
+        toggleFadeClass(element);
 
         setTimeout(() => {
             showContent();
             setTimeout(() => {
-                toggleFadeClass(elemsArray[index]);
+                toggleFadeClass(element);
             }, animTime);
         }, animTime);
-    }
+    });
 }
 
 export { useFade };
