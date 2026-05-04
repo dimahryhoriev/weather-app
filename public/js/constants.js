@@ -106,6 +106,21 @@ const weatherConfig = {
             if (temperature >= 15) return 'Warm';
         },
     },
+
+    rain: {
+        setRainChance: (percentage) => {
+            if (percentage <= 30) return 'low';
+            if (percentage <= 60) return 'possible';
+            if (percentage <= 100) return 'likely';
+        }
+    },
+
+    snow: {
+        setSnowChance: (percentage) => {
+            if (percentage <= 30) return 'low';
+            if (percentage <= 60) return 'likely';
+        }
+    }
 }
 
 export { dom, dayCycles, weatherConfig };
