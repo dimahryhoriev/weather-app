@@ -39,7 +39,7 @@ const setWindStatus = (currentWeather, weatherDetails) => {
     const { temp } = currentWeather;
     const windSpeed = weatherConfig.wind.setWindSpeed(wind);
     const windTemperature = weatherConfig.wind.setWindTemperature(temp);
-    const windDescription = `${windTemperature} ${windSpeed} wind`;
+    const windDescription = weatherConfig.wind.adviceMap[windSpeed][windTemperature];
 
     dom.details.description.textContent = windDescription;
 }

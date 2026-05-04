@@ -67,6 +67,32 @@ const weatherConfig = {
     },
 
     wind: {
+        adviceMap: {
+            'light': {
+                'Cold': 'Chilly breeze. Wear a warm coat.',
+                'Cool': 'Fresh air. A light hoodie is enough.',
+                'Warm': 'Perfect weather. Enjoy the sun!'
+            },
+
+            'moderate': {
+                'Cold': 'Biting wind. Layer up with a windbreaker.',
+                'Cool': 'Breezy. Keep your jacket zipped.',
+                'Warm': 'Nice breeze. No extra layers needed.'
+            },
+
+            'strong': {
+                'Cold': 'Freezing gale! Wear a scarf and thick coat.',
+                'Cool': 'Very windy. A sturdy jacket is a must.',
+                'Warm': 'Warm but gusty. Hold onto your hat!'
+            },
+
+            'storm': {
+                'Cold': 'Danger! Extreme wind chill. Stay indoors.',
+                'Cool': 'Storm alert. Avoid trees and seek shelter.',
+                'Warm': 'Severe winds. Stay safe inside.'
+            }
+        },
+
         setWindSpeed: (speed) => {
             if (speed <= 5) return 'light';
             if (speed <= 11) return 'moderate';
