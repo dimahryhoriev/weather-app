@@ -60,10 +60,10 @@ const dayCycles = {
 
 const weatherConfig = {
     cloud: {
-        clear: ['clear', 'Sunny', 'Clear'],
-        partly: ['partly-cloudy', 'Partly Cloudy'],
-        mostly: ['mostly-cloudy', 'Mostly Cloudy'],
-        overcast: ['overcast', 'Overcast'],
+        none: [['clear', 'Sunny', 'Clear'], 25],
+        light: [['partly-cloudy', 'Partly Cloudy'], 45],
+        medium: [['mostly-cloudy', 'Mostly Cloudy'], 70],
+        heavy: [['overcast', 'Overcast'], 100],
     },
 
     wind: {
@@ -108,18 +108,17 @@ const weatherConfig = {
     },
 
     rain: {
-        setRainChance: (percentage) => {
-            if (percentage <= 30) return 'low';
-            if (percentage <= 60) return 'possible';
-            if (percentage <= 100) return 'likely';
-        }
+        none: [['none-precip'], 20],
+        light: [['light-rain'], 40],
+        medium: [['medium-rain'], 60],
+        heavy: [['heavy-rain'], 100],
     },
 
     snow: {
-        setSnowChance: (percentage) => {
-            if (percentage <= 30) return 'low';
-            if (percentage <= 60) return 'likely';
-        }
+        none: [['none-precip'], 20],
+        light: [['light-snow'], 40],
+        medium: [['medium-snow'], 60],
+        heavy: [['heavy-snow'], 100],
     }
 }
 

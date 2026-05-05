@@ -4,7 +4,11 @@ import { useFade } from './animations.js';
 
 // Show current weather by search query
 function updateWeatherCurrent(currentWeather) {
-    const { city, date, temp, cloud } = currentWeather;
+    const { city, date, temp, cloud, rain, snow } = currentWeather;
+    const { currentHour } = getCurrentTime();
+    const cloudFactor = [cloud[0], cloud[1]];
+    const rainFactor = [rain[0], rain[1](currentHour)];
+    const snowFactor = [snow[0], snow[1](currentHour)];
 
     dom.current.temp.textContent = temp;
     dom.current.city.textContent = city;
@@ -18,7 +22,13 @@ function updateWeatherCurrent(currentWeather) {
     dom.current.month.textContent = date.toLocaleString('en-US', { month: 'short' });
     dom.current.year.textContent = date.getFullYear().toString().slice(-2);
 
-    updateCurrentVisuals(cloud[0], cloud[1]);
+    if (rainFactor[1] < 40 && snowFactor[1] < 60) {
+        updateCurrentVisuals([cloudFactor[0], cloudFactor[1]]);
+    } else if (rainFactor[1] >= 40 && snowFactor[1] < 60) {
+        updateCurrentVisuals([cloudFactor[0], cloudFactor[1]], [rainFactor[0], rainFactor[1]]);
+    } else if (rainFactor[1] < 40 && snowFactor[1] >= 60) {
+        updateCurrentVisuals([snowFactor[0], snowFactor[1]]);
+    }
 }
 
 // Show weather details by search query
@@ -42,6 +52,16 @@ const setWindStatus = (currentWeather, weatherDetails) => {
     const windDescription = weatherConfig.wind.adviceMap[windSpeed][windTemperature];
 
     dom.details.description.textContent = windDescription;
+}
+
+const getRainChance = (weatherData, currentHour) => {
+    const rainChance = weatherData.forecast.forecastday[0].hour[currentHour].chance_of_rain;
+    return rainChance;
+}
+
+const getSnowChance = (weatherData, currentHour) => {
+    const snowChance = weatherData.forecast.forecastday[0].hour[currentHour].chance_of_snow;
+    return snowChance;
 }
 
 // Show next 12 hours weather forecast
@@ -81,35 +101,36 @@ function updateWeatherForecast(currentWeather) {
     }
 }
 
-function updateForecastVisuals(dayPeriod, weatherFactor, percentage) {
-    const weatherStatus = getWeatherStatus(weatherFactor, percentage);
-    const { iconPath } = generateAssetPath(weatherStatus, dayPeriod);
+function updateForecastVisuals(dayPeriod, weatherFactors, percentage) {
+    const weatherStatus = getWeatherStatus(weatherFactors, percentage);
+    const { iconPath } = generateAssetPath(dayPeriod, weatherFactors, weatherStatus);
 
-    if (dayPeriod === 'night' && weatherStatus[0] === 'clear') {
+    if (dayPeriod === 'night' && weatherStatus[0] === 'none') {
         return [iconPath, weatherStatus[2]];
     } else {
         return [iconPath, weatherStatus[1]];
     }
 }
 
-// Update icon in current weather UI
-function updateCurrentVisuals(weatherFactor, percentage) {
+// Update visuals in current weather UI
+function updateCurrentVisuals(cloudiness, precip = false) {
     let { currentHour } = getCurrentTime();
     const dayPeriod = setDayCycle(currentHour);
-    const weatherStatus = getWeatherStatus(weatherFactor, percentage);
+    const weatherStatus = getWeatherStatus(cloudiness, precip);
 
-    const { iconPath, backgroundPath } = generateAssetPath(weatherStatus, dayPeriod);
+    const { iconPath, backgroundPath } = generateAssetPath(dayPeriod, weatherFactors, weatherStatus);
 
     dom.current.icon.style.backgroundImage = iconPath;
     dom.current.background.style.backgroundImage = backgroundPath;
 }
 
-function generateAssetPath(weatherStatus, dayPeriod) {
+function generateAssetPath(dayPeriod, weatherFactors, weatherStatus) {
     let iconPath = '';
     let backgroundPath = '';
+    console.log(weatherFactors);
 
-    iconPath = `url('assets/icons/${dayPeriod}/${weatherStatus[0]}.svg')`;
-    backgroundPath = `url('assets/images/background/${dayPeriod}/${weatherStatus[0]}.jpg')`;
+    iconPath = `url('assets/icons/${dayPeriod}/${weatherFactors}/${weatherStatus[0]}.svg')`;
+    backgroundPath = `url('assets/images/background/${dayPeriod}/${weatherFactors}/${weatherStatus[0]}.jpg')`;
 
     return { iconPath, backgroundPath };
 }
@@ -140,19 +161,34 @@ function setDayCycle(currentHour) {
     return dayPeriod;
 }
 
-function getWeatherStatus(weatherFactor, percentage) {
-    const factorData = weatherConfig[weatherFactor];
-    if (!factorData) {
-        console.error(`Invalid factor data: ${weatherFactor}`);
+function getWeatherStatus(cloudiness, precip = false) {
+    const [cloudName, cloudPercentage] = cloudiness;
+    const [precipName, precipPercentage] = precip;
+    const cloudData = weatherConfig[cloudName];
+    const precipData = weatherConfig[precipName];
+
+    if (!cloudiness) {
+        console.error(`Invalid cloudiness data: ${cloudiness}`);
         return null;
     }
 
-    if (percentage <= 25) return factorData.clear;
-    if (percentage <= 45) return factorData.partly;
-    if (percentage <= 70) return factorData.mostly;
-    if (percentage <= 100) return factorData.overcast;
+    const getFactorStatus = (factor = cloudData, percentage = cloudPercentage) => {
+        if (percentage[1] <= factor.none[1]) return factor.none[0];
+        if (percentage[1] <= factor.light[1]) return factor.light[0];
+        if (percentage[1] <= factor.medium[1]) return factor.medium[0];
+        if (percentage[1] <= factor.heavy[1]) return factor.heavy[0];
+    }
 
-    console.error(`Invalid factor percentage: ${percentage}`);
+    const cloudStatus = getFactorStatus();
+    const precipStatus = getFactorStatus(precipData, precipPercentage);
+
+    if (precip) {
+        return `${cloudStatus}-${precipStatus}`;
+    } else {
+        return cloudStatus;
+    };
+
+    console.error(`Invalid cloudiness percentage: ${cloudiness}`);
     return null;
 }
 
@@ -187,6 +223,8 @@ dom.search.form.addEventListener('submit', async (event) => {
                     temp: Math.round(weatherData.current.temp_c),
                     cloud: ['cloud', weatherData.current.cloud],
                     dayIndex: weatherData.forecast.forecastday[0],
+                    rain: ['rain', (hour) => getRainChance(weatherData, hour)],
+                    snow: ['snow', (hour) => getSnowChance(weatherData, hour)],
                 },
 
                 details: {
