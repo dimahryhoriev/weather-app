@@ -117,20 +117,24 @@ function updateCurrentVisuals(cloudiness, precip = false) {
     let { currentHour } = getCurrentTime();
     const dayPeriod = setDayCycle(currentHour);
     const weatherStatus = getWeatherStatus(cloudiness, precip);
+    let iconPath, backgroundPath;
 
-    const { iconPath, backgroundPath } = generateAssetPath(dayPeriod, weatherFactors, weatherStatus);
+    if (precip) {
+        iconPath = backgroundPath = generateAssetPath(dayPeriod, precip[0], weatherStatus)
+    } else {
+        iconPath = backgroundPath = generateAssetPath(dayPeriod, cloudiness[0], weatherStatus)
+    }
 
     dom.current.icon.style.backgroundImage = iconPath;
     dom.current.background.style.backgroundImage = backgroundPath;
 }
 
-function generateAssetPath(dayPeriod, weatherFactors, weatherStatus) {
+function generateAssetPath(dayPeriod, weatherFactor, weatherStatus) {
     let iconPath = '';
     let backgroundPath = '';
-    console.log(weatherFactors);
 
-    iconPath = `url('assets/icons/${dayPeriod}/${weatherFactors}/${weatherStatus[0]}.svg')`;
-    backgroundPath = `url('assets/images/background/${dayPeriod}/${weatherFactors}/${weatherStatus[0]}.jpg')`;
+    iconPath = `url('assets/icons/${dayPeriod}/${weatherFactor}/${weatherStatus}.svg')`;
+    backgroundPath = `url('assets/images/background/${dayPeriod}/${weatherFactor}/${weatherStatus}.jpg')`;
 
     return { iconPath, backgroundPath };
 }
