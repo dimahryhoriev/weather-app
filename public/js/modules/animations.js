@@ -1,5 +1,11 @@
-import { dom } from './constants.js';
-import { showContent } from './main.js';
+import {
+    dom,
+} from './constants.js';
+
+import {
+    showContent,
+} from './dom-handlers.js';
+
 
 const animTime = 125;
 const toggleFadeClass = elemIndex => elemIndex.classList.toggle('is-faded');
@@ -18,4 +24,7 @@ const useFade = elemsArray => {
     });
 }
 
-export { useFade };
+
+export {
+    useFade
+};

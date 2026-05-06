@@ -122,4 +122,8 @@ const weatherConfig = {
     }
 }
 
-export { dom, dayCycles, weatherConfig };   
+export {
+    dom,
+    dayCycles,
+    weatherConfig,
+};
