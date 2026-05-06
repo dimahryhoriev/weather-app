@@ -115,7 +115,7 @@ function updateWeatherForecast(currentWeather) {
 }
 
 function updateForecastVisuals(dayPeriod, cloudiness, precip = false) {
-    const weatherStatus = getWeatherStatus(cloudiness, precip);
+    const weatherStatus = getWeatherStatus(dayPeriod, cloudiness, precip);
     const factor = precip ? precip[0] : cloudiness[0];
     const { iconPath } = generateAssetPath(dayPeriod, factor, weatherStatus);
 
@@ -141,7 +141,7 @@ function updateForecastVisuals(dayPeriod, cloudiness, precip = false) {
 function updateCurrentVisuals(cloudiness, precip = false) {
     const { currentHour } = getCurrentTime();
     const dayPeriod = setDayCycle(currentHour);
-    const weatherStatus = getWeatherStatus(cloudiness, precip);
+    const weatherStatus = getWeatherStatus(dayPeriod, cloudiness, precip);
     const factor = precip ? precip[0] : cloudiness[0];
     const { iconPath, backgroundPath } = generateAssetPath(dayPeriod, factor, weatherStatus);
 
@@ -185,7 +185,7 @@ function setDayCycle(currentHour) {
     return dayPeriod;
 }
 
-function getWeatherStatus(cloudiness, precip = false) {
+function getWeatherStatus(dayPeriod, cloudiness, precip = false) {
     const [cloudName, cloudPercentage] = cloudiness;
     let precipName, precipPercentage;
     if (precip) [precipName, precipPercentage] = precip;
@@ -198,7 +198,10 @@ function getWeatherStatus(cloudiness, precip = false) {
     }
 
     const getFactorStatus = (factor = cloudData, percentage = cloudPercentage) => {
-        if (percentage <= factor.none[1]) return factor.none[0][0];
+        if (percentage <= factor.none[1]) {
+            if (dayPeriod === 'day') return factor.none[0][1];
+            if (dayPeriod === 'night') return factor.none[0][0];
+        }
         if (percentage <= factor.light[1]) return factor.light[0][0];
         if (percentage <= factor.medium[1]) return factor.medium[0][0];
         if (percentage <= factor.heavy[1]) return factor.heavy[0][0];

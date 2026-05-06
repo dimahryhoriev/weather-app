@@ -60,10 +60,10 @@ const dayCycles = {
 
 const weatherConfig = {
     cloud: {
-        none: [['clear', 'Sunny', 'Clear'], 25],
-        light: [['partly-cloudy', 'Partly Cloudy'], 45],
-        medium: [['mostly-cloudy', 'Mostly Cloudy'], 70],
-        heavy: [['overcast', 'Overcast'], 100],
+        none: [['clear', 'sunny'], 25],
+        light: [['partly-cloudy'], 45],
+        medium: [['mostly-cloudy'], 70],
+        heavy: [['overcast'], 100],
     },
 
     wind: {
