@@ -6,7 +6,7 @@ import { useFade } from './animations.js';
 function updateWeatherCurrent(currentWeather) {
     const { city, date, temp, cloud, rain, snow } = currentWeather;
     const { currentHour } = getCurrentTime();
-    const cloudFactor = [cloud[0], cloud[1]];
+    const cloudFactor = [cloud[0], cloud[1](currentHour)];
     const rainFactor = [rain[0], rain[1](currentHour)];
     const snowFactor = [snow[0], snow[1](currentHour)];
 
@@ -66,8 +66,8 @@ const getSnowChance = (weatherData, currentHour) => {
 
 // Show next 12 hours weather forecast
 function updateWeatherForecast(currentWeather) {
+    const { city, date, temp, cloud, rain, snow, dayIndex } = currentWeather;
     let { currentHour, currentMinute } = getCurrentTime();
-    let { dayIndex } = currentWeather;
 
     for (let forecastCounter = 1; forecastCounter <= 24; forecastCounter++) {
         // Declare next forecast hour
@@ -79,6 +79,9 @@ function updateWeatherForecast(currentWeather) {
 
         // Calculating the next hour
         currentHour = (currentHour + 1) % 24;
+        const cloudFactor = [cloud[0], cloud[1](currentHour)];
+        const rainFactor = [rain[0], rain[1](currentHour)];
+        const snowFactor = [snow[0], snow[1](currentHour)];
         const formattedHour = currentHour.toString().padStart(2, '0');
         const formattedMinute = currentMinute = '00';
         nextHour.textContent = `${formattedHour}:${formattedMinute}`;
@@ -92,7 +95,17 @@ function updateWeatherForecast(currentWeather) {
 
         // Extract the weather icon & description for a specific hour
         const dayPeriod = setDayCycle(currentHour);
-        const visualsData = updateForecastVisuals(dayPeriod, 'cloud', nextCloud);
+        const getVisualsData = () => {
+            if (rainFactor[1] < 40 && snowFactor[1] < 60) {
+                return updateForecastVisuals(dayPeriod, [cloudFactor[0], cloudFactor[1]]);
+            } else if (rainFactor[1] >= 40 && snowFactor[1] < 60) {
+                return updateForecastVisuals(dayPeriod, [cloudFactor[0], cloudFactor[1]], [rainFactor[0], rainFactor[1]]);
+            } else if (rainFactor[1] < 40 && snowFactor[1] >= 60) {
+                return updateForecastVisuals(dayPeriod, [snowFactor[0], snowFactor[1]]);
+            }
+        }
+
+        const visualsData = getVisualsData();
         const iconPath = visualsData[0];
         const weatherStatus = visualsData[1];
 
@@ -101,40 +114,36 @@ function updateWeatherForecast(currentWeather) {
     }
 }
 
-function updateForecastVisuals(dayPeriod, weatherFactors, percentage) {
-    const weatherStatus = getWeatherStatus(weatherFactors, percentage);
-    const { iconPath } = generateAssetPath(dayPeriod, weatherFactors, weatherStatus);
+function updateForecastVisuals(dayPeriod, cloudiness, precip = false) {
+    const weatherStatus = getWeatherStatus(cloudiness, precip);
+    const factor = precip ? precip[0] : cloudiness[0];
+    const { iconPath } = generateAssetPath(dayPeriod, factor, weatherStatus);
 
-    if (dayPeriod === 'night' && weatherStatus[0] === 'none') {
-        return [iconPath, weatherStatus[2]];
+    if (dayPeriod === 'night' && ['clear', 'clear-no-precip'].includes) {
+        return [iconPath, weatherConfig.cloud.none[0][2]];
     } else {
-        return [iconPath, weatherStatus[1]];
+        return [iconPath, weatherStatus];
     }
 }
 
 // Update visuals in current weather UI
 function updateCurrentVisuals(cloudiness, precip = false) {
-    let { currentHour } = getCurrentTime();
+    const { currentHour } = getCurrentTime();
     const dayPeriod = setDayCycle(currentHour);
     const weatherStatus = getWeatherStatus(cloudiness, precip);
-    let iconPath, backgroundPath;
-
-    if (precip) {
-        iconPath = backgroundPath = generateAssetPath(dayPeriod, precip[0], weatherStatus)
-    } else {
-        iconPath = backgroundPath = generateAssetPath(dayPeriod, cloudiness[0], weatherStatus)
-    }
+    const factor = precip ? precip[0] : cloudiness[0];
+    const { iconPath, backgroundPath } = generateAssetPath(dayPeriod, factor, weatherStatus);
 
     dom.current.icon.style.backgroundImage = iconPath;
     dom.current.background.style.backgroundImage = backgroundPath;
 }
 
-function generateAssetPath(dayPeriod, weatherFactor, weatherStatus) {
+function generateAssetPath(dayPeriod, factor, weatherStatus) {
     let iconPath = '';
     let backgroundPath = '';
 
-    iconPath = `url('assets/icons/${dayPeriod}/${weatherFactor}/${weatherStatus}.svg')`;
-    backgroundPath = `url('assets/images/background/${dayPeriod}/${weatherFactor}/${weatherStatus}.jpg')`;
+    iconPath = `url('assets/icons/${dayPeriod}/${factor}/${weatherStatus}.svg')`;
+    backgroundPath = `url('assets/images/background/${dayPeriod}/${factor}/${weatherStatus}.jpg')`;
 
     return { iconPath, backgroundPath };
 }
@@ -167,9 +176,10 @@ function setDayCycle(currentHour) {
 
 function getWeatherStatus(cloudiness, precip = false) {
     const [cloudName, cloudPercentage] = cloudiness;
-    const [precipName, precipPercentage] = precip;
+    let precipName, precipPercentage;
+    if (precip) [precipName, precipPercentage] = precip;
     const cloudData = weatherConfig[cloudName];
-    const precipData = weatherConfig[precipName];
+    const precipData = precip ? weatherConfig[precipName] : null;
 
     if (!cloudiness) {
         console.error(`Invalid cloudiness data: ${cloudiness}`);
@@ -177,16 +187,17 @@ function getWeatherStatus(cloudiness, precip = false) {
     }
 
     const getFactorStatus = (factor = cloudData, percentage = cloudPercentage) => {
-        if (percentage[1] <= factor.none[1]) return factor.none[0];
-        if (percentage[1] <= factor.light[1]) return factor.light[0];
-        if (percentage[1] <= factor.medium[1]) return factor.medium[0];
-        if (percentage[1] <= factor.heavy[1]) return factor.heavy[0];
+        if (percentage <= factor.none[1]) return factor.none[0][0];
+        if (percentage <= factor.light[1]) return factor.light[0][0];
+        if (percentage <= factor.medium[1]) return factor.medium[0][0];
+        if (percentage <= factor.heavy[1]) return factor.heavy[0][0];
     }
 
-    const cloudStatus = getFactorStatus();
-    const precipStatus = getFactorStatus(precipData, precipPercentage);
+    let cloudStatus, precipStatus;
+    cloudStatus = getFactorStatus();
 
     if (precip) {
+        precipStatus = getFactorStatus(precipData, precipPercentage);
         return `${cloudStatus}-${precipStatus}`;
     } else {
         return cloudStatus;
@@ -225,8 +236,10 @@ dom.search.form.addEventListener('submit', async (event) => {
                     city: weatherData.location.name,
                     date: new Date(localTime),
                     temp: Math.round(weatherData.current.temp_c),
-                    cloud: ['cloud', weatherData.current.cloud],
                     dayIndex: weatherData.forecast.forecastday[0],
+                    cloud: ['cloud', (hour) => {
+                        return weatherData.forecast.forecastday[0].hour[hour].cloud;
+                    }],
                     rain: ['rain', (hour) => getRainChance(weatherData, hour)],
                     snow: ['snow', (hour) => getSnowChance(weatherData, hour)],
                 },

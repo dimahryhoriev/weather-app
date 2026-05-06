@@ -108,18 +108,18 @@ const weatherConfig = {
     },
 
     rain: {
-        none: [['none-precip'], 20],
+        none: [['no-precip'], 20],
         light: [['light-rain'], 40],
         medium: [['medium-rain'], 60],
         heavy: [['heavy-rain'], 100],
     },
 
     snow: {
-        none: [['none-precip'], 20],
+        none: [['no-precip'], 20],
         light: [['light-snow'], 40],
         medium: [['medium-snow'], 60],
         heavy: [['heavy-snow'], 100],
     }
 }
 
-export { dom, dayCycles, weatherConfig };
+export { dom, dayCycles, weatherConfig };   
