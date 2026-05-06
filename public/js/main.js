@@ -119,11 +119,22 @@ function updateForecastVisuals(dayPeriod, cloudiness, precip = false) {
     const factor = precip ? precip[0] : cloudiness[0];
     const { iconPath } = generateAssetPath(dayPeriod, factor, weatherStatus);
 
-    if (dayPeriod === 'night' && ['clear', 'clear-no-precip'].includes) {
-        return [iconPath, weatherConfig.cloud.none[0][2]];
-    } else {
-        return [iconPath, weatherStatus];
+    const getForecastDesc = () => {
+        let descElems = weatherStatus.split('-');
+
+        descElems.forEach((value, index, array) => {
+            array[index] = value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
+        });
+
+        if (descElems.length === 1) return `${descElems[0]}`;
+        if (descElems.length === 2) return `${descElems[0]} ${descElems[1]}`;
+        if (descElems.length === 3) descElems.splice(0, 1);
+        if (descElems.length === 4) descElems.splice(0, 2);
+
+        return `${descElems[0]} ${descElems[1]}`
     }
+
+    return [iconPath, getForecastDesc()];
 }
 
 // Update visuals in current weather UI
