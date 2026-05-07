@@ -31,11 +31,11 @@
                     </defs>
                 </svg>
             </div>
-            <div class="header__language language">
-                <button class="language__item language__item--active">EN</button>
-                <button class="language__item">UA</button>
-                <div class="language__toggle"></div>
-            </div>
+            <button class="header__language language" type="button" role="switch">
+                <div class="language__item" data-js="lang-en">EN</div>
+                <div class="language__item" data-js="lang-ua">UA</div>
+                <div class="language__slider"></div>
+            </button>
         </header>
         <section class="current">
             <div class="current__content current__content--active is-hidden">

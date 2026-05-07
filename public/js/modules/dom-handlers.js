@@ -6,6 +6,7 @@ import {
 import {
     getCurrentTime,
     setDayCycle,
+    getLang,
 } from './utils.js';
 
 import {
@@ -13,6 +14,10 @@ import {
     generateAssetPath,
     setPriorityFactor,
 } from './weather-logic.js';
+
+import {
+    switchLang
+} from './translator.js';
 
 
 function updateWeatherCurrent(currentWeather) {
@@ -154,7 +159,7 @@ dom.search.form.addEventListener('input', (event) => {
         dom.search.submitBtn.style.display = 'flex';
         dom.search.resetBtn.style.display = 'none';
     }
-})
+});
 
 dom.search.form.addEventListener('reset', (event) => {
     event.preventDefault();
@@ -162,7 +167,14 @@ dom.search.form.addEventListener('reset', (event) => {
     dom.search.submitBtn.style.display = 'flex';
     dom.search.resetBtn.style.display = 'none';
     dom.search.input.value = '';
+});
+
+dom.header.lang.toggle.addEventListener('click', (event) => {
+    event.preventDefault();
+
+    switchLang();
 })
+
 
 export {
     showContent,

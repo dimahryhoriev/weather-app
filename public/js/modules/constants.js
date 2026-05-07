@@ -1,4 +1,16 @@
 const dom = {
+    header: {
+        lang: {
+            toggle: document.querySelector('.header__language'),
+            slider: document.querySelector('.language__slider'),
+            item: document.querySelector('.language__item'),
+            list: {
+                en: document.querySelector('[data-js="lang-en"]'),
+                ua: document.querySelector('[data-js="lang-ua"]'),
+            }
+        },
+    },
+
     search: {
         form: document.querySelector('.dashboard__search'),
         input: document.querySelector('.dashboard__search-input'),

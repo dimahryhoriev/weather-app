@@ -256,6 +256,7 @@ body {
   border-radius: 20px;
   backdrop-filter: blur(19px);
   border: 2.5px solid rgba(255, 255, 255, 0.14);
+  cursor: pointer;
 }
 @media (550px <= width < 1280px) {
   .language {
@@ -278,7 +279,7 @@ body {
     padding: 8px;
   }
 }
-.language__toggle {
+.language__slider {
   position: absolute;
   background-color: rgba(255, 255, 255, 0.14);
   -ms-flex-item-align: center;
@@ -287,21 +288,38 @@ body {
   width: 42.5px;
   height: 40px;
   left: 4px;
+  z-index: 1;
+  -webkit-transition: all 0.6s ease;
+  transition: all 0.6s ease;
 }
 @media (550px <= width < 1280px) {
-  .language__toggle {
+  .language__slider {
     border-radius: 14.5px;
     width: 40.5px;
     height: 38px;
   }
 }
 @media (width < 550px) {
-  .language__toggle {
+  .language__slider {
     border-radius: 8px;
     width: 29px;
     height: 26px;
     left: 3px;
     top: 3px;
+  }
+}
+.language__slider--active {
+  left: calc(100% - 46.5px);
+}
+@media (550px <= width < 1280px) {
+  .language__slider--active {
+    left: calc(100% - 44.5px);
+  }
+}
+@media (width < 550px) {
+  .language__slider--active {
+    left: 3px;
+    top: calc(100% - 29px);
   }
 }
 .language__item {
