@@ -118,7 +118,7 @@ const weatherConfig = {
         none: [['no-precip'], 20],
         light: [['light-snow'], 40],
         medium: [['medium-snow'], 60],
-        heavy: [['heavy-snow'], 100],
+        heavy: [['snow'], 100],
     }
 }
 
