@@ -6,7 +6,6 @@ import {
 import {
     getCurrentTime,
     setDayCycle,
-    getLang,
 } from './utils.js';
 
 import {

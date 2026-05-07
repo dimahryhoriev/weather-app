@@ -40,28 +40,10 @@ const getSnowChance = (weatherData, currentHour) => {
     return snowChance;
 }
 
-const getLang = (type) => {
-    const slider = dom.header.lang.slider;
-    let notActiveLang;
-    let activeLang;
-
-    if (slider.classList.contains('language__slider--active')) {
-        notActiveLang = 'en';
-        activeLang = 'ua';
-    } else {
-        notActiveLang = 'ua';
-        activeLang = 'en';
-    }
-
-    if (type === 'active') return activeLang;
-    if (type === 'not-active') return notActiveLang;
-}
-
 
 export {
     getCurrentTime,
     setDayCycle,
     getRainChance,
     getSnowChance,
-    getLang,
 }

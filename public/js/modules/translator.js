@@ -14,6 +14,7 @@ const switchLang = () => {
     return isToggleActive;
 }
 
+// const getToggleStatus = ()
 
 
 export { switchLang };
