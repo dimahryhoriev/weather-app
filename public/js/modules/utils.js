@@ -11,7 +11,6 @@ function getCurrentTime() {
     return { currentHour, currentMinute };
 }
 
-
 function setDayCycle(currentHour) {
     const currentMonth = dom.current.month.textContent;
     let isDay;
@@ -31,12 +30,10 @@ function setDayCycle(currentHour) {
     return dayPeriod;
 }
 
-
 const getRainChance = (weatherData, currentHour) => {
     const rainChance = weatherData.forecast.forecastday[0].hour[currentHour].chance_of_rain;
     return rainChance;
 }
-
 
 const getSnowChance = (weatherData, currentHour) => {
     const snowChance = weatherData.forecast.forecastday[0].hour[currentHour].chance_of_snow;

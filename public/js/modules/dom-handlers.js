@@ -83,8 +83,6 @@ function updateWeatherForecast(currentWeather) {
         // Extract the weather icon & description for a specific hour
         const dayPeriod = setDayCycle(currentHour);
         const visualsData = setPriorityFactor('forecast-section', currentHour, factors);
-        console.log(visualsData);
-        console.log(currentHour);
         const iconPath = visualsData[0];
         const weatherStatus = visualsData[1];
 

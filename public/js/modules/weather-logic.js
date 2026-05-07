@@ -49,7 +49,6 @@ function getWeatherStatus(dayPeriod, cloudiness, precip = false) {
     return null;
 }
 
-
 function generateAssetPath(dayPeriod, factor, weatherStatus) {
     let iconPath;
     let backgroundPath;
@@ -59,7 +58,6 @@ function generateAssetPath(dayPeriod, factor, weatherStatus) {
 
     return { iconPath, backgroundPath };
 }
-
 
 const getForecastDesc = () => {
     let descElems = weatherStatus.split('-');
@@ -76,7 +74,6 @@ const getForecastDesc = () => {
     return `${descElems[0]} ${descElems[1]}`
 }
 
-
 const setPriorityFactor = (section, hour, factors) => {
     const [cloudFactor, rainFactor, snowFactor] = factors;
     const dayPeriod = setDayCycle(hour);
@@ -85,11 +82,11 @@ const setPriorityFactor = (section, hour, factors) => {
     if (section === 'current-section') currentSection = updateCurrentVisuals;
     if (section === 'forecast-section') currentSection = updateForecastVisuals;
 
-    if (rainFactor[1] < 40 && snowFactor[1] < 60) {
+    if (rainFactor[1] < 40 && snowFactor[1] <= 60) {
         return currentSection(dayPeriod, [cloudFactor[0], cloudFactor[1]]);
-    } else if (rainFactor[1] >= 40 && snowFactor[1] < 60) {
+    } else if (rainFactor[1] >= 40 && snowFactor[1] <= 60) {
         return currentSection(dayPeriod, [cloudFactor[0], cloudFactor[1]], [rainFactor[0], rainFactor[1]]);
-    } else if (rainFactor[1] < 40 && snowFactor[1] >= 60) {
+    } else if (snowFactor[1] > 60) {
         return currentSection(dayPeriod, [snowFactor[0], snowFactor[1]]);
     }
 }
