@@ -1,8 +1,8 @@
-const url = require('url')
-const express = require('express')
-const router = express.Router()
-const axios = require('axios')
-const apicache = require('apicache')
+const url = require('url');
+const express = require('express');
+const router = express.Router();
+const axios = require('axios');
+const apicache = require('apicache');
 
 // Environment variables
 const API_BASE_URL = process.env.API_BASE_URL

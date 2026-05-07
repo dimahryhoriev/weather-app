@@ -42,20 +42,28 @@ body {
 }
 
 .header {
+    display: flex;
     position: fixed;
+    align-items: center;
     top: 36px;
+    gap: 24px;
 
     @include m.tablet {
         top: 25px;
         left: 40px;
+        gap: 16px;
     }
 
     @include m.mobile {
+        flex-direction: row-reverse;
+        align-items: flex-start;
         top: 20px;
         left: 22px;
+        gap: 14px;
     }
 
     &__logo {
+        display: flex;
         width: fit-content;
 
         svg {
@@ -68,10 +76,71 @@ body {
             }
 
             @include m.mobile {
+                position: absolute;
+                top: 7px;
                 width: 40px;
                 height: 22px;
             }
         }
+    }
+}
+
+.language {
+    display: flex;
+    position: relative;
+    gap: 16px;
+    width: fit-content;
+    height: fit-content;
+    width: 96px;
+    height: 54px;
+    padding: 14px;
+    background-color: v.$surface;
+    border-radius: 20px;
+    backdrop-filter: blur(19px);
+    border: 2.5px solid v.$surface-stroke;
+
+    @include m.tablet {
+        width: 92px;
+        height: 50px;
+        gap: 14px;
+        padding: 12px;
+    }
+
+    @include m.mobile {
+        flex-direction: column;
+        border-radius: 12px;
+        width: 40px;
+        height: 62px;
+        gap: 8px;
+        padding: 8px;
+    }
+
+    &__toggle {
+        position: absolute;
+        background-color: v.$surface-stroke;
+        align-self: center;
+        border-radius: 12.5px;
+        width: 42.5px;
+        height: 40px;
+        left: 4px;
+
+        @include m.tablet {
+            border-radius: 14.5px;
+            width: 40.5px;
+            height: 38px;
+        }
+
+        @include m.mobile {
+            border-radius: 8px;
+            width: 29px;
+            height: 26px;
+            left: 3px;
+            top: 3px;
+        }
+    }
+
+    &__item {
+        @include m.text-primary;
     }
 }
 
@@ -296,7 +365,7 @@ body {
         @include m.tablet {
             display: flex;
             position: fixed;
-            width: 305px;
+            width: 240px;
             min-height: 28px;
             height: 28px;
             top: 25px;
@@ -325,7 +394,7 @@ body {
         @include m.mobile {
             display: flex;
             position: fixed;
-            width: 125px;
+            width: 120px;
             min-height: 20px;
             height: 20px;
             top: 20px;
