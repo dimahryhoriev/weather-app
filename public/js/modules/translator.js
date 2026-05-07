@@ -3,18 +3,18 @@ import {
 } from "./constants.js";
 
 
-const switchLang = () => {
+const getCurrentLang = () => {
     const slider = dom.header.lang.slider;
-    let isToggleActive = false;
-    if (slider.classList.contains('language__slider--active')) isToggleActive = true;
+    let currentLang;
 
-    isToggleActive === true ? isToggleActive = false : isToggleActive = true;
-    slider.classList.toggle('language__slider--active');
+    if (slider.classList.contains('language__slider--active')) {
+        currentLang = 'ua';
+    } else {
+        currentLang = 'en';
+    }
 
-    return isToggleActive;
+    return currentLang;
 }
 
-// const getToggleStatus = ()
 
-
-export { switchLang };
+export { getCurrentLang };

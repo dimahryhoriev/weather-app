@@ -14,10 +14,6 @@ import {
     setPriorityFactor,
 } from './weather-logic.js';
 
-import {
-    switchLang
-} from './translator.js';
-
 
 function updateWeatherCurrent(currentWeather) {
     const { city, date, temp, cloud, rain, snow } = currentWeather;
@@ -171,7 +167,8 @@ dom.search.form.addEventListener('reset', (event) => {
 dom.header.lang.toggle.addEventListener('click', (event) => {
     event.preventDefault();
 
-    switchLang();
+    const slider = dom.header.lang.slider;
+    slider.classList.toggle('language__slider--active');
 })
 
 
