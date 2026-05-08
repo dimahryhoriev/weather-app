@@ -56,6 +56,7 @@ function updateWeatherDetails(currentWeather, weatherDetails) {
 
 function updateWeatherForecast(currentWeather) {
     const { city, date, temp, cloud, rain, snow, dayIndex } = currentWeather;
+    const currentLang = i18next.language;
     let { currentHour, currentMinute } = getCurrentTime();
 
     for (let forecastCounter = 1; forecastCounter <= 24; forecastCounter++) {
@@ -92,8 +93,16 @@ function updateWeatherForecast(currentWeather) {
         const formattedStatus = weatherStatus.toLowerCase().replace(/\s+/g, '_');
         nextDesc.setAttribute('data-i18n', `${formattedStatus}`);
 
+        if (currentLang === 'ua') {
+            console.log(currentLang);
+            const textKey = nextDesc.getAttribute('data-i18n');
+            const translatedText = i18next.t(textKey);
+            nextDesc.textContent = translatedText;
+        } else {
+            nextDesc.textContent = weatherStatus;
+        }
+
         nextIcon.style.backgroundImage = iconPath;
-        nextDesc.textContent = weatherStatus;
     }
 }
 
@@ -157,7 +166,6 @@ const switchLanguage = () => {
     textElems.forEach((element) => {
         const textKey = element.getAttribute('data-i18n');
         const translatedText = i18next.t(textKey);
-        console.log(textKey);
 
         if (textKey !== 'search_placeholder') {
             // If element textContent is not a number
