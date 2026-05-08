@@ -710,6 +710,7 @@ body {
 
         @include m.mobile {
             padding-left: 66px;
+            gap: 24px;
         }
     }
 

@@ -1372,6 +1372,7 @@ body {
 @media (width < 550px) {
   .forecast__item {
     padding-left: 66px;
+    gap: 24px;
   }
 }
 @media (550px <= width < 1280px) {

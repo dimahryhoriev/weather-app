@@ -19,6 +19,18 @@ i18next.init({
                 'cloudy': 'Cloudy',
                 'wind': 'Wind',
                 'speed': 'km/h',
+                'clear': 'Clear',
+                'sunny': 'Sunny',
+                'partly_cloudy': 'Partly Cloudy',
+                'mostly_cloudy': 'Mostly Cloudy',
+                'overcast': 'Overcast',
+                'no_precip': 'No Precip',
+                'light_rain': 'Light Rain',
+                'medium_rain': 'Medium Rain',
+                'heavy_rain': 'Heavy Rain',
+                'light_snow': 'Light Snow',
+                'medium_snow': 'Meidum Snow',
+                'heavy_snow': 'Snow',
             }
         },
 
@@ -36,6 +48,18 @@ i18next.init({
                 'cloudy': 'Хмарність',
                 'wind': 'Вітер',
                 'speed': 'км/год',
+                'clear': 'Ясно',
+                'sunny': 'Сонячно',
+                'partly_cloudy': 'Мінлива Хмарність',
+                'mostly_cloudy': 'Переважно Хмарно',
+                'overcast': 'Суцільна Хмарність',
+                'no_precip': 'Без Опадів',
+                'light_rain': 'Невеликий Дощ',
+                'medium_rain': 'Помірний Дощ',
+                'heavy_rain': 'Сильний Дощ',
+                'light_snow': 'Невеликий Сніг',
+                'medium_snow': 'Помірний Сніг',
+                'heavy_snow': 'Сніг',
             }
         }
     }

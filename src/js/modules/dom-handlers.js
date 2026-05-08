@@ -89,6 +89,9 @@ function updateWeatherForecast(currentWeather) {
         const iconPath = visualsData[0];
         const weatherStatus = visualsData[1];
 
+        const formattedStatus = weatherStatus.toLowerCase().replace(/\s+/g, '_');
+        nextDesc.setAttribute('data-i18n', `${formattedStatus}`);
+
         nextIcon.style.backgroundImage = iconPath;
         nextDesc.textContent = weatherStatus;
     }
@@ -157,7 +160,10 @@ const switchLanguage = () => {
         console.log(textKey);
 
         if (textKey !== 'search_placeholder') {
+            // If element textContent is not a number
             if (!/\d/.test(element.textContent)) element.innerHTML = translatedText;
+
+            // If element textContent is a number
             element.style.setProperty('--after-text', `'${translatedText}'`);
         } else {
             element.placeholder = i18next.t(textKey);
