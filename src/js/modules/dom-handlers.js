@@ -169,7 +169,7 @@ dom.header.lang.toggle.addEventListener('click', (event) => {
 
     const slider = dom.header.lang.slider;
     slider.classList.toggle('language__slider--active');
-})
+});
 
 
 export {

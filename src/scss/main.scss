@@ -572,7 +572,7 @@ body {
 
             &--speed {
                 &::after {
-                    content: 'km/h';
+                    content: attr(data-unit);
                 }
             }
         }
