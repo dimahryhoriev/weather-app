@@ -81,27 +81,27 @@ const weatherConfig = {
     wind: {
         adviceMap: {
             'light': {
-                'Cold': 'Chilly breeze. Wear a warm coat.',
-                'Cool': 'Fresh air. A light hoodie is enough.',
-                'Warm': 'Perfect weather. Enjoy the sun!'
+                'cold': 'Chilly breeze. Wear a warm coat.',
+                'cool': 'Fresh air. A light hoodie is enough.',
+                'warm': 'Perfect weather. Enjoy the sun!'
             },
 
             'moderate': {
-                'Cold': 'Biting wind. Layer up with a windbreaker.',
-                'Cool': 'Breezy. Keep your jacket zipped.',
-                'Warm': 'Nice breeze. No extra layers needed.'
+                'cold': 'Biting wind. Layer up with a windbreaker.',
+                'cool': 'Breezy. Keep your jacket zipped.',
+                'warm': 'Nice breeze. No extra layers needed.'
             },
 
             'strong': {
-                'Cold': 'Freezing gale! Wear a scarf and thick coat.',
-                'Cool': 'Very windy. A sturdy jacket is a must.',
-                'Warm': 'Warm but gusty. Hold onto your hat!'
+                'cold': 'Freezing gale! Wear a scarf and thick coat.',
+                'cool': 'Very windy. A sturdy jacket is a must.',
+                'warm': 'Warm but gusty. Hold onto your hat!'
             },
 
             'storm': {
-                'Cold': 'Danger! Extreme wind chill. Stay indoors.',
-                'Cool': 'Storm alert. Avoid trees and seek shelter.',
-                'Warm': 'Severe winds. Stay safe inside.'
+                'cold': 'Danger! Extreme wind chill. Stay indoors.',
+                'cool': 'Storm alert. Avoid trees and seek shelter.',
+                'warm': 'Severe winds. Stay safe inside.'
             }
         },
 
@@ -113,9 +113,9 @@ const weatherConfig = {
         },
 
         setWindTemperature: (temperature) => {
-            if (temperature < 10) return 'Cold';
-            if (temperature < 15) return 'Cool';
-            if (temperature >= 15) return 'Warm';
+            if (temperature < 10) return 'cold';
+            if (temperature < 15) return 'cool';
+            if (temperature >= 15) return 'warm';
         },
     },
 

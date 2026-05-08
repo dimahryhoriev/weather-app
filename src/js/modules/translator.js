@@ -31,6 +31,18 @@ i18next.init({
                 'light_snow': 'Light Snow',
                 'medium_snow': 'Meidum Snow',
                 'heavy_snow': 'Snow',
+                'light_cold_wind': 'Chilly breeze. Wear a warm coat.',
+                'light_cool_wind': 'Fresh air. A light hoodie is enough.',
+                'light_warm_wind': 'Perfect weather. Enjoy the sun!',
+                'moderate_cold_wind': 'Biting wind. Layer up with a windbreaker.',
+                'moderate_cool_wind': 'Breezy. Keep your jacket zipped.',
+                'moderate_warm_wind': 'Nice breeze. No extra layers needed.',
+                'strong_cold_wind': 'Freezing gale! Wear a scarf and thick coat.',
+                'strong_cool_wind': 'Very windy. A sturdy jacket is a must.',
+                'strong_warm_wind': 'Warm but gusty. Hold onto your hat!',
+                'storm_cold_wind': 'Danger! Extreme wind chill. Stay indoors.',
+                'storm_cool_wind': 'Storm alert. Avoid trees and seek shelter.',
+                'storm_warm_wind': 'Severe winds. Stay safe inside.',
             }
         },
 
@@ -60,6 +72,18 @@ i18next.init({
                 'light_snow': 'Невеликий Сніг',
                 'medium_snow': 'Помірний Сніг',
                 'heavy_snow': 'Сніг',
+                'light_cold_wind': 'Прохолодний бриз. Одягніть тепле пальто.',
+                'light_cool_wind': 'Свіже повітря. Достатньо легкого худі.',
+                'light_warm_wind': 'Ідеальна погода. Насолоджуйтесь сонцем!',
+                'moderate_cold_wind': 'Пронизливий вітер. Одягніться багатошарово або оберіть вітровку.',
+                'moderate_cool_wind': 'Свіжо. Тримайте куртку застебнутою.',
+                'moderate_warm_wind': 'Приємний вітерець. Додаткові шари одягу не потрібні.',
+                'strong_cold_wind': 'Морозний шторм! Одягніть шарф і товсте пальто.',
+                'strong_cool_wind': 'Дуже вітряно. Міцна куртка обов’язкова.',
+                'strong_warm_wind': 'Тепло, але поривчасто. Тримайте капелюх!',
+                'storm_cold_wind': 'Небезпека! Екстремально холодний вітер. Залишайтеся вдома.',
+                'storm_cool_wind': 'Штормове попередження. Уникайте дерев та шукайте укриття.',
+                'storm_warm_wind': 'Сильний вітер. Будьте в безпеці всередині приміщення.'
             }
         }
     }

@@ -149,15 +149,21 @@ function updateForecastVisuals(dayPeriod, cloudiness, precip = false) {
 }
 
 const setWindStatus = (currentWeather, weatherDetails) => {
+    const currentLang = i18next.language;
     const { wind } = weatherDetails;
     const { temp } = currentWeather;
     const windSpeed = weatherConfig.wind.setWindSpeed(wind);
     const windTemperature = weatherConfig.wind.setWindTemperature(temp);
     const windDescription = weatherConfig.wind.adviceMap[windSpeed][windTemperature];
+    const textKey = `${windSpeed}_${windTemperature}_wind`;
+    dom.details.description.setAttribute('data-i18n', `${textKey}`);
 
-    dom.details.description.textContent = windDescription;
-
-    return ``
+    if (currentLang === 'ua') {
+        const { translatedText } = translateText(dom.details.description);
+        dom.details.description.textContent = translatedText;
+    } else {
+        dom.details.description.textContent = windDescription;
+    }
 }
 
 const switchLanguage = () => {
