@@ -48,7 +48,7 @@ i18next.init({
                 'cloudy': 'Хмарність',
                 'wind': 'Вітер',
                 'speed': 'км/год',
-                'clear': 'Ясно',
+                'clear': 'Чисте Небо',
                 'sunny': 'Сонячно',
                 'partly_cloudy': 'Мінлива Хмарність',
                 'mostly_cloudy': 'Переважно Хмарно',

@@ -3,6 +3,8 @@ import {
     dayCycles,
 } from './constants.js';
 
+import i18next from 'i18next';
+
 
 function getCurrentTime() {
     const time = dom.current.time.textContent;
@@ -53,6 +55,13 @@ const getCurrentLang = () => {
     return currentLang;
 }
 
+const translateText = (element) => {
+    const textKey = element.getAttribute('data-i18n');
+    const translatedText = i18next.t(textKey);
+
+    return { textKey, translatedText };
+}
+
 
 export {
     getCurrentTime,
@@ -60,4 +69,5 @@ export {
     getRainChance,
     getSnowChance,
     getCurrentLang,
+    translateText,
 }

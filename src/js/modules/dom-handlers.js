@@ -7,6 +7,7 @@ import {
     getCurrentLang,
     getCurrentTime,
     setDayCycle,
+    translateText,
 } from './utils.js';
 
 import {
@@ -94,9 +95,7 @@ function updateWeatherForecast(currentWeather) {
         nextDesc.setAttribute('data-i18n', `${formattedStatus}`);
 
         if (currentLang === 'ua') {
-            console.log(currentLang);
-            const textKey = nextDesc.getAttribute('data-i18n');
-            const translatedText = i18next.t(textKey);
+            const { translatedText } = translateText(nextDesc);
             nextDesc.textContent = translatedText;
         } else {
             nextDesc.textContent = weatherStatus;
@@ -157,6 +156,8 @@ const setWindStatus = (currentWeather, weatherDetails) => {
     const windDescription = weatherConfig.wind.adviceMap[windSpeed][windTemperature];
 
     dom.details.description.textContent = windDescription;
+
+    return ``
 }
 
 const switchLanguage = () => {
