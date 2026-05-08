@@ -4,6 +4,7 @@ import {
 } from './constants.js'
 
 import {
+    getCurrentLang,
     getCurrentTime,
     setDayCycle,
 } from './utils.js';
@@ -13,6 +14,8 @@ import {
     generateAssetPath,
     setPriorityFactor,
 } from './weather-logic.js';
+
+import i18next from 'i18next';
 
 
 function updateWeatherCurrent(currentWeather) {
@@ -144,6 +147,25 @@ const setWindStatus = (currentWeather, weatherDetails) => {
     dom.details.description.textContent = windDescription;
 }
 
+const switchLanguage = () => {
+    i18next.changeLanguage(getCurrentLang());
+    const textElems = document.querySelectorAll('[data-i18n]');
+
+    textElems.forEach((element) => {
+        const key = element.getAttribute('data-i18n');
+        const translatedText = i18next.t(key);
+
+        if (translatedText) {
+            if (key !== 'search_placeholder') {
+                element.innerHTML = translatedText;
+            } else {
+                element.placeholder = i18next.t(key);
+            }
+        }
+    });
+}
+
+
 dom.search.form.addEventListener('input', (event) => {
     event.preventDefault();
 
@@ -169,6 +191,7 @@ dom.header.lang.toggle.addEventListener('click', (event) => {
 
     const slider = dom.header.lang.slider;
     slider.classList.toggle('language__slider--active');
+    switchLanguage();
 });
 
 
