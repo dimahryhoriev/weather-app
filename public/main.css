@@ -1148,7 +1148,7 @@ body {
   content: "%";
 }
 .details__item-value--speed::after {
-  content: attr(data-unit);
+  content: var(--after-text, "km/h");
 }
 .details__item-icon {
   position: absolute;

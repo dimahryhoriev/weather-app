@@ -152,15 +152,15 @@ const switchLanguage = () => {
     const textElems = document.querySelectorAll('[data-i18n]');
 
     textElems.forEach((element) => {
-        const key = element.getAttribute('data-i18n');
-        const translatedText = i18next.t(key);
+        const textKey = element.getAttribute('data-i18n');
+        const translatedText = i18next.t(textKey);
+        console.log(textKey);
 
-        if (translatedText) {
-            if (key !== 'search_placeholder') {
-                element.innerHTML = translatedText;
-            } else {
-                element.placeholder = i18next.t(key);
-            }
+        if (textKey !== 'search_placeholder') {
+            if (!/\d/.test(element.textContent)) element.innerHTML = translatedText;
+            element.style.setProperty('--after-text', `'${translatedText}'`);
+        } else {
+            element.placeholder = i18next.t(textKey);
         }
     });
 }
