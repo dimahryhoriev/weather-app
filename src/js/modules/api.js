@@ -7,10 +7,13 @@ import {
     getSnowChance,
 } from './utils.js';
 
+const API_BASE = window.location.hostname === 'localhost'
+    ? 'http://localhost:3000'
+    : '';
 
 // Fetch weather data from API
 const fetchWeather = async (city) => {
-    const url = `/api?q=${city}&t=${new Date().getTime()}`;
+    const url = `${API_BASE}/api?q=${city}&t=${new Date().getTime()}`;
     const res = await fetch(url);
     const data = await res.json();
 

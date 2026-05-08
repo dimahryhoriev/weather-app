@@ -1,3 +1,6 @@
+import '../scss/main.scss';
+import i18 from './modules/translator.js';
+
 import {
     dom,
     dayCycles,

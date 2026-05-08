@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="main.css">
     <title>World Weather</title>
 </head>
 
@@ -32,8 +31,8 @@
                 </svg>
             </div>
             <button class="header__language language" type="button" role="switch">
-                <div class="language__item" data-js="lang-en">EN</div>
-                <div class="language__item" data-js="lang-ua">UA</div>
+                <div class="language__item" data-js="lang-en" data-i18n="toggle_en">EN</div>
+                <div class="language__item" data-js="lang-ua" data-i18n="toggle_ua">UA</div>
                 <div class="language__slider"></div>
             </button>
         </header>
@@ -69,16 +68,17 @@
                     </svg>
                 </div>
                 <div class="current__placeholder">
-                    <h2 class="current__title">Select location</h2>
-                    <h3 class="current__subtitle">Search for a city to see the weather</h3>
+                    <h2 class="current__title" data-i18n="location_hint_title">Select location</h2>
+                    <h3 class="current__subtitle" data-i18n="location_hint_subtitle">Search for a city to see the
+                        weather</h3>
                 </div>
             </div>
         </section>
         <aside class="sidebar">
             <div class="dashboard">
                 <form class="dashboard__search">
-                    <input class="dashboard__search-input" type="search" placeholder="Search Location..."
-                        maxlength="20">
+                    <input class="dashboard__search-input" type="search" placeholder="Search Location..." maxlength="20"
+                        data-i18n="search_placeholder">
                     <button class="dashboard__search-btn" type="submit">
                         <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_129_5344)">
@@ -102,7 +102,7 @@
                     </button>
                 </form>
                 <div class="dashboard__placeholder">
-                    <div class="dashboard__title">There is nothing here yet...</div>
+                    <div class="dashboard__title" data-i18n="no_results">There is nothing here yet...</div>
                     <div class="dashboard__skeleton skeleton">
                         <div class="skeleton__block skeleton__block--details">
                             <div class="skeleton__line skeleton__line--long"></div>
@@ -253,7 +253,7 @@
         </aside>
     </div>
 
-    <script src="js/main.js" type="module"></script>
+    <script src="/src/js/main.js" type="module"></script>
 </body>
 
 </html>
