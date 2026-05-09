@@ -81,27 +81,27 @@ const weatherConfig = {
     wind: {
         adviceMap: {
             'light': {
-                'cold': 'Chilly breeze. Wear a warm coat.',
-                'cool': 'Fresh air. A light hoodie is enough.',
-                'warm': 'Perfect weather. Enjoy the sun!'
+                'cold_wind': 'Chilly breeze. Wear a warm coat.',
+                'cool_wind': 'Fresh air. A light hoodie is enough.',
+                'warm_wind': 'Perfect weather. Enjoy the sun!'
             },
 
             'moderate': {
-                'cold': 'Biting wind. Layer up with a windbreaker.',
-                'cool': 'Breezy. Keep your jacket zipped.',
-                'warm': 'Nice breeze. No extra layers needed.'
+                'cold_wind': 'Biting wind. Layer up with a windbreaker.',
+                'cool_wind': 'Breezy. Keep your jacket zipped.',
+                'warm_wind': 'Nice breeze. No extra layers needed.'
             },
 
             'strong': {
-                'cold': 'Freezing gale! Wear a scarf and thick coat.',
-                'cool': 'Very windy. A sturdy jacket is a must.',
-                'warm': 'Warm but gusty. Hold onto your hat!'
+                'cold_wind': 'Freezing gale! Wear a scarf and thick coat.',
+                'cool_wind': 'Very windy. A sturdy jacket is a must.',
+                'warm_wind': 'Warm but gusty. Hold onto your hat!'
             },
 
             'storm': {
-                'cold': 'Danger! Extreme wind chill. Stay indoors.',
-                'cool': 'Storm alert. Avoid trees and seek shelter.',
-                'warm': 'Severe winds. Stay safe inside.'
+                'cold_wind': 'Danger! Extreme wind chill. Stay indoors.',
+                'cool_wind': 'Storm alert. Avoid trees and seek shelter.',
+                'warm_wind': 'Severe winds. Stay safe inside.'
             }
         },
 

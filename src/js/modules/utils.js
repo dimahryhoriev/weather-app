@@ -55,11 +55,16 @@ const getCurrentLang = () => {
     return currentLang;
 }
 
-const translateText = (element) => {
-    const textKey = element.getAttribute('data-i18n');
-    const translatedText = i18next.t(textKey);
+const translateText = (elem) => {
+    const lang = i18next.language;
+    const elemText = elem.textContent;
+    const elemKey = elemText.toLowerCase().replace(/\s+/g, '_');
+    elem.setAttribute('data-i18n', `${elemKey}`);
 
-    return { textKey, translatedText };
+    if (lang === 'ua') {
+        const translatedText = i18next.t(elemKey);
+        elem.textContent = translatedText;
+    }
 }
 
 

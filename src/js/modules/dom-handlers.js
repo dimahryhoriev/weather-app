@@ -90,16 +90,9 @@ function updateWeatherForecast(currentWeather) {
         const visualsData = setPriorityFactor('forecast-section', currentHour, factors);
         const iconPath = visualsData[0];
         const weatherStatus = visualsData[1];
+        nextDesc.textContent = weatherStatus;
 
-        const formattedStatus = weatherStatus.toLowerCase().replace(/\s+/g, '_');
-        nextDesc.setAttribute('data-i18n', `${formattedStatus}`);
-
-        if (currentLang === 'ua') {
-            const { translatedText } = translateText(nextDesc);
-            nextDesc.textContent = translatedText;
-        } else {
-            nextDesc.textContent = weatherStatus;
-        }
+        translateText(nextDesc);
 
         nextIcon.style.backgroundImage = iconPath;
     }
@@ -149,21 +142,16 @@ function updateForecastVisuals(dayPeriod, cloudiness, precip = false) {
 }
 
 const setWindStatus = (currentWeather, weatherDetails) => {
-    const currentLang = i18next.language;
     const { wind } = weatherDetails;
     const { temp } = currentWeather;
-    const windSpeed = weatherConfig.wind.setWindSpeed(wind);
-    const windTemperature = weatherConfig.wind.setWindTemperature(temp);
-    const windDescription = weatherConfig.wind.adviceMap[windSpeed][windTemperature];
-    const textKey = `${windSpeed}_${windTemperature}_wind`;
-    dom.details.description.setAttribute('data-i18n', `${textKey}`);
+    const hintsMap = weatherConfig.wind;
 
-    if (currentLang === 'ua') {
-        const { translatedText } = translateText(dom.details.description);
-        dom.details.description.textContent = translatedText;
-    } else {
-        dom.details.description.textContent = windDescription;
-    }
+    const descElem = dom.details.description;
+    const windSpeed = hintsMap.setWindSpeed(wind);
+    const windTemperature = hintsMap.setWindTemperature(temp);
+    descElem.textContent = `${windSpeed} ${windTemperature} wind`;
+
+    translateText(descElem);
 }
 
 const switchLanguage = () => {
