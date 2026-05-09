@@ -62,8 +62,7 @@ const translateText = (elem) => {
     elem.setAttribute('data-i18n', `${elemKey}`);
 
     if (lang === 'ua') {
-        const translatedText = i18next.t(elemKey, { lng: 'ua' });
-        elem.textContent = translatedText;
+        elem.textContent = i18next.t(elemKey, { lng: 'ua' });
     } else {
         elem.textContent = i18next.t(elemKey, { lng: 'en' });
     }

@@ -19,18 +19,22 @@ i18next.init({
                 'cloudy': 'Cloudy',
                 'wind': 'Wind',
                 'speed': 'km/h',
+
                 'clear': 'Clear',
                 'sunny': 'Sunny',
                 'partly_cloudy': 'Partly Cloudy',
                 'mostly_cloudy': 'Mostly Cloudy',
                 'overcast': 'Overcast',
+
                 'no_precip': 'No Precip',
                 'light_rain': 'Light Rain',
                 'medium_rain': 'Medium Rain',
                 'heavy_rain': 'Heavy Rain',
+
                 'light_snow': 'Light Snow',
                 'medium_snow': 'Meidum Snow',
                 'heavy_snow': 'Snow',
+
                 'light_cold_wind': 'Chilly breeze. Wear a warm coat.',
                 'light_cool_wind': 'Fresh air. A light hoodie is enough.',
                 'light_warm_wind': 'Perfect weather. Enjoy the sun!',
@@ -43,6 +47,27 @@ i18next.init({
                 'storm_cold_wind': 'Danger! Extreme wind chill. Stay indoors.',
                 'storm_cool_wind': 'Storm alert. Avoid trees and seek shelter.',
                 'storm_warm_wind': 'Severe winds. Stay safe inside.',
+
+                'jan': 'Jan',
+                'feb': 'Feb',
+                'mar': 'Mar',
+                'apr': 'Apr',
+                'may': 'May',
+                'jun': 'Jun',
+                'jul': 'Jul',
+                'aug': 'Aug',
+                'sep': 'Sep',
+                'oct': 'Oct',
+                'nov': 'Nov',
+                'dec': 'Dec',
+
+                'monday': 'Monday',
+                'tuesday': 'Tuesday',
+                'wednesday': 'Wednesday',
+                'thursday': 'Thursday',
+                'friday': 'Friday',
+                'saturday': 'Saturday',
+                'sunday': 'Sunday',
             }
         },
 
@@ -60,18 +85,22 @@ i18next.init({
                 'cloudy': 'Хмарність',
                 'wind': 'Вітер',
                 'speed': 'км/год',
+
                 'clear': 'Чисте Небо',
                 'sunny': 'Сонячно',
                 'partly_cloudy': 'Мінлива Хмарність',
                 'mostly_cloudy': 'Переважно Хмарно',
                 'overcast': 'Суцільна Хмарність',
+
                 'no_precip': 'Без Опадів',
                 'light_rain': 'Невеликий Дощ',
                 'medium_rain': 'Помірний Дощ',
                 'heavy_rain': 'Сильний Дощ',
+
                 'light_snow': 'Невеликий Сніг',
                 'medium_snow': 'Помірний Сніг',
                 'heavy_snow': 'Сніг',
+
                 'light_cold_wind': 'Прохолодний бриз. Одягніть тепле пальто.',
                 'light_cool_wind': 'Свіже повітря. Достатньо легкого худі.',
                 'light_warm_wind': 'Ідеальна погода. Насолоджуйтесь сонцем!',
@@ -83,7 +112,28 @@ i18next.init({
                 'strong_warm_wind': 'Тепло, але поривчасто. Тримайте капелюх!',
                 'storm_cold_wind': 'Небезпека! Екстремально холодний вітер. Залишайтеся вдома.',
                 'storm_cool_wind': 'Штормове попередження. Уникайте дерев та шукайте укриття.',
-                'storm_warm_wind': 'Сильний вітер. Будьте в безпеці всередині приміщення.'
+                'storm_warm_wind': 'Сильний вітер. Будьте в безпеці всередині приміщення.',
+
+                'jan': 'Січ',
+                'feb': 'Лют',
+                'mar': 'Бер',
+                'apr': 'Квіт',
+                'may': 'Трав',
+                'jun': 'Черв',
+                'jul': 'Лип',
+                'aug': 'Серп',
+                'sep': 'Вер',
+                'oct': 'Жовт',
+                'nov': 'Лист',
+                'dec': 'Груд',
+
+                'monday': 'Понеділок',
+                'tuesday': 'Вівторок',
+                'wednesday': 'Середа',
+                'thursday': 'Четвер',
+                'friday': 'П’ятниця',
+                'saturday': 'Субота',
+                'sunday': 'Неділя',
             }
         }
     }
