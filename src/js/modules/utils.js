@@ -55,17 +55,20 @@ const getCurrentLang = () => {
     return currentLang;
 }
 
-const translateText = (elem) => {
+const translateText = (elems) => {
     const lang = i18next.language;
-    const elemText = elem.textContent;
-    const elemKey = elemText.toLowerCase().replace(/\s+/g, '_');
-    elem.setAttribute('data-i18n', `${elemKey}`);
 
-    if (lang === 'ua') {
-        elem.textContent = i18next.t(elemKey, { lng: 'ua' });
-    } else {
-        elem.textContent = i18next.t(elemKey, { lng: 'en' });
-    }
+    elems.forEach(element => {
+        const elemText = element.textContent;
+        const elemKey = elemText.toLowerCase().replace(/\s+/g, '_');
+        element.setAttribute('data-i18n', `${elemKey}`);
+
+        if (lang === 'ua') {
+            element.textContent = i18next.t(elemKey, { lng: 'ua' });
+        } else {
+            element.textContent = i18next.t(elemKey, { lng: 'en' });
+        }
+    });
 }
 
 

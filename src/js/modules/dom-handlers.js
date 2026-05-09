@@ -34,6 +34,8 @@ function updateWeatherCurrent(currentWeather) {
     dom.current.month.textContent = date.toLocaleString('en-US', { month: 'short' });
     dom.current.year.textContent = date.getFullYear().toString().slice(-2);
 
+    translateText([dom.current.weekDay, dom.current.month]);
+
     const { currentHour } = getCurrentTime();
     const cloudFactor = [cloud[0], cloud[1](currentHour)];
     const rainFactor = [rain[0], rain[1](currentHour)];
@@ -92,7 +94,7 @@ function updateWeatherForecast(currentWeather) {
         const weatherStatus = visualsData[1];
         nextDesc.textContent = weatherStatus;
 
-        translateText(nextDesc);
+        translateText([nextDesc]);
 
         nextIcon.style.backgroundImage = iconPath;
     }
@@ -151,7 +153,7 @@ const setWindStatus = (currentWeather, weatherDetails) => {
     const windTemperature = hintsMap.setWindTemperature(temp);
     descElem.textContent = `${windSpeed} ${windTemperature} wind`;
 
-    translateText(descElem);
+    translateText([descElem]);
 }
 
 const switchLanguage = () => {
