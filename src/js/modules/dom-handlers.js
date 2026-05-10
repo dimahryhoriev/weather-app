@@ -157,7 +157,9 @@ const setWindStatus = (currentWeather, weatherDetails) => {
 }
 
 const switchLanguage = () => {
-    i18next.changeLanguage(getCurrentLang());
+    const lang = getCurrentLang();
+    i18next.changeLanguage(lang);
+
     const textElems = document.querySelectorAll('[data-i18n]');
 
     textElems.forEach((element) => {
@@ -200,10 +202,22 @@ dom.search.form.addEventListener('reset', (event) => {
 dom.header.lang.toggle.addEventListener('click', (event) => {
     event.preventDefault();
 
+    const lang = getCurrentLang();
     const slider = dom.header.lang.slider;
+    console.log(lang);
+
     slider.classList.toggle('language__slider--active');
+
     switchLanguage();
 });
+
+window.addEventListener('DOMContentLoaded', () => {
+    const lang = localStorage.getItem('language');
+    const slider = dom.header.lang.slider;
+
+    if (lang === 'ua') slider.classList.add('language__slider--active');
+    switchLanguage();
+})
 
 
 export {

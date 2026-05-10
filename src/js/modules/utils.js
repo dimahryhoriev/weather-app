@@ -52,6 +52,8 @@ const getCurrentLang = () => {
         currentLang = 'en';
     }
 
+    localStorage.setItem('language', currentLang);
+
     return currentLang;
 }
 
