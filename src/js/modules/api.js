@@ -3,6 +3,7 @@ import {
 } from './constants.js'
 
 import {
+    getCurrentLang,
     getRainChance,
     getSnowChance,
 } from './utils.js';
@@ -48,8 +49,23 @@ const getWeatherParams = async () => {
     }
 }
 
+const translateCity = async (city) => {
+    // OPEN API - photon.komoot.io/api/?q=city&lang=en
+
+    const lang = getCurrentLang();
+    const url = `https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=1&language=${lang}`;
+
+    const res = await fetch(url);
+    const data = await res.json();
+    const translatedCity = data.results[0].name;
+    console.log(translatedCity);
+
+    return translatedCity;
+}
+
 
 export {
     fetchWeather,
     getWeatherParams,
+    translateCity,
 }

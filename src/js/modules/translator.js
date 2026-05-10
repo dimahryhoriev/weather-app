@@ -71,7 +71,7 @@ i18next.init({
             }
         },
 
-        ua: {
+        uk: {
             translation: {
                 'location_hint_title': 'Виберіть локацію',
                 'location_hint_subtitle': 'Введіть назву міста, щоб побачити погоду',

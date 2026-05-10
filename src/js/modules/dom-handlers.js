@@ -16,14 +16,19 @@ import {
     setPriorityFactor,
 } from './weather-logic.js';
 
+import {
+    translateCity
+} from './api.js';
+
 import i18next from 'i18next';
 
 
-function updateWeatherCurrent(currentWeather) {
+const updateWeatherCurrent = async (currentWeather) => {
     const { city, date, temp, cloud, rain, snow } = currentWeather;
+    const translatedCity = await translateCity(city);
 
+    dom.current.city.textContent = translatedCity;
     dom.current.temp.textContent = temp;
-    dom.current.city.textContent = city;
     dom.current.time.textContent = date.toLocaleString('en-US', {
         hour: '2-digit',
         minute: '2-digit',
@@ -215,7 +220,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const lang = localStorage.getItem('language');
     const slider = dom.header.lang.slider;
 
-    if (lang === 'ua') slider.classList.add('language__slider--active');
+    if (lang === 'uk') slider.classList.add('language__slider--active');
     switchLanguage();
 })
 

@@ -47,7 +47,7 @@ const getCurrentLang = () => {
     let currentLang;
 
     if (slider.classList.contains('language__slider--active')) {
-        currentLang = 'ua';
+        currentLang = 'uk';
     } else {
         currentLang = 'en';
     }
@@ -65,8 +65,8 @@ const translateText = (elems) => {
         const elemKey = elemText.toLowerCase().replace(/\s+/g, '_');
         element.setAttribute('data-i18n', `${elemKey}`);
 
-        if (lang === 'ua') {
-            element.textContent = i18next.t(elemKey, { lng: 'ua' });
+        if (lang === 'uk') {
+            element.textContent = i18next.t(elemKey, { lng: 'uk' });
         } else {
             element.textContent = i18next.t(elemKey, { lng: 'en' });
         }
