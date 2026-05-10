@@ -57,8 +57,9 @@ const translateCity = async (city) => {
 
     const res = await fetch(url);
     const data = await res.json();
+    console.log(res);
+    console.log(data);
     const translatedCity = data.results[0].name;
-    console.log(translatedCity);
 
     return translatedCity;
 }

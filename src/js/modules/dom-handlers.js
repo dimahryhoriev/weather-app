@@ -25,6 +25,7 @@ import i18next from 'i18next';
 
 const updateWeatherCurrent = async (currentWeather) => {
     const { city, date, temp, cloud, rain, snow } = currentWeather;
+    localStorage.setItem('city', city);
     const translatedCity = await translateCity(city);
 
     dom.current.city.textContent = translatedCity;
@@ -161,7 +162,7 @@ const setWindStatus = (currentWeather, weatherDetails) => {
     translateText([descElem]);
 }
 
-const switchLanguage = () => {
+const switchLanguage = async () => {
     const lang = getCurrentLang();
     i18next.changeLanguage(lang);
 
@@ -175,12 +176,19 @@ const switchLanguage = () => {
             // If element textContent is not a number
             if (!/\d/.test(element.textContent)) element.innerHTML = translatedText;
 
-            // If element textContent is a number
+            // If element has --after-text property
             element.style.setProperty('--after-text', `'${translatedText}'`);
         } else {
             element.placeholder = i18next.t(textKey);
         }
     });
+
+    const city = localStorage.getItem('city');
+    const translatedCity = city != ''
+        ? await translateCity(city)
+        : ''
+
+    dom.current.city.textContent = translatedCity;
 }
 
 
