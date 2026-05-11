@@ -52,14 +52,19 @@ const getWeatherParams = async () => {
 }
 
 const translateCity = async (city, requestedLang = false) => {
-    // OPEN API - photon.komoot.io/api/?q=city&lang=en
-
     const currentLang = requestedLang || getCurrentLang();
-    const CITY_API_BASE = 'https://nominatim.openstreetmap.org/search?';
-    const url = `${CITY_API_BASE}q=${encodeURIComponent(city)}&format=json&accept-language=${currentLang}&limit=1`;
-    console.log(url);
+    const NOMINATIM_API_URL = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(city)}&format=json&accept-language=${currentLang}&limit=1`;
+    const OPEN_METEO_API_URL = `https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=1&language=${currentLang}`;
+    let url = NOMINATIM_API_URL;
+    let res;
 
-    const res = await fetch(url, { headers: { 'User-Agent': 'weather-app' } });
+    try {
+        res = await fetch(url, { headers: { 'User-Agent': 'weather-app' } });
+    } catch {
+        url = OPEN_METEO_API_URL;
+        res = await fetch(url);
+    }
+
     const data = await res.json();
     console.log(data);
     const translatedCity = data[0].name;
