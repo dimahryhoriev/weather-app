@@ -54,7 +54,7 @@ const getWeatherParams = async () => {
 
 const translateCity = async (city, requestedLang = false) => {
     const currentLang = requestedLang || getCurrentLang();
-    const NOMINATIM_API_URL = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(city)}&format=json&accept-language=${currentLang}&limit=1`;
+    const NOMINATIM_API_URL = `https://nominatim.openstreetmap.org/search?city=${encodeURIComponent(city)}&format=json&accept-language=${currentLang}&limit=1`;
     const OPEN_METEO_API_URL = `https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=1&language=${currentLang}`;
     let url = NOMINATIM_API_URL;
     let res;
