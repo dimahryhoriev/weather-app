@@ -6,6 +6,7 @@ import {
 import {
     getCurrentLang,
     getCurrentTime,
+    normalizeText,
     setDayCycle,
     translateText,
 } from './utils.js';
@@ -17,7 +18,7 @@ import {
 } from './weather-logic.js';
 
 import {
-    translateCity
+    translateCity,
 } from './api.js';
 
 import i18next from 'i18next';
@@ -27,8 +28,9 @@ const updateWeatherCurrent = async (currentWeather) => {
     const { city, date, temp, cloud, rain, snow } = currentWeather;
     localStorage.setItem('city', city);
     const translatedCity = await translateCity(city);
+    const normalizedCity = normalizeText([translatedCity]);
 
-    dom.current.city.textContent = translatedCity;
+    dom.current.city.textContent = normalizedCity;
     dom.current.temp.textContent = temp;
     dom.current.time.textContent = date.toLocaleString('en-US', {
         hour: '2-digit',

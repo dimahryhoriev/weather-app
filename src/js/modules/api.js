@@ -6,6 +6,7 @@ import {
     getCurrentLang,
     getRainChance,
     getSnowChance,
+    normalizeText,
 } from './utils.js';
 
 const API_BASE = window.location.hostname === 'localhost'
@@ -22,15 +23,17 @@ const fetchWeather = async (city) => {
 }
 
 const getWeatherParams = async () => {
-    console.log(dom.search.input.value);
     const translatedCity = await translateCity(dom.search.input.value, 'en');
-    const weatherData = await fetchWeather(translatedCity);
+    const normalizedCity = normalizeText([translatedCity]);
+
+    console.log(normalizedCity);
+    const weatherData = await fetchWeather(normalizedCity);
     const localTime = weatherData.location.localtime.replace(' ', 'T');
     console.log(weatherData);
 
     return {
         current: {
-            city: weatherData.location.name,
+            city: normalizedCity,
             date: new Date(localTime),
             temp: Math.round(weatherData.current.temp_c),
             dayIndex: weatherData.forecast.forecastday[0],
@@ -66,7 +69,6 @@ const translateCity = async (city, requestedLang = false) => {
     }
 
     const data = await res.json();
-    console.log(data);
     const translatedCity = data[0].name;
 
     return translatedCity;

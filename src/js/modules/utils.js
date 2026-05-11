@@ -1,6 +1,7 @@
 import {
     dom,
     dayCycles,
+    locationConfig,
 } from './constants.js';
 
 import i18next from 'i18next';
@@ -73,6 +74,22 @@ const translateText = (elems) => {
     });
 }
 
+const normalizeText = (elems) => {
+    const map = locationConfig.normalizationMap;
+    const mapKeys = new RegExp(Object.keys(map).join('|'), 'g');
+
+    return elems.map((element) => {
+        if (typeof element !== 'string') return element;
+
+        return element
+            .replace(mapKeys, (match) => map[match])
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .replace(/[^a-zA-Z0-9 ]/g, '')
+            .trim()
+    })
+}
+
 
 export {
     getCurrentTime,
@@ -81,4 +98,5 @@ export {
     getSnowChance,
     getCurrentLang,
     translateText,
+    normalizeText,
 }
