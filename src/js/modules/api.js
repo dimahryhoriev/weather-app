@@ -24,16 +24,14 @@ const fetchWeather = async (city) => {
 
 const getWeatherParams = async () => {
     const translatedCity = await translateCity(dom.search.input.value, 'en');
-    const normalizedCity = normalizeText([translatedCity]);
 
-    console.log(normalizedCity);
-    const weatherData = await fetchWeather(normalizedCity);
+    const weatherData = await fetchWeather(translatedCity);
     const localTime = weatherData.location.localtime.replace(' ', 'T');
     console.log(weatherData);
 
     return {
         current: {
-            city: normalizedCity,
+            city: translatedCity,
             date: new Date(localTime),
             temp: Math.round(weatherData.current.temp_c),
             dayIndex: weatherData.forecast.forecastday[0],
@@ -69,7 +67,7 @@ const translateCity = async (city, requestedLang = false) => {
     }
 
     const data = await res.json();
-    const translatedCity = data[0].name;
+    const translatedCity = normalizeText([data[0].name]);
 
     return translatedCity;
 }

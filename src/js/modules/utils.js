@@ -69,7 +69,9 @@ const translateText = (elems) => {
         if (lang === 'uk') {
             element.textContent = i18next.t(elemKey, { lng: 'uk' });
         } else {
-            element.textContent = i18next.t(elemKey, { lng: 'en' });
+            const translatedText = i18next.t(elemKey, { lng: 'en' });
+            const normalizedText = normalizeText([translatedText]);
+            element.textContent = normalizedText;
         }
     });
 }
@@ -79,7 +81,9 @@ const normalizeText = (elems) => {
     const mapKeys = new RegExp(Object.keys(map).join('|'), 'g');
 
     return elems.map((element) => {
-        if (typeof element !== 'string') return element;
+        const isLatinLetters = mapKeys.test(element);
+
+        if (typeof element !== 'string' || isLatinLetters === false) return element;
 
         return element
             .replace(mapKeys, (match) => map[match])
