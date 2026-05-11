@@ -61,13 +61,18 @@ const translateCity = async (city, requestedLang = false) => {
 
     try {
         res = await fetch(url, { headers: { 'User-Agent': 'weather-app' } });
+        if (!res.ok) throw new Error('Nominatim failed');
     } catch {
+        console.warn("Nominatim blocked/failed, switching to Open-Meteo...");
         url = OPEN_METEO_API_URL;
+        console.log(url);
         res = await fetch(url);
     }
 
     const data = await res.json();
-    const translatedCity = normalizeText([data[0].name]);
+    console.log(data);
+    const cityPath = data[0]?.name ?? data.results?.[0]?.name;
+    const translatedCity = normalizeText([cityPath]);
 
     return translatedCity;
 }
