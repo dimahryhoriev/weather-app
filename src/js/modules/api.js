@@ -22,7 +22,9 @@ const fetchWeather = async (city) => {
 }
 
 const getWeatherParams = async () => {
-    const weatherData = await fetchWeather(dom.search.input.value);
+    console.log(dom.search.input.value);
+    const translatedCity = await translateCity(dom.search.input.value, 'en');
+    const weatherData = await fetchWeather(translatedCity);
     const localTime = weatherData.location.localtime.replace(' ', 'T');
     console.log(weatherData);
 
@@ -49,17 +51,18 @@ const getWeatherParams = async () => {
     }
 }
 
-const translateCity = async (city) => {
+const translateCity = async (city, requestedLang = false) => {
     // OPEN API - photon.komoot.io/api/?q=city&lang=en
 
-    const lang = getCurrentLang();
-    const url = `https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=1&language=${lang}`;
+    const currentLang = requestedLang || getCurrentLang();
+    const CITY_API_BASE = 'https://nominatim.openstreetmap.org/search?';
+    const url = `${CITY_API_BASE}q=${encodeURIComponent(city)}&format=json&accept-language=${currentLang}&limit=1`;
+    console.log(url);
 
-    const res = await fetch(url);
+    const res = await fetch(url, { headers: { 'User-Agent': 'weather-app' } });
     const data = await res.json();
-    console.log(res);
     console.log(data);
-    const translatedCity = data.results[0].name;
+    const translatedCity = data[0].name;
 
     return translatedCity;
 }
