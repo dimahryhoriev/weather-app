@@ -82,13 +82,13 @@ function updateWeatherForecast(currentWeather) {
         const nextIcon = template.querySelector('[data-js="f-icon"]');
 
         // Calculating the next hour
-        currentHour = (currentHour + 1) % 24;
+        if (currentHour !== 23) currentHour = (currentHour + 1) % 24;
         const cloudFactor = [cloud[0], cloud[1](currentHour)];
         const rainFactor = [rain[0], rain[1](currentHour)];
         const snowFactor = [snow[0], snow[1](currentHour)];
         const factors = [cloudFactor, rainFactor, snowFactor];
         const formattedHour = currentHour.toString().padStart(2, '0');
-        isLastHour = formattedHour === '00' ? true : false;
+        isLastHour = formattedHour === '23' ? true : false;
         const formattedMinute = currentMinute = '00';
         nextHour.textContent = `${formattedHour}:${formattedMinute}`;
 
