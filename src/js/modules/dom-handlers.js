@@ -71,7 +71,7 @@ function updateWeatherForecast(currentWeather) {
     const currentLang = i18next.language;
     let { currentHour, currentMinute } = getCurrentTime();
 
-    for (let forecastCounter = 1; forecastCounter <= 24; forecastCounter++) {
+    for (let isLastHour; isLastHour !== true;) {
         // Declare next forecast hour
         const template = dom.forecast.item.content.cloneNode(true);
         const nextHour = template.querySelector('[data-js="f-time"]');
@@ -86,6 +86,7 @@ function updateWeatherForecast(currentWeather) {
         const snowFactor = [snow[0], snow[1](currentHour)];
         const factors = [cloudFactor, rainFactor, snowFactor];
         const formattedHour = currentHour.toString().padStart(2, '0');
+        isLastHour = formattedHour === '00' ? true : false;
         const formattedMinute = currentMinute = '00';
         nextHour.textContent = `${formattedHour}:${formattedMinute}`;
 
