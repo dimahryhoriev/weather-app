@@ -94,6 +94,15 @@ const normalizeText = (elems) => {
     })
 }
 
+const getOverlayOpacity = (weatherStatus) => {
+    console.log(weatherStatus);
+    if (weatherStatus.includes('mostly-cloudy-heavy-rain' || 'snow')) {
+        return 'linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25))';
+    } else {
+        return 'linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05))';
+    }
+}
+
 
 export {
     getCurrentTime,
@@ -103,4 +112,5 @@ export {
     getCurrentLang,
     translateText,
     normalizeText,
+    getOverlayOpacity,
 }

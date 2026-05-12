@@ -9,6 +9,7 @@ import {
     normalizeText,
     setDayCycle,
     translateText,
+    getOverlayOpacity,
 } from './utils.js';
 
 import {
@@ -123,9 +124,10 @@ function updateCurrentVisuals(dayPeriod, cloudiness, precip = false) {
     const weatherStatus = getWeatherStatus(dayPeriod, cloudiness, precip);
     const factor = precip ? precip[0] : cloudiness[0];
     const { iconPath, backgroundPath } = generateAssetPath(dayPeriod, factor, weatherStatus);
+    const overlay = getOverlayOpacity(weatherStatus);
 
     dom.current.icon.style.backgroundImage = iconPath;
-    dom.current.background.style.backgroundImage = backgroundPath;
+    dom.current.background.style.backgroundImage = `${overlay}, ${backgroundPath}`;
 }
 
 function updateForecastVisuals(dayPeriod, cloudiness, precip = false) {
