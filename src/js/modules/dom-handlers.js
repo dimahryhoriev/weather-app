@@ -9,7 +9,6 @@ import {
     normalizeText,
     setDayCycle,
     translateText,
-    getOverlayOpacity,
 } from './utils.js';
 
 import {
@@ -72,7 +71,6 @@ function updateWeatherDetails(currentWeather, weatherDetails) {
 function updateWeatherForecast(currentWeather) {
     const { city, date, temp, cloud, rain, snow, dayIndex } = currentWeather;
     const currentLang = i18next.language;
-    console.log(dom.current.time);
     let { currentHour, currentMinute } = getCurrentTime();
 
     for (let isLastHour; isLastHour !== true;) {
@@ -129,10 +127,9 @@ function updateCurrentVisuals(dayPeriod, cloudiness, precip = false) {
     const weatherStatus = getWeatherStatus(dayPeriod, cloudiness, precip);
     const factor = precip ? precip[0] : cloudiness[0];
     const { iconPath, backgroundPath } = generateAssetPath(dayPeriod, factor, weatherStatus);
-    const overlay = getOverlayOpacity(weatherStatus);
 
     dom.current.icon.style.backgroundImage = iconPath;
-    dom.current.background.style.backgroundImage = `${overlay}, ${backgroundPath}`;
+    dom.current.background.style.backgroundImage = `${backgroundPath}`;
 }
 
 function updateForecastVisuals(dayPeriod, cloudiness, precip = false) {
@@ -226,8 +223,6 @@ dom.header.lang.toggle.addEventListener('click', (event) => {
 
     const lang = getCurrentLang();
     const slider = dom.header.lang.slider;
-    console.log(lang);
-
     slider.classList.toggle('language__slider--active');
 
     switchLanguage();

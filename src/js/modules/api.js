@@ -26,6 +26,7 @@ const getWeatherParams = async () => {
     const translatedCity = await translateCity(dom.search.input.value, 'en');
     const weatherData = await fetchWeather(translatedCity);
     const localTime = weatherData.location.localtime.replace(' ', 'T');
+    console.log(weatherData);
 
     return {
         current: {
@@ -63,12 +64,10 @@ const translateCity = async (city, requestedLang = false) => {
     } catch {
         console.warn("Nominatim blocked/failed, switching to Open-Meteo...");
         url = OPEN_METEO_API_URL;
-        console.log(url);
         res = await fetch(url);
     }
 
     const data = await res.json();
-    console.log(data);
     const cityPath = data[0]?.name ?? data.results?.[0]?.name;
     const translatedCity = normalizeText([cityPath]);
 

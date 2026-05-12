@@ -10,8 +10,6 @@ import i18next from 'i18next';
 function getCurrentTime() {
     const time = dom.current.time.textContent;
     let [currentHour, currentMinute] = time.split(':').map(Number);
-    console.log(currentHour);
-    console.log(dom.current.time);
 
     return { currentHour, currentMinute };
 }
@@ -96,15 +94,6 @@ const normalizeText = (elems) => {
     })
 }
 
-const getOverlayOpacity = (weatherStatus) => {
-    console.log(weatherStatus);
-    if (weatherStatus.includes('mostly-cloudy-heavy-rain' || 'snow')) {
-        return 'linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25))';
-    } else {
-        return 'linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05))';
-    }
-}
-
 
 export {
     getCurrentTime,
@@ -114,5 +103,4 @@ export {
     getCurrentLang,
     translateText,
     normalizeText,
-    getOverlayOpacity,
 }

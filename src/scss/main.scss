@@ -4,13 +4,7 @@
 @use 'mixins' as m;
 
 body {
-    background:
-        linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)),
-        url(./assets/images/background/bg-default.jpg);
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
+    background: transparent url(./assets/images/background/bg-default.jpg) center / cover no-repeat fixed;
     font-family: v.$font-primary;
     overflow-x: hidden;
 
