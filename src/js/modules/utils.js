@@ -10,6 +10,8 @@ import i18next from 'i18next';
 function getCurrentTime() {
     const time = dom.current.time.textContent;
     let [currentHour, currentMinute] = time.split(':').map(Number);
+    console.log(currentHour);
+    console.log(dom.current.time);
 
     return { currentHour, currentMinute };
 }

@@ -24,10 +24,8 @@ const fetchWeather = async (city) => {
 
 const getWeatherParams = async () => {
     const translatedCity = await translateCity(dom.search.input.value, 'en');
-
     const weatherData = await fetchWeather(translatedCity);
     const localTime = weatherData.location.localtime.replace(' ', 'T');
-    console.log(weatherData);
 
     return {
         current: {

@@ -25,13 +25,16 @@ import {
 import i18next from 'i18next';
 
 
-const updateWeatherCurrent = async (currentWeather) => {
+const updateWeatherCurrent = (currentWeather) => {
     const { city, date, temp, cloud, rain, snow } = currentWeather;
     localStorage.setItem('city', city);
-    const translatedCity = await translateCity(city);
-    const normalizedCity = normalizeText([translatedCity]);
 
-    dom.current.city.textContent = normalizedCity;
+    (async () => {
+        const translatedCity = await translateCity(city);
+        const normalizedCity = normalizeText([translatedCity]);
+        dom.current.city.textContent = normalizedCity;
+    })()
+
     dom.current.temp.textContent = temp;
     dom.current.time.textContent = date.toLocaleString('en-US', {
         hour: '2-digit',
@@ -69,6 +72,7 @@ function updateWeatherDetails(currentWeather, weatherDetails) {
 function updateWeatherForecast(currentWeather) {
     const { city, date, temp, cloud, rain, snow, dayIndex } = currentWeather;
     const currentLang = i18next.language;
+    console.log(dom.current.time);
     let { currentHour, currentMinute } = getCurrentTime();
 
     for (let isLastHour; isLastHour !== true;) {
