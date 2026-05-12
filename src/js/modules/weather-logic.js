@@ -84,9 +84,9 @@ const setPriorityFactor = (section, hour, factors) => {
 
     if (rainFactor[1] < 40 && snowFactor[1] <= 60) {
         return currentSection(dayPeriod, [cloudFactor[0], cloudFactor[1]]);
-    } else if (rainFactor[1] >= 40 && snowFactor[1] <= 60) {
+    } else if (rainFactor[1] >= 40 && snowFactor[1] <= 60 && cloudFactor[1] >= 45) {
         return currentSection(dayPeriod, [cloudFactor[0], cloudFactor[1]], [rainFactor[0], rainFactor[1]]);
-    } else if (snowFactor[1] > 60) {
+    } else if (snowFactor[1] > 60 && cloudFactor[1] >= 45) {
         return currentSection(dayPeriod, [snowFactor[0], snowFactor[1]]);
     }
 }
