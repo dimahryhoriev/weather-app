@@ -200,23 +200,24 @@ const switchLanguage = async () => {
 const updateAppState = (state) => {
     // DOM elements
     const element = dom.default.element;
-    let icon = dom.default.icons.element;
-    let title = dom.default.title;
-    let subtitle = dom.default.subtitle;
+    const icon = dom.default.icons.element;
+    const title = dom.default.title;
+    const subtitle = dom.default.subtitle;
+    const background = dom.current.background;
 
     // (Base64 ---> SVG) converted icons
-    const noInternet = atob(dom.default.icons.noInternet);
+    const stateIcon = atob(dom.default.icons[state]);
+    const stateBackground = dom.default.backgrounds[state];
 
-    if (state === 'No internet') {
-        title.setAttribute('data-i18n', 'no_internet_title');
-        subtitle.setAttribute('data-i18n', 'no_internet_subtitle');
+    title.setAttribute('data-i18n', `${state}_title`);
+    subtitle.setAttribute('data-i18n', `${state}_subtitle`);
 
-        icon.innerHTML = noInternet;
-        title.textContent = 'no_internet_title';
-        subtitle.textContent = 'no_internet_subtitle';
+    icon.innerHTML = stateIcon;
+    title.textContent = `${state}_title`;
+    subtitle.textContent = `${state}_subtitle`;
+    background.style.backgroundImage = stateBackground;
 
-        translateText([title, subtitle]);
-    }
+    translateText([title, subtitle]);
 }
 
 

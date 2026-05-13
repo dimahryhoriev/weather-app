@@ -97,7 +97,7 @@ const normalizeText = (elems) => {
 const getAppState = (error) => {
     const message = error.message;
 
-    if (message === 'Failed to fetch') return 'No internet';
+    if (message === 'Failed to fetch') return 'no_internet';
 }
 
 
