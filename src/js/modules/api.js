@@ -7,6 +7,7 @@ import {
     getRainChance,
     getSnowChance,
     normalizeText,
+    setAppState,
 } from './utils.js';
 
 const API_BASE = window.location.hostname === 'localhost'
@@ -15,11 +16,15 @@ const API_BASE = window.location.hostname === 'localhost'
 
 // Fetch weather data from API
 const fetchWeather = async (city) => {
-    const url = `${API_BASE}/api?q=${city}&t=${new Date().getTime()}`;
-    const res = await fetch(url);
-    const data = await res.json();
-
-    return data;
+    try {
+        const url = `${API_BASE}/api?q=${city}&t=${new Date().getTime()}`;
+        const res = await fetch(url);
+        const data = await res.json();
+        return data;
+    } catch (error) {
+        console.log(error);
+        setAppState(error);
+    }
 }
 
 const getWeatherParams = async () => {

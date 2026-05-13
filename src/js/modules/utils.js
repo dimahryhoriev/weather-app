@@ -94,6 +94,22 @@ const normalizeText = (elems) => {
     })
 }
 
+const setAppState = (error) => {
+    // DOM elements
+    let icon = dom.default.icons.element;
+    let title = dom.default.title;
+    let subtitle = dom.default.subtitle;
+
+    // (Base64 ---> SVG) converted icons
+    const noInternet = atob(dom.default.icons.noInternet);
+
+    if (error.message === 'Failed to fetch') {
+        icon.innerHTML = noInternet;
+        title.textContent = 'No Internet';
+        subtitle.textContent = 'Please check your connection';
+    }
+}
+
 
 export {
     getCurrentTime,
@@ -103,4 +119,5 @@ export {
     getCurrentLang,
     translateText,
     normalizeText,
+    setAppState,
 }

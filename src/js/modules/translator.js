@@ -68,6 +68,9 @@ i18next.init({
                 'friday': 'Friday',
                 'saturday': 'Saturday',
                 'sunday': 'Sunday',
+
+                'no_internet_title': 'No Internet',
+                'no_internet_subtitle': 'Please check your connection',
             }
         },
 
@@ -134,6 +137,9 @@ i18next.init({
                 'friday': 'П’ятниця',
                 'saturday': 'Субота',
                 'sunday': 'Неділя',
+
+                'no_internet_title': '',
+                'no_internet_subtitle': '',
             }
         }
     }
