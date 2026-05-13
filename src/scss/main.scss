@@ -2,6 +2,7 @@
 @use 'variables' as v;
 @use 'fonts';
 @use 'mixins' as m;
+@use 'animations' as a;
 
 body {
     background: transparent url(./assets/images/background/bg-default.jpg) center / cover no-repeat fixed;
@@ -368,10 +369,13 @@ body {
 
         &-btn {
             position: absolute;
+            cursor: pointer;
             width: 28px;
             height: 28px;
             right: 16px;
             top: 9px;
+
+            @include a.useScaleIn;
 
             svg {
                 width: 100%;
