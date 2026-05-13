@@ -7,8 +7,12 @@ import {
     getRainChance,
     getSnowChance,
     normalizeText,
-    setAppState,
+    getAppState,
 } from './utils.js';
+
+import {
+    updateAppState,
+} from './dom-handlers.js';
 
 const API_BASE = window.location.hostname === 'localhost'
     ? 'http://localhost:3000'
@@ -22,8 +26,8 @@ const fetchWeather = async (city) => {
         const data = await res.json();
         return data;
     } catch (error) {
-        console.log(error);
-        setAppState(error);
+        const appState = getAppState(error);
+        updateAppState(appState);
     }
 }
 

@@ -94,21 +94,12 @@ const normalizeText = (elems) => {
     })
 }
 
-const setAppState = (error) => {
-    // DOM elements
-    let icon = dom.default.icons.element;
-    let title = dom.default.title;
-    let subtitle = dom.default.subtitle;
+const getAppState = (error) => {
+    const message = error.message;
 
-    // (Base64 ---> SVG) converted icons
-    const noInternet = atob(dom.default.icons.noInternet);
-
-    if (error.message === 'Failed to fetch') {
-        icon.innerHTML = noInternet;
-        title.textContent = 'No Internet';
-        subtitle.textContent = 'Please check your connection';
-    }
+    if (message === 'Failed to fetch') return 'No internet';
 }
+
 
 
 export {
@@ -119,5 +110,5 @@ export {
     getCurrentLang,
     translateText,
     normalizeText,
-    setAppState,
+    getAppState,
 }

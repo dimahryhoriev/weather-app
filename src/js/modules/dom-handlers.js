@@ -197,6 +197,28 @@ const switchLanguage = async () => {
     dom.current.city.textContent = translatedCity;
 }
 
+const updateAppState = (state) => {
+    // DOM elements
+    const element = dom.default.element;
+    let icon = dom.default.icons.element;
+    let title = dom.default.title;
+    let subtitle = dom.default.subtitle;
+
+    // (Base64 ---> SVG) converted icons
+    const noInternet = atob(dom.default.icons.noInternet);
+
+    if (state === 'No internet') {
+        title.setAttribute('data-i18n', 'no_internet_title');
+        subtitle.setAttribute('data-i18n', 'no_internet_subtitle');
+
+        icon.innerHTML = noInternet;
+        title.textContent = 'no_internet_title';
+        subtitle.textContent = 'no_internet_subtitle';
+
+        translateText([title, subtitle]);
+    }
+}
+
 
 dom.search.form.addEventListener('input', (event) => {
     event.preventDefault();
@@ -245,4 +267,5 @@ export {
     updateWeatherCurrent,
     updateWeatherDetails,
     updateWeatherForecast,
+    updateAppState,
 }

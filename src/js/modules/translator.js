@@ -138,8 +138,8 @@ i18next.init({
                 'saturday': 'Субота',
                 'sunday': 'Неділя',
 
-                'no_internet_title': '',
-                'no_internet_subtitle': '',
+                'no_internet_title': 'Немає інтернету',
+                'no_internet_subtitle': 'Будь ласка перевірте з\'єднання',
             }
         }
     }
