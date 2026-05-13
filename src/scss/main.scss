@@ -214,16 +214,15 @@ body {
     }
 
     &__illustration {
-        svg {
-            height: 130px;
+        height: 130px;
+        width: auto;
 
-            @include m.tablet {
-                height: 100px;
-            }
+        @include m.tablet {
+            height: 100px;
+        }
 
-            @include m.mobile {
-                height: 60px;
-            }
+        @include m.mobile {
+            height: 60px;
         }
     }
 

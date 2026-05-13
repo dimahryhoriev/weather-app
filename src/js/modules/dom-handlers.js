@@ -21,6 +21,10 @@ import {
     translateCity,
 } from './api.js';
 
+import {
+    getFileURL,
+} from './db.js';
+
 import i18next from 'i18next';
 
 
@@ -206,16 +210,16 @@ const updateAppState = (state) => {
     const background = dom.current.background;
 
     // (Base64 ---> SVG) converted icons
-    const stateIcon = atob(dom.default.icons[state]);
+    const stateIcon = dom.default.icons[state];
     const stateBackground = dom.default.backgrounds[state];
 
     title.setAttribute('data-i18n', `${state}_title`);
     subtitle.setAttribute('data-i18n', `${state}_subtitle`);
 
-    icon.innerHTML = stateIcon;
+    background.style.backgroundImage = `url(${stateBackground})`;
+    icon.data = stateIcon;
     title.textContent = `${state}_title`;
     subtitle.textContent = `${state}_subtitle`;
-    background.style.backgroundImage = stateBackground;
 
     translateText([title, subtitle]);
 }

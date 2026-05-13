@@ -21,6 +21,11 @@ import {
     updateWeatherForecast,
 } from './modules/dom-handlers.js';
 
+import {
+    initAssets
+} from './modules/db.js';
+
+initAssets();
 
 
 // Render user's search query

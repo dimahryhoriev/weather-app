@@ -1,3 +1,8 @@
+import {
+    getFileURL,
+} from './db.js';
+
+
 const dom = {
     header: {
         lang: {
@@ -56,14 +61,16 @@ const dom = {
 
     default: {
         section: document.querySelector('.current__content--default'),
+
+        // (SVG ---> BLOB ---> indexedDB) for icons
         icons: {
             element: document.querySelector('.current__illustration'),
-
-            // (SVG ---> Base64) converted icons
-            no_internet: 'PHN2ZyB2aWV3Qm94PSIwIDAgMzQgMjgiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMi43OTYzNSAxLjg0OTE0TDI5LjMyODEgMjhMMzEuMjA0MyAyNi4xNTA4TDQuNjcyNDMgMEwyLjc5NjM1IDEuODQ5MTRaTTAuOTQ3NjI4IDkuOTQ2MTJDMi4zMzgzNCA4LjU3NTM3IDMuODY0NjIgNy40MTk2NCA1LjQ4MzkxIDYuNDc4OTRMNy40MzA4MiA4LjM5Nzg5QzYuMTUzNDMgOS4wODIyMiA0LjkzNTU5IDkuOTEzNDkgMy44MDI4MiAxMC44OTE4TDE3IDIzLjYzNzlMMTkuOTc2MyAyMC43NjM0TDIxLjg1MjUgMjIuNjEyNkwxNyAyNy4yOTkyTDAgMTAuODgwMUwwLjk0NzYyOCA5Ljk0NjEyWk0zMC4xOTczIDEwLjg5MThMMjMuNzY2NyAxNy4xMDI2TDI1LjY0MjggMTguOTUxOEwzNCAxMC44ODAxTDMzLjA1MjUgOS45NDYxMkMyNy4wMDk0IDMuOTg5ODIgMTguNDA2OSAyLjA5MzU3IDEwLjczNDMgNC4yNTczNkwxMi45MjYgNi40MTc1OUMxOC45MDI5IDUuMjAwNzkgMjUuMzM0MiA2LjY5MjE2IDMwLjE5NzMgMTAuODkxOFoiIGZpbGw9IndoaXRlIi8+Cjwvc3ZnPgo=',
+            no_internet: await getFileURL('no_internet_icon'),
         },
+
+        // (JPG ---> BLOB ---> indexedDB) for backgrounds
         backgrounds: {
-            no_internet: ''
+            no_internet: await getFileURL('no_internet_bg'),
         },
         title: document.querySelector('.current__title'),
         subtitle: document.querySelector('.current__subtitle'),
