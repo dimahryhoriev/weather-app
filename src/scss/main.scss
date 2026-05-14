@@ -862,8 +862,10 @@ body {
 
     &__line {
         background-color: v.$surface-stroke;
+        position: relative;
         height: 21px;
         border-radius: 12px;
+        overflow: hidden;
 
         @include m.mobile {
             height: 16.5px;
@@ -871,6 +873,7 @@ body {
 
         &--short {
             width: 70px;
+            @include a.useShine;
 
             @include m.mobile {
                 width: 55px;
@@ -879,6 +882,7 @@ body {
 
         &--long {
             width: 100%;
+            @include a.useShine($width: 80px, $blur: 32px);
         }
     }
 
@@ -886,12 +890,15 @@ body {
         display: flex;
         position: absolute;
         background-color: v.$surface-stroke;
+        overflow: hidden;
         border-radius: 50%;
+        @include a.useShine;
 
         &--small {
             width: 24px;
             height: 24px;
             right: 0;
+            @include a.useShine($angle: 10deg);
 
             @include m.mobile {
                 width: 21px;
