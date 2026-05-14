@@ -1,5 +1,7 @@
-// ANIMATIONS CREATED WITH @keyframes //
+@use 'variables' as v;
 
+
+// scaleIn animation and function for it's launch
 @keyframes scaleIn {
     from {
         opacity: 0;
@@ -14,4 +16,20 @@
 
 @mixin useScaleIn($duration: 0.25s, $delay: 0s) {
     animation: scaleIn $duration ease-in-out $delay both;
+}
+
+
+// shine animation and function for it's launch
+@keyframes shine {
+    from {
+        background-image: linear-gradient(45deg, rgba(v.$surface-stroke, 1), rgba(v.$surface-stroke, 1));
+    }
+
+    to {
+        background-image: linear-gradient(45deg, rgba(v.$surface-stroke, 0), rgba(v.$surface-stroke, 1));
+    }
+}
+
+@mixin useShine($duration: 1s, $delay: 0s) {
+    animation: shine $duration ease-in-out infinite;
 }

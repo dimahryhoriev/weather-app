@@ -24,10 +24,13 @@ const fetchWeather = async (city) => {
         const url = `${API_BASE}/api?q=${city}&t=${new Date().getTime()}`;
         const res = await fetch(url);
         const data = await res.json();
+
         return data;
     } catch (error) {
         const appState = getAppState(error);
         updateAppState(appState);
+
+        throw new Error('Website stopped due to lack of internet');
     }
 }
 
