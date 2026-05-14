@@ -223,11 +223,11 @@ const updateAppState = (state) => {
     const stateIcon = dom.default.icons[state];
     const stateBackground = dom.default.backgrounds[state];
 
+
     title.setAttribute('data-i18n', `${state}_title`);
     subtitle.setAttribute('data-i18n', `${state}_subtitle`);
-
+    icon.src = stateIcon;
     background.style.backgroundImage = `url(${stateBackground})`;
-    icon.data = stateIcon;
     title.textContent = `${state}_title`;
     subtitle.textContent = `${state}_subtitle`;
 

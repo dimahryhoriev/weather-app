@@ -96,9 +96,13 @@ const normalizeText = (elems) => {
 
 const getAppState = (error) => {
     const message = error.message;
+    const defaultSection = dom.current.section.default;
+    const activeSection = dom.current.section.active;
 
     if (message === 'Failed to fetch') return 'no_internet';
     if (message === 'Too Many Requests') return 'too_many_requests';
+    if (defaultSection.includes('is-hidden')) return 'active';
+    if (activeSection.includes('is-hidden')) return 'default';
 }
 
 

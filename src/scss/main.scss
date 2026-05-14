@@ -186,9 +186,30 @@ body {
     position: fixed;
     align-items: center;
     height: fit-content;
+    max-width: 640px;
     width: fit-content;
     margin: 0 116px 0 0;
     bottom: 85px;
+
+    @include m.tablet {
+        position: relative;
+        width: fit-content;
+        top: auto;
+        left: auto;
+        margin: 0 40px 0 40px;
+        bottom: 0;
+        max-width: 540px;
+    }
+
+    @include m.mobile {
+        position: relative;
+        width: fit-content;
+        top: auto;
+        left: auto;
+        margin: 0 22px 0 22px;
+        bottom: 0;
+        max-width: 380px;
+    }
 
     &__content {
         display: flex;
@@ -297,24 +318,6 @@ body {
         @include m.mobile {
             font-size: 10px;
         }
-    }
-
-    @include m.tablet {
-        position: relative;
-        width: fit-content;
-        top: auto;
-        left: auto;
-        margin: 0 40px 0 40px;
-        bottom: 0;
-    }
-
-    @include m.mobile {
-        position: relative;
-        width: fit-content;
-        top: auto;
-        left: auto;
-        margin: 0 22px 0 22px;
-        bottom: 0;
     }
 }
 
