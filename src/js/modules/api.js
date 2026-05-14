@@ -11,6 +11,10 @@ import {
 } from './utils.js';
 
 import {
+    showContent,
+} from './dom-handlers.js';
+
+import {
     updateAppState,
 } from './dom-handlers.js';
 
@@ -23,14 +27,33 @@ const fetchWeather = async (city) => {
     try {
         const url = `${API_BASE}/api?q=${city}&t=${new Date().getTime()}`;
         const res = await fetch(url);
-        const data = await res.json();
 
-        return data;
+        if (res.status === 200) {
+            return await res.json();
+        } else {
+            throw new Error('Too Many Requests');
+        }
+
     } catch (error) {
         const appState = getAppState(error);
         updateAppState(appState);
 
-        throw new Error('Website stopped due to lack of internet');
+        if (appState === 'no_internet') throw new Error('Website stopped due to lack of internet');
+        if (appState === 'too_many_requests') {
+            showContent(
+                [
+                    dom.current.section.active,
+                    dom.details.section,
+                    dom.forecast.section,
+                ],
+
+                [
+                    dom.current.section.default,
+                    dom.placeholder.section,
+                ],
+            );
+            throw new Error('Too Many Requests');
+        };
     }
 }
 
@@ -72,11 +95,17 @@ const translateCity = async (city, requestedLang = false) => {
 
     try {
         res = await fetch(url, { headers: { 'User-Agent': 'weather-app' } });
-        if (!res.ok) throw new Error('Nominatim failed');
-    } catch {
+        if (res.status === 429) throw new Error('Too Many Requests');
+    } catch (error) {
         console.warn("Nominatim blocked/failed, switching to Open-Meteo...");
         url = OPEN_METEO_API_URL;
         res = await fetch(url);
+
+        if (!res.ok) {
+            const appState = getAppState(error);
+            updateAppState(appState);
+            if (appState === 'too_many_requests') throw new Error('Too Many Requests');
+        }
     }
 
     const data = await res.json();

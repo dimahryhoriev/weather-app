@@ -98,6 +98,7 @@ const getAppState = (error) => {
     const message = error.message;
 
     if (message === 'Failed to fetch') return 'no_internet';
+    if (message === 'Too Many Requests') return 'too_many_requests';
 }
 
 

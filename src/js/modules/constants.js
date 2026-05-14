@@ -66,11 +66,13 @@ const dom = {
         icons: {
             element: document.querySelector('.current__illustration'),
             no_internet: await getFileURL('no_internet_icon'),
+            too_many_requests: await getFileURL('too_many_requests_icon'),
         },
 
         // (JPG ---> BLOB ---> indexedDB) for backgrounds
         backgrounds: {
             no_internet: await getFileURL('no_internet_bg'),
+            too_many_requests: await getFileURL('too_many_requests_bg'),
         },
         title: document.querySelector('.current__title'),
         subtitle: document.querySelector('.current__subtitle'),

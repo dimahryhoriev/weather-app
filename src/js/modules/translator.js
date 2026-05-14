@@ -71,6 +71,8 @@ i18next.init({
 
                 'no_internet_title': 'No Internet',
                 'no_internet_subtitle': 'Please check your connection',
+                'too_many_requests_title': 'Too Many Requests!',
+                'too_many_requests_subtitle': 'Rate limit reached. Try again later.',
             }
         },
 
@@ -140,6 +142,8 @@ i18next.init({
 
                 'no_internet_title': 'Немає інтернету',
                 'no_internet_subtitle': 'Будь ласка перевірте з\'єднання',
+                'too_many_requests_title': 'Забагато запитів!',
+                'too_many_requests_subtitle': 'Ліміт вичерпано. Спробуйте пізніше.',
             }
         }
     }

@@ -48,6 +48,10 @@ const initAssets = async () => {
     // No internet connection assets
     await saveFile('no_internet_icon', 'assets/icons/app-state/no-internet.svg');
     await saveFile('no_internet_bg', 'assets/images/background/app-state/no-internet.jpg');
+
+    // Too many requests assets
+    await saveFile('too_many_requests_bg', 'assets/images/background/app-state/too-many-requests.jpg');
+    await saveFile('too_many_requests_icon', 'assets/icons/app-state/too-many-requests.svg');
 }
 
 
