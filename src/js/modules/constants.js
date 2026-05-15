@@ -67,12 +67,14 @@ const dom = {
             element: document.querySelector('.current__illustration'),
             no_internet: await getFileURL('no_internet_icon'),
             too_many_requests: await getFileURL('too_many_requests_icon'),
+            city_not_found: await getFileURL('city_not_found_icon'),
         },
 
         // (JPG ---> BLOB ---> indexedDB) for backgrounds
         backgrounds: {
             no_internet: await getFileURL('no_internet_bg'),
             too_many_requests: await getFileURL('too_many_requests_bg'),
+            city_not_found: await getFileURL('city_not_found_bg'),
         },
         title: document.querySelector('.current__title'),
         subtitle: document.querySelector('.current__subtitle'),

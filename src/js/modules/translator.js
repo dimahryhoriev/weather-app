@@ -69,10 +69,17 @@ i18next.init({
                 'saturday': 'Saturday',
                 'sunday': 'Sunday',
 
+                // No internet labels
                 'no_internet_title': 'No Internet',
                 'no_internet_subtitle': 'Please check your connection',
+
+                // Too many requests labels
                 'too_many_requests_title': 'Ooops... Too Many Requests!',
                 'too_many_requests_subtitle': 'Rate limit reached. Try again later.',
+
+                // City not found labels
+                'city_not_found_title': 'Uh-oh... No city found',
+                'city_not_found_subtitle': 'Double-check your search term',
             }
         },
 
@@ -140,10 +147,17 @@ i18next.init({
                 'saturday': 'Субота',
                 'sunday': 'Неділя',
 
+                // No internet labels
                 'no_internet_title': 'Без мережі',
                 'no_internet_subtitle': 'Будь ласка перевірте з\'єднання',
+
+                // Too many requests labels
                 'too_many_requests_title': 'Ууупс... Надто багато запитів!',
-                'too_many_requests_subtitle': 'Ліміт вичерпано. Спробуйте пізніше.',
+                'too_many_requests_subtitle': 'Ліміт вичерпано. Спробуйте пізніше',
+
+                // City not found labels
+                'city_not_found_title': 'Ойой... Міста не знайдено',
+                'city_not_found_subtitle': 'Перевірте ваш пошуковий запит',
             }
         }
     }

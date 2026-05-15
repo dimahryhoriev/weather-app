@@ -101,6 +101,7 @@ const getAppState = (error) => {
 
     if (message === 'Failed to fetch') return 'no_internet';
     if (message === 'Too Many Requests') return 'too_many_requests';
+    if (message === 'City Not Found') return 'city_not_found';
     if (defaultSection.includes('is-hidden')) return 'active';
     if (activeSection.includes('is-hidden')) return 'default';
 }

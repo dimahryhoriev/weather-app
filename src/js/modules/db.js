@@ -52,6 +52,10 @@ const initAssets = async () => {
     // Too many requests assets
     await saveFile('too_many_requests_bg', 'assets/images/background/app-state/too-many-requests.jpg');
     await saveFile('too_many_requests_icon', 'assets/icons/app-state/too-many-requests.svg');
+
+    // City not found assets
+    await saveFile('city_not_found_bg', 'assets/images/background/app-state/city-not-found.jpg');
+    await saveFile('city_not_found_icon', 'assets/icons/app-state/city-not-found.svg');
 }
 
 

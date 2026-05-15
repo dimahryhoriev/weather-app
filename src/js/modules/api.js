@@ -28,18 +28,18 @@ const fetchWeather = async (city) => {
         const url = `${API_BASE}/api?q=${city}&t=${new Date().getTime()}`;
         const res = await fetch(url);
 
-        if (res.status === 200) {
-            return await res.json();
-        } else {
-            throw new Error('Too Many Requests');
-        }
+        if (res.status === 200) return await res.json();
+        if (res.status === 429) throw new Error('Too Many Requests');
+        if (res.status === 500) throw new Error('City Not Found');
 
     } catch (error) {
         const appState = getAppState(error);
+        console.log(error);
+        console.log(appState);
         updateAppState(appState);
 
         if (appState === 'no_internet') throw new Error('Website stopped due to lack of internet');
-        if (appState === 'too_many_requests') {
+        if (appState === 'too_many_requests' || 'city_not_found') {
             showContent(
                 [
                     dom.current.section.active,
@@ -52,7 +52,8 @@ const fetchWeather = async (city) => {
                     dom.placeholder.section,
                 ],
             );
-            throw new Error('Too Many Requests');
+            if (appState === 'too_many_requests') throw new Error('Too Many Requests');
+            if (appState === 'city_not_found') throw new Error('City Not Found');
         };
     }
 }
