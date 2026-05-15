@@ -20,7 +20,7 @@ import {
 
 const API_BASE = window.location.hostname === 'localhost'
     ? 'http://localhost:3000'
-    : '';
+    : 'https://weather-app-server-v8q4.onrender.com';
 
 // Fetch weather data from API
 const fetchWeather = async (city) => {
