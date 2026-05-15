@@ -186,10 +186,11 @@ body {
     position: fixed;
     align-items: center;
     height: fit-content;
-    max-width: 640px;
     width: fit-content;
     margin: 0 116px 0 0;
     bottom: 85px;
+    max-width: 600px;
+    overflow: visible;
 
     @include m.tablet {
         position: relative;
@@ -198,7 +199,6 @@ body {
         left: auto;
         margin: 0 40px 0 40px;
         bottom: 0;
-        max-width: 540px;
     }
 
     @include m.mobile {
@@ -208,7 +208,7 @@ body {
         left: auto;
         margin: 0 22px 0 22px;
         bottom: 0;
-        max-width: 380px;
+        max-width: 400px;
     }
 
     &__content {
@@ -265,8 +265,10 @@ body {
     &__icon {
         margin-top: 15px;
         background: transparent url(assets/icons/cloudy.svg) center / cover no-repeat;
+        min-width: 70px;
         width: 70px;
         height: 70px;
+        overflow: visible;
         transition: all 0.8s ease;
 
         @include m.tablet {
@@ -376,12 +378,30 @@ body {
             height: 28px;
             right: 16px;
             top: 9px;
+            transition: all 0.1s ease-in-out;
 
             @include a.useScaleIn;
 
             svg {
+                path {
+                    fill: v.$primary;
+                }
+
                 width: 100%;
                 height: 100%;
+            }
+
+            &:hover {
+                scale: 1.05;
+
+                path {
+                    fill: v.$secondary;
+                    transition: all 0.2s ease-in-out;
+                }
+            }
+
+            &:active {
+                scale: 0.95;
             }
 
             &--reset {
