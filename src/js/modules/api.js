@@ -12,11 +12,10 @@ import {
 
 import {
     showContent,
+    updateAppState,
+    switchAppStates,
 } from './dom-handlers.js';
 
-import {
-    updateAppState,
-} from './dom-handlers.js';
 
 const API_BASE = window.location.hostname === 'localhost'
     ? 'http://localhost:3000'
@@ -37,24 +36,11 @@ const fetchWeather = async (city) => {
         console.log(error);
         console.log(appState);
         updateAppState(appState);
+        switchAppStates();
 
         if (appState === 'no_internet') throw new Error('Website stopped due to lack of internet');
-        if (appState === 'too_many_requests' || 'city_not_found') {
-            showContent(
-                [
-                    dom.current.section.active,
-                    dom.details.section,
-                    dom.forecast.section,
-                ],
-
-                [
-                    dom.current.section.default,
-                    dom.placeholder.section,
-                ],
-            );
-            if (appState === 'too_many_requests') throw new Error('Too Many Requests');
-            if (appState === 'city_not_found') throw new Error('City Not Found');
-        };
+        if (appState === 'too_many_requests') throw new Error('Too Many Requests');
+        if (appState === 'city_not_found') throw new Error('City Not Found');
     }
 }
 
@@ -110,6 +96,8 @@ const translateCity = async (city, requestedLang = false) => {
             if (res === undefined) {
                 const appState = getAppState(error);
                 updateAppState(appState);
+                switchAppStates();
+
                 if (appState === 'too_many_requests') throw new Error('Too Many Requests');
                 if (appState === 'no_internet') throw new Error('Website stopped due to lack of internet');
             }

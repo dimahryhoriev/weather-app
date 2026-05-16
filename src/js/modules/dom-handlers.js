@@ -234,6 +234,21 @@ const updateAppState = (state) => {
     translateText([title, subtitle]);
 }
 
+const switchAppStates = () => {
+    showContent(
+        [
+            dom.current.section.active,
+            dom.details.section,
+            dom.forecast.section,
+        ],
+
+        [
+            dom.current.section.default,
+            dom.placeholder.section,
+        ],
+    );
+}
+
 
 dom.search.form.addEventListener('input', (event) => {
     event.preventDefault();
@@ -283,4 +298,5 @@ export {
     updateWeatherDetails,
     updateWeatherForecast,
     updateAppState,
+    switchAppStates,
 }
