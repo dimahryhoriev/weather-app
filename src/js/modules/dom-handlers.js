@@ -255,7 +255,8 @@ const switchAppStates = () => {
 const updateSearchHints = async (query) => {
     const hintsList = dom.search.hints.list;
     const hintsData = await getSearchHints(query);
-    const hintsValues = hintsData.map(item => item.name);
+    console.log(hintsData);
+    const hintsValues = hintsData.map(item => item.properties.name);
     const inputValue = query.charAt(0).toUpperCase() + query.slice(1);
     let maxQuantity = 5;
 
@@ -263,14 +264,14 @@ const updateSearchHints = async (query) => {
         const length = hintsList.children.length;
         if (length > maxQuantity) hintsList.replaceChildren();
 
-        const template = createSearchHint(element.name)
+        const template = createSearchHint(element.properties.name)
         hintsList.appendChild(template);
     });
 
-    if (hintsValues[0] === inputValue) {
+    if (hintsValues.includes(inputValue)) {
         hintsList.replaceChildren();
 
-        const template = createSearchHint(hintsValues[0]);
+        const template = createSearchHint(inputValue);
         hintsList.appendChild(template);
     }
 

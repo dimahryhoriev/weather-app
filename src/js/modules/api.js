@@ -111,12 +111,12 @@ const translateCity = async (city, requestedLang = false) => {
 const getSearchHints = async (query) => {
     const lang = getCurrentLang();
 
-    const url = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(query)}&count=5&language=${lang}`;
+    const url = `https://photon.komoot.io/api/?q=${query}&limit=5&lang=${lang}&layer=city`;
     const res = await fetch(url);
     const data = await res.json();
-    const hints = data.results;
+    console.log(data);
 
-    return hints;
+    return data.features;
 }
 
 getSearchHints('Kyiv');
