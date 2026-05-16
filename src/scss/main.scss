@@ -199,6 +199,7 @@ body {
         left: auto;
         margin: 0 40px 0 40px;
         bottom: 0;
+        max-width: 470px;
     }
 
     @include m.mobile {
@@ -264,7 +265,7 @@ body {
 
     &__icon {
         margin-top: 15px;
-        background: transparent url(/assets/icons/cloudy.svg) center / cover no-repeat;
+        background: transparent url(/assets/icons/cloudy.svg) center / contain no-repeat;
         min-width: 70px;
         width: 70px;
         height: 70px;
