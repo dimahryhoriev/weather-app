@@ -62,16 +62,13 @@ dom.search.form.addEventListener('submit', async (event) => {
 
 dom.search.input.addEventListener('input', async (event) => {
     const hintsList = dom.search.hints.list;
-    const inputValue = event.target.value;
-    const query = inputValue;
-    setTimeout(updateSearchHints, 1000, query);
+    const inputValue = event.target.value.trim();
 
     if (inputValue === '') {
         hintsList.classList.add('is-hidden');
         hintsList.replaceChildren();
+        return
     }
 
-    if (inputValue !== '' && hintsList.children.length > 1) {
-        hintsList.classList.remove('is-hidden');
-    }
+    await updateSearchHints(inputValue);
 })

@@ -273,6 +273,8 @@ const updateSearchHints = async (query) => {
         const template = createSearchHint(hintsValues[0]);
         hintsList.appendChild(template);
     }
+
+    hintsList.classList.remove('is-hidden');
 }
 
 const createSearchHint = (string) => {
