@@ -31,22 +31,27 @@ initAssets();
 // Render user's search query
 dom.search.form.addEventListener('submit', async (event) => {
     event.preventDefault();
+    const storedCity = localStorage.getItem('city');
 
     try {
-        dom.forecast.list.innerHTML = '';
         const weatherParams = await getWeatherParams();
+        const currentCity = weatherParams.current.city[0];
+        const domCity = dom.current.city.textContent;
 
-        updateWeatherCurrent(weatherParams.current);
-        updateWeatherDetails(weatherParams.current, weatherParams.details);
-        updateWeatherForecast(weatherParams.current);
+        if (storedCity !== currentCity || storedCity === currentCity && domCity === '') {
+            updateWeatherCurrent(weatherParams.current);
+            updateWeatherDetails(weatherParams.current, weatherParams.details);
+            updateWeatherForecast(weatherParams.current);
 
-        useFade([
-            dom.placeholder.section,
-            dom.current.section.active,
-            dom.current.section.default,
-            dom.details.section,
-            dom.forecast.section
-        ]);
+
+            useFade([
+                dom.placeholder.section,
+                dom.current.section.active,
+                dom.current.section.default,
+                dom.details.section,
+                dom.forecast.section
+            ]);
+        }
 
     } catch (error) {
         console.error('Error fetching weather data: ', error);

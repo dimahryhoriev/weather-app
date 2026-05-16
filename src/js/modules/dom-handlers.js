@@ -73,6 +73,8 @@ function updateWeatherDetails(currentWeather, weatherDetails) {
 }
 
 function updateWeatherForecast(currentWeather) {
+    dom.forecast.list.innerHTML = '';
+
     const { city, date, temp, cloud, rain, snow, dayIndex } = currentWeather;
     const currentLang = i18next.language;
     let { currentHour, currentMinute } = getCurrentTime();
