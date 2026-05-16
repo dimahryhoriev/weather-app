@@ -5,7 +5,7 @@
 @use 'animations' as a;
 
 body {
-    background: transparent url(assets/images/background/bg-default.jpg) center / cover no-repeat fixed;
+    background: transparent url(/assets/images/background/bg-default.jpg) center / cover no-repeat fixed;
     font-family: v.$font-primary;
     overflow-x: hidden;
     transition: all 0.8s ease;
@@ -264,7 +264,7 @@ body {
 
     &__icon {
         margin-top: 15px;
-        background: transparent url(assets/icons/cloudy.svg) center / cover no-repeat;
+        background: transparent url(/assets/icons/cloudy.svg) center / cover no-repeat;
         min-width: 70px;
         width: 70px;
         height: 70px;
@@ -723,7 +723,7 @@ body {
             position: absolute;
             align-items: center;
             justify-content: center;
-            background: transparent url(assets/icons/snow.svg) center / contain no-repeat;
+            background: transparent url(/assets/icons/snow.svg) center / contain no-repeat;
             width: 48px;
             height: 48px;
             left: 0;
