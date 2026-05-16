@@ -420,6 +420,34 @@ body {
             }
         }
 
+        &-hints {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+            position: absolute;
+            background-color: v.$surface;
+            width: 100%;
+            top: 100%;
+            height: fit-content;
+            backdrop-filter: blur(19px);
+            border-radius: 0 0 14px 14px;
+        }
+
+        &-hint {
+            @include m.text-h4;
+            height: fit-content;
+            text-decoration: underline 1.5px;
+            text-underline-offset: 1.5px;
+            transition: all 0.2s ease-in-out;
+            cursor: pointer;
+
+            &:hover {
+                color: v.$primary;
+            }
+        }
+
         @include m.tablet {
             display: flex;
             position: fixed;

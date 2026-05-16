@@ -8,6 +8,7 @@ import {
 } from './modules/constants.js';
 
 import {
+    getSearchHints,
     getWeatherParams,
 } from './modules/api.js';
 
@@ -19,6 +20,8 @@ import {
     updateWeatherCurrent,
     updateWeatherDetails,
     updateWeatherForecast,
+    updateSearchHints,
+    showContent,
 } from './modules/dom-handlers.js';
 
 import {
@@ -43,7 +46,6 @@ dom.search.form.addEventListener('submit', async (event) => {
             updateWeatherDetails(weatherParams.current, weatherParams.details);
             updateWeatherForecast(weatherParams.current);
 
-
             useFade([
                 dom.placeholder.section,
                 dom.current.section.active,
@@ -55,5 +57,21 @@ dom.search.form.addEventListener('submit', async (event) => {
 
     } catch (error) {
         console.error('Error fetching weather data: ', error);
+    }
+})
+
+dom.search.input.addEventListener('input', async (event) => {
+    const hintsList = dom.search.hints.list;
+    const inputValue = event.target.value;
+    const query = inputValue;
+    setTimeout(updateSearchHints, 1000, query);
+
+    if (inputValue === '') {
+        hintsList.classList.add('is-hidden');
+        hintsList.replaceChildren();
+    }
+
+    if (inputValue !== '' && hintsList.children.length > 1) {
+        hintsList.classList.remove('is-hidden');
     }
 })

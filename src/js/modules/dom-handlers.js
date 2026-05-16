@@ -18,6 +18,7 @@ import {
 } from './weather-logic.js';
 
 import {
+    getSearchHints,
     translateCity,
 } from './api.js';
 
@@ -251,6 +252,37 @@ const switchAppStates = () => {
     );
 }
 
+const updateSearchHints = async (query) => {
+    const hintsList = dom.search.hints.list;
+    const hintsData = await getSearchHints(query);
+    const hintsValues = hintsData.map(item => item.name);
+    const inputValue = query.charAt(0).toUpperCase() + query.slice(1);
+    let maxQuantity = 5;
+
+    hintsData.forEach((element) => {
+        const length = hintsList.children.length;
+        if (length > maxQuantity) hintsList.replaceChildren();
+
+        const template = createSearchHint(element.name)
+        hintsList.appendChild(template);
+    });
+
+    if (hintsValues[0] === inputValue) {
+        hintsList.replaceChildren();
+
+        const template = createSearchHint(hintsValues[0]);
+        hintsList.appendChild(template);
+    }
+}
+
+const createSearchHint = (string) => {
+    const template = dom.search.hints.item.content.cloneNode(true);
+    const hint = template.querySelector('.dashboard__search-hint');
+    hint.textContent = string;
+
+    return template;
+}
+
 
 dom.search.form.addEventListener('input', (event) => {
     event.preventDefault();
@@ -270,6 +302,8 @@ dom.search.form.addEventListener('reset', (event) => {
     dom.search.submitBtn.style.display = 'flex';
     dom.search.resetBtn.style.display = 'none';
     dom.search.input.value = '';
+    dom.search.hints.list.classList.add('is-hidden');
+    dom.search.hints.list.replaceChildren();
 });
 
 dom.header.lang.toggle.addEventListener('click', (event) => {
@@ -301,4 +335,5 @@ export {
     updateWeatherForecast,
     updateAppState,
     switchAppStates,
+    updateSearchHints,
 }

@@ -84,15 +84,12 @@ const translateCity = async (city, requestedLang = false) => {
         res = await fetch(url, { headers: { 'User-Agent': 'weather-app' } });
         if (res.status === 429) throw new Error('Too Many Requests');
     } catch (error) {
-        console.log(error);
-        console.log(res);
         console.warn("Nominatim blocked/failed, switching to Open-Meteo...");
         url = OPEN_METEO_API_URL;
 
         try {
             res = await fetch(url);
         } catch {
-            console.log(res);
             if (res === undefined) {
                 const appState = getAppState(error);
                 updateAppState(appState);
@@ -111,9 +108,23 @@ const translateCity = async (city, requestedLang = false) => {
     return translatedCity;
 }
 
+const getSearchHints = async (query) => {
+    const lang = getCurrentLang();
+
+    const url = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(query)}&count=5&language=${lang}`;
+    const res = await fetch(url);
+    const data = await res.json();
+    const hints = data.results;
+
+    return hints;
+}
+
+getSearchHints('Kyiv');
+
 
 export {
     fetchWeather,
     getWeatherParams,
     translateCity,
+    getSearchHints,
 }

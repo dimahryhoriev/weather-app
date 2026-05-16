@@ -20,7 +20,11 @@ const dom = {
         form: document.querySelector('.dashboard__search'),
         input: document.querySelector('.dashboard__search-input'),
         submitBtn: document.querySelector('.dashboard__search-btn'),
-        resetBtn: document.querySelector('.dashboard__search-btn--reset')
+        resetBtn: document.querySelector('.dashboard__search-btn--reset'),
+        hints: {
+            list: document.querySelector('.dashboard__search-hints'),
+            item: document.querySelector('[data-js="search-hint"]'),
+        }
     },
 
     current: {
