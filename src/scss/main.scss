@@ -61,6 +61,7 @@ body {
     align-items: center;
     top: 36px;
     gap: 24px;
+    z-index: 10;
 
     @include m.tablet {
         top: 25px;
@@ -353,6 +354,7 @@ body {
         width: 100%;
         min-height: 50px;
         height: 50px;
+        z-index: 10;
 
         &-input {
             width: 100%;
@@ -450,7 +452,7 @@ body {
         @include m.mobile {
             display: flex;
             position: fixed;
-            width: 120px;
+            width: 130px;
             min-height: 20px;
             height: 20px;
             top: 20px;
