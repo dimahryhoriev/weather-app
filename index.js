@@ -15,7 +15,7 @@ app.use(cors())
 // Rate Limiting
 const limiter = rateLimit({
     windowMs: 10 * 60 * 1000, // 10 Mins (m * s * ms)
-    max: 1
+    max: 10
 })
 app.use(limiter)
 app.set('trust proxy', 1)
