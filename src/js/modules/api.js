@@ -111,15 +111,16 @@ const translateCity = async (city, requestedLang = false) => {
 const getSearchHints = async (query) => {
     const lang = getCurrentLang();
 
-    const url = `https://photon.komoot.io/api/?q=${query}&limit=5&lang=${lang}&layer=city`;
-    const res = await fetch(url);
-    const data = await res.json();
-    console.log(data);
-
-    return data.features;
+    try {
+        const url = `https://photon.komoot.io/api/?q=${query}&limit=5&lang=${lang}&layer=city`;
+        const res = await fetch(url);
+        const data = await res.json();
+        return data.features;
+    } catch (error) {
+        return 'Photon is temporary unavailable';
+    }
 }
 
-getSearchHints('Kyiv');
 
 
 export {

@@ -253,29 +253,34 @@ const switchAppStates = () => {
 }
 
 const updateSearchHints = async (query) => {
-    const hintsList = dom.search.hints.list;
-    const hintsData = await getSearchHints(query);
-    console.log(hintsData);
-    const hintsValues = hintsData.map(item => item.properties.name);
-    const inputValue = query.charAt(0).toUpperCase() + query.slice(1);
-    let maxQuantity = 5;
+    try {
+        const hintsList = dom.search.hints.list;
+        const hintsData = await getSearchHints(query);
+        const hintsValues = hintsData.map(item => item.properties.name);
+        const inputValue = query.charAt(0).toUpperCase() + query.slice(1);
+        let maxQuantity = 5;
 
-    hintsData.forEach((element) => {
-        const length = hintsList.children.length;
-        if (length > maxQuantity) hintsList.replaceChildren();
+        hintsData.forEach((element) => {
+            const length = hintsList.children.length;
+            if (length > maxQuantity) hintsList.replaceChildren();
 
-        const template = createSearchHint(element.properties.name)
-        hintsList.appendChild(template);
-    });
+            const template = createSearchHint(element.properties.name)
+            hintsList.appendChild(template);
+        });
 
-    if (hintsValues.includes(inputValue)) {
-        hintsList.replaceChildren();
+        if (hintsValues.includes(inputValue)) {
+            hintsList.replaceChildren();
 
-        const template = createSearchHint(inputValue);
-        hintsList.appendChild(template);
+            const template = createSearchHint(inputValue);
+            console.log(template);
+            console.log(inputValue);
+            hintsList.appendChild(template);
+        }
+
+        hintsList.classList.remove('is-hidden');
+    } catch {
+        return null;
     }
-
-    hintsList.classList.remove('is-hidden');
 }
 
 const createSearchHint = (string) => {
