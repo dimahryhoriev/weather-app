@@ -22,9 +22,9 @@ const API_BASE = window.location.hostname === 'localhost'
     : 'https://weather-app-server-v8q4.onrender.com';
 
 // Fetch weather data from API
-const fetchWeather = async (city) => {
+const fetchWeather = async (city, autocomplete = false) => {
     try {
-        const url = `${API_BASE}/api?q=${city}&t=${new Date().getTime()}`;
+        const url = `${API_BASE}/api?q=${city}&autocomplete=${autocomplete}&t=${new Date().getTime()}`;
         const res = await fetch(url);
 
         if (res.status === 200) return await res.json();
@@ -46,7 +46,7 @@ const fetchWeather = async (city) => {
 
 const getWeatherParams = async () => {
     const translatedCity = await translateCity(dom.search.input.value, 'en');
-    const weatherData = await fetchWeather(translatedCity);
+    const weatherData = await fetchWeather(translatedCity, false);
     const localTime = weatherData.location.localtime.replace(' ', 'T');
     console.log(weatherData);
 
@@ -112,12 +112,12 @@ const getSearchHints = async (query) => {
     const lang = getCurrentLang();
 
     try {
-        const url = `https://photon.komoot.io/api/?q=${query}&limit=5&lang=${lang}&layer=city`;
-        const res = await fetch(url);
-        const data = await res.json();
-        return data.features;
+        const res = await fetchWeather(query, true);
+        console.log(res);
+        return res;
     } catch (error) {
-        return 'Photon is temporary unavailable';
+        console.log(error);
+        return 'Weather API is temporary unavailable';
     }
 }
 

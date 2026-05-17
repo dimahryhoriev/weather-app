@@ -256,7 +256,7 @@ const updateSearchHints = async (query) => {
     try {
         const hintsList = dom.search.hints.list;
         const hintsData = await getSearchHints(query);
-        const hintsValues = hintsData.map(item => item.properties.name);
+        const hintsValues = hintsData.map(item => item.name);
         const inputValue = query.charAt(0).toUpperCase() + query.slice(1);
         let maxQuantity = 5;
 
@@ -264,7 +264,7 @@ const updateSearchHints = async (query) => {
             const length = hintsList.children.length;
             if (length > maxQuantity) hintsList.replaceChildren();
 
-            const template = createSearchHint(element.properties.name)
+            const template = createSearchHint(element.name)
             hintsList.appendChild(template);
         });
 
