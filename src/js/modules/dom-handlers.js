@@ -332,6 +332,16 @@ window.addEventListener('DOMContentLoaded', () => {
     switchLanguage();
 })
 
+document.addEventListener('click', (event) => {
+    const hintsList = dom.search.hints.list;
+
+    if
+        (!hintsList.contains(event.target)
+        && !hintsList.classList.contains('is-hidden')) {
+        hintsList.classList.add('is-hidden')
+    }
+})
+
 
 export {
     showContent,
