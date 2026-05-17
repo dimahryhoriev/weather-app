@@ -35,6 +35,15 @@ initAssets();
 dom.search.form.addEventListener('submit', async (event) => {
     event.preventDefault();
     const storedCity = localStorage.getItem('city');
+    const hintsList = dom.search.hints.list;
+    const input = dom.search.input;
+
+    input.value = event.submitter.textContent.trim() !== ''
+        ? event.submitter.textContent
+        : dom.search.input.value
+
+    hintsList.replaceChildren();
+    hintsList.classList.add('is-hidden');
 
     try {
         const weatherParams = await getWeatherParams();

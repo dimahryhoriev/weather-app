@@ -439,6 +439,8 @@ body {
             @include m.text-h4;
             height: fit-content;
             text-decoration: underline 1.5px;
+            width: 100%;
+            text-align: left;
             text-underline-offset: 1.5px;
             transition: all 0.2s ease-in-out;
             cursor: pointer;
