@@ -106,6 +106,13 @@ const getAppState = (error) => {
     if (activeSection.includes('is-hidden')) return 'default';
 }
 
+const detectAlphabet = (string) => {
+    const alphabet = /^[а-щьюяєіїґ]+$/iu.test(string);
+
+    if (alphabet === true) return 'cyrillic';
+    if (alphabet === false) return 'latin';
+}
+
 
 
 export {
@@ -117,4 +124,5 @@ export {
     translateText,
     normalizeText,
     getAppState,
+    detectAlphabet,
 }

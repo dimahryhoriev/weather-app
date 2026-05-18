@@ -109,15 +109,25 @@ const translateCity = async (city, requestedLang = false) => {
 }
 
 const getSearchHints = async (query) => {
-    const lang = getCurrentLang();
-
     try {
         const res = await fetchWeather(query, true);
-        console.log(res);
         return res;
+    } catch {
+        return 'Weather API is temporary unavailable';
+    }
+}
+
+const translateHint = async (string) => {
+    const GOOGLEAPIS_BASE = `https://translate.googleapis.com/translate_a/single`;
+    const params = `client=gtx&sl=auto&tl=uk&dt=t&q=${encodeURIComponent(string)}`;
+    const url = `${GOOGLEAPIS_BASE}?${params}`;
+
+    try {
+        const res = await fetch(url);
+        const data = await res.json();
+        return data[0][0][0];
     } catch (error) {
-        console.log(error);
-        return 'Photon service is temporary unavailable';
+        return string;
     }
 }
 
@@ -127,4 +137,5 @@ export {
     getWeatherParams,
     translateCity,
     getSearchHints,
+    translateHint,
 }

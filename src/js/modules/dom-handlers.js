@@ -9,6 +9,7 @@ import {
     normalizeText,
     setDayCycle,
     translateText,
+    detectAlphabet,
 } from './utils.js';
 
 import {
@@ -20,6 +21,7 @@ import {
 import {
     getSearchHints,
     translateCity,
+    translateHint,
 } from './api.js';
 
 import {
@@ -256,15 +258,20 @@ const updateSearchHints = async (query) => {
     try {
         const hintsList = dom.search.hints.list;
         const hintsData = await getSearchHints(query);
-        const hintsValues = hintsData.map(item => item.name);
+        const hintsValues = await Promise.all(hintsData.map(async (item) => {
+            const alphabet = detectAlphabet(item.name);
+            return alphabet === 'cyrillic'
+                ? await translateHint(item.name)
+                : item.name
+        }));
         const inputValue = query.charAt(0).toUpperCase() + query.slice(1);
-        let maxQuantity = 5;
+        const maxQuantity = 5;
 
-        hintsData.forEach((element) => {
+        hintsValues.forEach(async (element) => {
             const length = hintsList.children.length;
             if (length > maxQuantity) hintsList.replaceChildren();
 
-            const template = createSearchHint(element.name)
+            const template = await createSearchHint(element)
             hintsList.appendChild(template);
         });
 
@@ -272,18 +279,17 @@ const updateSearchHints = async (query) => {
             hintsList.replaceChildren();
 
             const template = createSearchHint(inputValue);
-            console.log(template);
-            console.log(inputValue);
             hintsList.appendChild(template);
         }
 
         hintsList.classList.remove('is-hidden');
-    } catch {
+    } catch (error) {
+        console.log(error);
         return null;
     }
 }
 
-const createSearchHint = (string) => {
+const createSearchHint = async (string) => {
     const template = dom.search.hints.item.content.cloneNode(true);
     const hint = template.querySelector('.dashboard__search-hint');
     hint.textContent = string;
