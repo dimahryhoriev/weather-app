@@ -102,8 +102,8 @@ const getAppState = (error) => {
     if (message === 'Failed to fetch') return 'no_internet';
     if (message === 'Too Many Requests') return 'too_many_requests';
     if (message === 'City Not Found') return 'city_not_found';
-    if (defaultSection.classList.contains('is-hidden')) return 'active';
-    if (activeSection.classList.contains('is-hidden')) return 'default';
+    if (defaultSection.classList.contains('is-hidden')) return null;
+    if (activeSection.classList.contains('is-hidden')) return null;
 }
 
 const detectAlphabet = (string) => {

@@ -34,6 +34,7 @@ const fetchWeather = async (city, autocomplete = false) => {
 
     } catch (error) {
         const appState = getAppState(error);
+        if (appState === null) return null;
         updateAppState(appState);
         switchAppStates();
 
@@ -91,16 +92,17 @@ const translateCity = async (city, requestedLang = false) => {
             if (data.results === undefined) {
                 throw new Error('Too Many Requests');
             } else {
-                throw new Error('City Not Found');
+                return data;
             }
         } catch (errorTwo) {
-            const appStateOne = getAppState(errorTwo);
-            updateAppState(appStateOne);
+            const appState = getAppState(errorTwo);
+            if (appState === null) return null;
+            updateAppState(appState);
             switchAppStates();
 
-            if (appStateOne === 'city_not_found') throw new Error('City Not Found');
-            if (appStateOne === 'too_many_requests') throw new Error('Too Many Requests');
-            if (appStateOne === 'no_internet') throw new Error('Website stopped due to lack of internet');
+            if (appState === 'city_not_found') throw new Error('City Not Found');
+            if (appState === 'too_many_requests') throw new Error('Too Many Requests');
+            if (appState === 'no_internet') throw new Error('Website stopped due to lack of internet');
         }
     }
 
