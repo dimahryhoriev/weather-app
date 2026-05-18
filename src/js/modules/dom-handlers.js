@@ -227,7 +227,6 @@ const updateAppState = (state) => {
     // (Base64 ---> SVG) converted icons
     const stateIcon = dom.default.icons[state];
     const stateBackground = dom.default.backgrounds[state];
-    console.log(stateBackground);
 
     title.setAttribute('data-i18n', `${state}_title`);
     subtitle.setAttribute('data-i18n', `${state}_subtitle`);
@@ -255,9 +254,14 @@ const switchAppStates = () => {
 }
 
 const updateSearchHints = async (query) => {
+    const hintsList = dom.search.hints.list;
+
     try {
-        const hintsList = dom.search.hints.list;
         const hintsData = await getSearchHints(query);
+        if (hintsData.length === 0 && hintsList.children.length <= 1) {
+            throw new Error('Hint for this request is not found');
+        }
+
         const hintsValues = await Promise.all(hintsData.map(async (item) => {
             const alphabet = detectAlphabet(item.name);
             return alphabet === 'cyrillic'
@@ -268,11 +272,11 @@ const updateSearchHints = async (query) => {
         const maxQuantity = 5;
 
         hintsValues.forEach(async (element) => {
-            const length = hintsList.children.length;
-            if (length > maxQuantity) hintsList.replaceChildren();
-
             const template = await createSearchHint(element)
             hintsList.appendChild(template);
+
+            const length = hintsList.children.length;
+            if (length > maxQuantity) hintsList.replaceChildren();
         });
 
         if (hintsValues.includes(inputValue)) {
@@ -284,7 +288,9 @@ const updateSearchHints = async (query) => {
 
         hintsList.classList.remove('is-hidden');
     } catch (error) {
-        console.log(error);
+        if (error.message === 'Hint for this request is not found') {
+            hintsList.classList.add('is-hidden');
+        }
         return null;
     }
 }

@@ -24,6 +24,7 @@ const API_BASE = window.location.hostname === 'localhost'
 // Fetch weather data from API
 const fetchWeather = async (city, autocomplete = false) => {
     try {
+        if (city[0].trim() === '') return;
         const url = `${API_BASE}/api?q=${city}&autocomplete=${autocomplete}&t=${new Date().getTime()}`;
         const res = await fetch(url);
 
@@ -33,8 +34,6 @@ const fetchWeather = async (city, autocomplete = false) => {
 
     } catch (error) {
         const appState = getAppState(error);
-        console.log(error);
-        console.log(appState);
         updateAppState(appState);
         switchAppStates();
 
@@ -48,7 +47,6 @@ const getWeatherParams = async () => {
     const translatedCity = await translateCity(dom.search.input.value, 'en');
     const weatherData = await fetchWeather(translatedCity, false);
     const localTime = weatherData.location.localtime.replace(' ', 'T');
-    console.log(weatherData);
 
     return {
         current: {

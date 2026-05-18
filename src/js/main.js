@@ -72,11 +72,11 @@ dom.search.form.addEventListener('submit', async (event) => {
 dom.search.input.addEventListener('input', async (event) => {
     const hintsList = dom.search.hints.list;
     const inputValue = event.target.value.trim();
+    const length = hintsList.children.length;
 
-    if (inputValue === '') {
+    if (inputValue === '' || length <= 1) {
         hintsList.classList.add('is-hidden');
         hintsList.replaceChildren();
-        return
     }
 
     await updateSearchHints(inputValue);
