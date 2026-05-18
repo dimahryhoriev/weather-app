@@ -152,16 +152,16 @@ const weatherConfig = {
     },
 
     rain: {
-        none: [['no-precip'], 20],
-        light: [['light-rain'], 40],
-        medium: [['medium-rain'], 60],
+        none: [['no-precip'], 40],
+        light: [['light-rain'], 80],
+        medium: [['medium-rain'], 90],
         heavy: [['heavy-rain'], 100],
     },
 
     snow: {
-        none: [['no-precip'], 20],
-        light: [['light-snow'], 40],
-        medium: [['medium-snow'], 60],
+        none: [['no-precip'], 40],
+        light: [['light-snow'], 80],
+        medium: [['medium-snow'], 90],
         heavy: [['snow'], 100],
     }
 }
