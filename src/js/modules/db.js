@@ -45,6 +45,10 @@ const getFileURL = async (key) => {
 }
 
 const initAssets = async () => {
+    // Default state assets
+    await saveFile('default_icon', 'assets/icons/app-state/default.svg');
+    await saveFile('default_bg', 'assets/images/background/app-state/default.jpg');
+
     // No internet connection assets
     await saveFile('no_internet_icon', 'assets/icons/app-state/no-internet.svg');
     await saveFile('no_internet_bg', 'assets/images/background/app-state/no-internet.jpg');

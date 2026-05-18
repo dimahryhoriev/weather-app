@@ -7,8 +7,8 @@ i18next.init({
     resources: {
         en: {
             translation: {
-                'location_hint_title': 'Select location',
-                'location_hint_subtitle': 'Search for a city to see the weather',
+                'default_title': 'Select location',
+                'default_subtitle': 'Search for a city to see the weather',
                 'search_placeholder': 'Search Location...',
                 'no_results': 'There is nothing here yet...',
                 'details_title': 'Weather Details...',
@@ -85,8 +85,8 @@ i18next.init({
 
         uk: {
             translation: {
-                'location_hint_title': 'Виберіть локацію',
-                'location_hint_subtitle': 'Введіть назву міста, щоб побачити погоду',
+                'default_title': 'Виберіть локацію',
+                'default_subtitle': 'Введіть назву міста, щоб побачити погоду',
                 'search_placeholder': 'Шукати Локацію...',
                 'no_results': 'Тут поки що нічого немає...',
                 'details_title': 'Деталі погоди...',

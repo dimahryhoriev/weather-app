@@ -227,6 +227,7 @@ const updateAppState = (state) => {
     // (Base64 ---> SVG) converted icons
     const stateIcon = dom.default.icons[state];
     const stateBackground = dom.default.backgrounds[state];
+    console.log(stateBackground);
 
     title.setAttribute('data-i18n', `${state}_title`);
     subtitle.setAttribute('data-i18n', `${state}_subtitle`);

@@ -5,7 +5,7 @@
 @use 'animations' as a;
 
 body {
-    background: transparent url(/assets/images/background/bg-default.jpg) center / cover no-repeat fixed;
+    background: transparent url(/assets/images/background/app-state/default.jpg) center / cover no-repeat fixed;
     font-family: v.$font-primary;
     overflow-x: hidden;
     transition: all 0.8s ease;

@@ -69,6 +69,7 @@ const dom = {
         // (SVG ---> BLOB ---> indexedDB) for icons
         icons: {
             element: document.querySelector('.current__illustration'),
+            default: await getFileURL('default_icon'),
             no_internet: await getFileURL('no_internet_icon'),
             too_many_requests: await getFileURL('too_many_requests_icon'),
             city_not_found: await getFileURL('city_not_found_icon'),
@@ -76,6 +77,7 @@ const dom = {
 
         // (JPG ---> BLOB ---> indexedDB) for backgrounds
         backgrounds: {
+            default: await getFileURL('default_bg'),
             no_internet: await getFileURL('no_internet_bg'),
             too_many_requests: await getFileURL('too_many_requests_bg'),
             city_not_found: await getFileURL('city_not_found_bg'),

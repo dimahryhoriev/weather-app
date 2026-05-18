@@ -80,22 +80,27 @@ const translateCity = async (city, requestedLang = false) => {
 
     try {
         res = await fetch(url, { headers: { 'User-Agent': 'weather-app' } });
-        if (res.status === 429) throw new Error('Too Many Requests');
-    } catch (error) {
+        if (res.status === 429) throw new Error('Failed to fetch');
+    } catch (errorOne) {
         console.warn("Nominatim blocked/failed, switching to Open-Meteo...");
         url = OPEN_METEO_API_URL;
 
         try {
             res = await fetch(url);
-        } catch {
-            if (res === undefined) {
-                const appState = getAppState(error);
-                updateAppState(appState);
-                switchAppStates();
-
-                if (appState === 'too_many_requests') throw new Error('Too Many Requests');
-                if (appState === 'no_internet') throw new Error('Website stopped due to lack of internet');
+            const data = await res.json();
+            if (data.results === undefined) {
+                throw new Error('Too Many Requests');
+            } else {
+                throw new Error('City Not Found');
             }
+        } catch (errorTwo) {
+            const appStateOne = getAppState(errorTwo);
+            updateAppState(appStateOne);
+            switchAppStates();
+
+            if (appStateOne === 'city_not_found') throw new Error('City Not Found');
+            if (appStateOne === 'too_many_requests') throw new Error('Too Many Requests');
+            if (appStateOne === 'no_internet') throw new Error('Website stopped due to lack of internet');
         }
     }
 
