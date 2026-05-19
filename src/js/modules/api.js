@@ -45,31 +45,37 @@ const fetchWeather = async (city, autocomplete = false) => {
 }
 
 const getWeatherParams = async () => {
-    const translatedCity = await translateCity(dom.search.input.value, 'en');
-    const weatherData = await fetchWeather(translatedCity, false);
-    console.log(weatherData);
-    const localTime = weatherData.location.localtime.replace(' ', 'T');
+    try {
+        const translatedCity = await translateCity(dom.search.input.value, 'en');
+        const weatherData = await fetchWeather(translatedCity, false);
+        const localTime = weatherData.location.localtime.replace(' ', 'T');
 
-    return {
-        current: {
-            city: translatedCity,
-            date: new Date(localTime),
-            temp: Math.round(weatherData.current.temp_c),
-            dayIndex: weatherData.forecast.forecastday[0],
-            cloud: ['cloud', (hour) => {
-                return weatherData.forecast.forecastday[0].hour[hour].cloud;
-            }],
-            rain: ['rain', (hour) => getRainChance(weatherData, hour)],
-            snow: ['snow', (hour) => getSnowChance(weatherData, hour)],
-        },
+        return {
+            current: {
+                city: translatedCity,
+                date: new Date(localTime),
+                temp: Math.round(weatherData.current.temp_c),
+                dayIndex: weatherData.forecast.forecastday[0],
+                cloud: ['cloud', (hour) => {
+                    return weatherData.forecast.forecastday[0].hour[hour].cloud;
+                }],
+                rain: ['rain', (hour) => getRainChance(weatherData, hour)],
+                snow: ['snow', (hour) => getSnowChance(weatherData, hour)],
+            },
 
-        details: {
-            maxTemp: Math.round(weatherData.forecast.forecastday[0].day.maxtemp_c),
-            minTemp: Math.round(weatherData.forecast.forecastday[0].day.mintemp_c,),
-            humidity: weatherData.current.humidity,
-            cloud: weatherData.current.cloud,
-            wind: Math.round(weatherData.current.wind_kph),
-        },
+            details: {
+                maxTemp: Math.round(weatherData.forecast.forecastday[0].day.maxtemp_c),
+                minTemp: Math.round(weatherData.forecast.forecastday[0].day.mintemp_c,),
+                humidity: weatherData.current.humidity,
+                cloud: weatherData.current.cloud,
+                wind: Math.round(weatherData.current.wind_kph),
+            },
+        }
+    } catch (error) {
+        if (error.message === `Cannot read properties of null (reading 'location')`) {
+            updateAppState('city_not_found');
+            switchAppStates();
+        }
     }
 }
 
